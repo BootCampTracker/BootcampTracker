@@ -25,7 +25,6 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-                <DrawerComponent />
             <Link className="navLink" to="/user">
               Home
             </Link>
