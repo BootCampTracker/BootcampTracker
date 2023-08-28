@@ -9,8 +9,9 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+      <Link to="/home" classname="nav-logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/3629/3629539.png" alt="Logo" className="nav-logo-image" />
+        <h2 className="nav-title">Bootcamp Tracker</h2>
       </Link>
       <div>
         {/* If no user is logged in, show these links */}
