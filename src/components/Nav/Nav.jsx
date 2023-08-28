@@ -19,7 +19,6 @@ function Nav() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            {/* Add the menu icon */}
           </MUI.IconButton>
           <MUI.Typography variant="h6" component="div" sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
             <Link to="/home" className="nav-logo">
