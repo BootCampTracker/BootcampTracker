@@ -4,6 +4,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import * as MUI from '@mui/material'; // Import MUI components
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import DrawerComponent from '../DrawerComponent/DrawerComponent';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -34,10 +35,17 @@ function Nav() {
           <MUI.Button color="inherit"></MUI.Button>
         </MUI.Toolbar>
       </MUI.AppBar>
+            <Link className="navLink" to="/alumniform">
+              Alumni Form
+            </Link>
 
-      <div>
-        {/* Your navigation links and user-specific content */}
-      </div>
+            <LogOutButton className="navLink" />
+          </>
+        )}
+
+        <Link className="navLink" to="/about">
+          About
+        </Link>
     </div>
   );
 }
