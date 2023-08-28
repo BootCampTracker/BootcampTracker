@@ -20,7 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AlumniForm from '../AlumniForm/AlumniForm';
-
+import ProfilePage from '../ProfilePage/ProfilePage'
 import './App.css';
 
 function App() {
@@ -113,6 +113,10 @@ function App() {
 
           <Route exact path="/alumniform">
             <AlumniForm />
+          </Route>
+
+          <Route exact path="/profilepage">
+            <ProfilePage />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}

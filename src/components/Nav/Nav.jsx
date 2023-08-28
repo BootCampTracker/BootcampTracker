@@ -59,6 +59,10 @@ function Nav() {
               Alumni Form
             </Link>
 
+            <Link className="navLink" to="/profilepage">
+              Profile Page
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}
