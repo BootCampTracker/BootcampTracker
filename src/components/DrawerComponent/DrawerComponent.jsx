@@ -27,6 +27,7 @@ function DrawerComponent() { // we are setting a piece of state to determine if 
                     <Typography onClick={() => history.push('/user')}> Home </Typography>,
                         // THESE NEED TO PUSH TO THE CORRECT COMPONENTS WHEN THEY EXIST
                     <Typography onClick={() => history.push('/')}> Profile Page </Typography>,
+                    <Typography onClick={() => history.push('/alumniform')}> Alumni Form </Typography>,
                     <Typography onClick={() => history.push('/')}> Compare Bootcamps </Typography>,
                     <LogOutButton/>
                 ].map((label, index) => (
