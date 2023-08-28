@@ -1,45 +1,106 @@
 import React from "react";
-import { Box, Typography } from '@mui/material';
+import {
+    Box,
+    Typography,
+    Select,
+    Checkbox,
+    Radio,
+    RadioGroup,
+    FormControl,
+    FormControlLabel,
+    FormLabel
+} from '@mui/material';
 import { Button } from "@mui/base";
+
 
 
 function AlumniForm() {
 
 
     return (
-        <form className="alumni-form">
+        <FormControl>
             <Box>
-            <Typography>Bootcamp</Typography>
-                <input placeholder="Bootcamp/Program" />
-                <input type="" placeholder="Graduation Date" />
+                <Typography>Bootcamp</Typography>
+                <Select placeholder="Bootcamp/Program" />
+                <Select type="" placeholder="Graduation Date" />
             </Box>
             <Box>
-            <Typography>Job Information</Typography>
-                <input type="text" placeholder="Job Name" />
-                <input type="text" placeholder="Job Title" />
-                <input type="number" placeholder="Job Number" />
-                <input type="text" placeholder="Promotion - Yes/No" />
-                <input type="text" placeholder="Company Name" />
-                <input type="text" placeholder="State" />
-                <input type="number" placeholder="Hours Worked" />
-                <input type="text" placeholder="Job Type - Full time/part time" />
-                <input type="text" placeholder="Hire Date" />
-                <input type="text" placeholder="Salary - Yearly/hourly" />
+                <Typography>Job Information</Typography>
+                <Select type="text" placeholder="Job Name" />
+                <Select type="text" placeholder="Job Title" />
+                <Select type="number" placeholder="Job Number" />
+                <Select type="text" placeholder="Promotion - Yes/No" />
+                <Select type="text" placeholder="Company Name" />
+                <Select type="text" placeholder="State" />
+                <Select type="number" placeholder="Hours Worked" />
+                <Select type="text" placeholder="Job Type - Full time/part time" />
+                <Select type="text" placeholder="Hire Date" />
+                <Select type="text" placeholder="Salary - Yearly/hourly" />
             </Box>
             <Box>
-            <Typography>Benefits</Typography>
-                <input type="text" placeholder="Health Insurance" />
-                <input type="text" placeholder="Dental Insurance" />
-                <input type="text" placeholder="PTO" />
-                <input type="text" placeholder="401K" />
-                <input type="text" placeholder="LT Dis" />
-                <input type="text" placeholder="ST Dis" />
-                <input type="text" placeholder="Bonuses $$" />
-                <input type="text" placeholder="Equity Y/N" />
+                <Typography >Benefits</Typography>
+                <FormLabel id="health-insurance-radio-group">Health Insurance</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="health-insurance-radio-group"
+                >
+                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <FormLabel id="dental-insurance-radio-group">Dental Insurance</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="dental-insurance-radio-group"
+                >
+                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <FormLabel id="pto-radio-group">PTO</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="pto-radio-group"
+                >
+                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <FormLabel id="401k-radio-group">Health Insurance</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="401k-radio-group"
+                >
+                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <FormLabel id="lt-diability-radio-group">Long Term Disability</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="lt-diability-radio-group"
+                >
+                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <FormLabel id="st-diability-radio-group">Short Term Disability</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="st-diability-radio-group"
+                >
+                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <FormLabel id="bonus-radio-group">Long Term Disability</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="bonus-radio-group"
+                >
+                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <Select type="text" placeholder="Bonuses $$" />
+                <Checkbox type="text" placeholder="Equity Y/N" />
                 <textarea type="text" placeholder="Notes" />
             </Box>
-           <Button>Submit</Button>
-        </form>
+            <Button>Submit</Button>
+        </FormControl>
     )
 };
 
