@@ -87,7 +87,7 @@ function AlumniForm() {
                     <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                     <FormControlLabel value="no" control={<Radio />} label="No" />
                 </RadioGroup>
-                <FormLabel id="bonus-radio-group">Long Term Disability</FormLabel>
+                <FormLabel id="bonus-radio-group">Bonus</FormLabel>
                 <RadioGroup
                     row
                     aria-labelledby="bonus-radio-group"
@@ -96,7 +96,7 @@ function AlumniForm() {
                     <FormControlLabel value="no" control={<Radio />} label="No" />
                 </RadioGroup>
                 <Select type="text" placeholder="Bonuses $$" />
-                <Checkbox type="text" placeholder="Equity Y/N" />
+                <Select type="text" placeholder="Equity Y/N" />
                 <textarea type="text" placeholder="Notes" />
             </Box>
             <Button>Submit</Button>
