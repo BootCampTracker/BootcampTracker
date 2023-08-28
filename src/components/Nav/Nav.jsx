@@ -1,53 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import * as MUI from '@mui/material'; // Import MUI components
+import {AppBar, Toolbar, Button, Typography, IconButton, Link} from '@mui/material'; // Import MUI components
 import './Nav.css';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import DrawerComponent from '../DrawerComponent/DrawerComponent';
 
 function Nav() {
-  const user = useSelector((store) => store.user);
+    const user = useSelector((store) => store.user);
 
-  return (
-    <div>
-      <MUI.AppBar position="static">
-        <MUI.Toolbar>
-          <MUI.IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            {/* Add the menu icon */}
-          </MUI.IconButton>
-          <MUI.Typography variant="h6" component="div" sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
-            <Link to="/home" className="nav-logo">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/3629/3629539.png"
-                alt="Logo"
-                className="nav-logo-image"
-              />
-              <span className="nav-title">Bootcamp Tracker</span>
-            </Link>
-          </MUI.Typography>
-          <MUI.Button color="inherit"></MUI.Button>
-        </MUI.Toolbar>
-      </MUI.AppBar>
-            <Link className="navLink" to="/alumniform">
-              Alumni Form
-            </Link>
-
-            <LogOutButton className="navLink" />
-          </>
-        )}
-
-        <Link className="navLink" to="/about">
-          About
-        </Link>
-    </div>
-  );
+    return (
+        <div>
+            <AppBar position="static" sx={{alignItems: 'center'}}>
+                <Toolbar>
+                    <span style={{float: 'left'}}><DrawerComponent /></span>
+                    <IconButton size="large" edge="start" color="inherit" aria-label="menu"sx={{mr: 2}}>
+                        {/* Add the menu icon */} </IconButton>
+                    <Typography variant="h6" component="div"
+                        sx={{flexGrow: 1,display: 'flex',alignItems: 'center'}}>
+                        <Link to="/user" className="nav-logo" underline="always">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3629/3629539.png" alt="Logo" className="nav-logo-image"/>
+                            <span className="nav-title">Bootcamp Tracker</span>
+                        </Link>
+                    </Typography>
+                    <Button color="inherit"></Button>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
 
 export default Nav;
