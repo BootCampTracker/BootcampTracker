@@ -1,0 +1,29 @@
+.circle {
+    background: black;
+    width: 250px; 
+    height: 250px;
+    border-radius: 50%;
+    display: flex; /* or inline-flex */
+    align-items: center; 
+    justify-content: center;
+}
+
+h1, p, h2, img, svg, .circle {
+    animation: fadeIn ease 3s;
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.link {
+    transition: color 0.5s ease-in-out, box-shadow 1s ease-in-out;
+}
+.link:hover {
+    color: blue;
+    transform: scale(1.1);
+}
