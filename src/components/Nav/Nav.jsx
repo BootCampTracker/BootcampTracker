@@ -4,6 +4,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import * as MUI from '@mui/material'; // Import MUI components
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import DrawerComponent from '../DrawerComponent/DrawerComponent';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -35,7 +36,36 @@ function Nav() {
       </MUI.AppBar>
 
       <div>
-        {/* Your navigation links and user-specific content */}
+        {/* If no user is logged in, show these links */}
+        {!user.id && (
+          // If there's no user, show login/registration links
+          <Link className="navLink" to="/login">
+            Login / Register
+          </Link>
+        )}
+
+        {/* If a user is logged in, show these links */}
+        {user.id && (
+          <>
+            <Link className="navLink" to="/user">
+              Home
+            </Link>
+
+            <Link className="navLink" to="/info">
+              Info Page
+            </Link>
+
+            <Link className="navLink" to="/alumniform">
+              Alumni Form
+            </Link>
+
+            <LogOutButton className="navLink" />
+          </>
+        )}
+
+        <Link className="navLink" to="/about">
+          About
+        </Link>
       </div>
     </div>
   );
