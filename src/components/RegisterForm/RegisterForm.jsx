@@ -26,7 +26,10 @@ function RegisterForm() {
 
   return (
     <form className="formPanel" onSubmit={handleRegister}>
-      <Typography component="h1" variant="h5" sx={{ mb: 4 }}>
+      <Typography 
+            variant="h1" 
+            sx={{fontSize: 50, mb: 4, textAlign: 'center'}}
+            >
         Register
       </Typography>
       {/* ERROR Message for Registration */}
@@ -60,9 +63,9 @@ function RegisterForm() {
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
         Register
       </Button>
-      <Grid container justifyContent="flex-end">
+      <Grid container justifyContent="center">
         <Grid item>
-          <Link to="/login" variant="body2" className="signin-link">
+          <Link to="/login" variant="body2" style={{ textDecoration: 'none' }}>
             Already have an account? Sign in
           </Link>
         </Grid>
