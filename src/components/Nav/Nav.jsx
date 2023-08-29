@@ -1,51 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import {AppBar, Toolbar, Button, Typography, IconButton, Link} from '@mui/material'; // Import MUI components
 import './Nav.css';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
+import DrawerComponent from '../DrawerComponent/DrawerComponent';
 
 function Nav() {
-  const user = useSelector((store) => store.user);
+    const user = useSelector((store) => store.user);
 
-  return (
-    <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
-      </Link>
-      <div>
-        {/* If no user is logged in, show these links */}
-        {!user.id && (
-          // If there's no user, show login/registration links
-          <Link className="navLink" to="/login">
-            Login / Register
-          </Link>
-        )}
-
-        {/* If a user is logged in, show these links */}
-        {user.id && (
-          <>
-            <Link className="navLink" to="/user">
-              Home
-            </Link>
-
-            <Link className="navLink" to="/info">
-              Info Page
-            </Link>
-
-            <Link className="navLink" to="/alumniform">
-              Alumni Form
-            </Link>
-
-            <LogOutButton className="navLink" />
-          </>
-        )}
-
-        <Link className="navLink" to="/about">
-          About
-        </Link>
-      </div>
-    </div>
-  );
+    return (
+        <div>
+            <AppBar position="static" sx={{alignItems: 'center'}}>
+                <Toolbar>
+                    <span style={{float: 'left'}}><DrawerComponent /></span>
+                    <IconButton size="large" edge="start" color="inherit" aria-label="menu"sx={{mr: 2}}>
+                        {/* Add the menu icon */} </IconButton>
+                    <Typography variant="h6" component="div"
+                        sx={{flexGrow: 1,display: 'flex',alignItems: 'center'}}>
+                        <Link to="/user" className="nav-logo" underline="always">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3629/3629539.png" alt="Logo" className="nav-logo-image"/>
+                            <span className="nav-title">Bootcamp Tracker</span>
+                        </Link>
+                    </Typography>
+                    <Button color="inherit"></Button>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
 
 export default Nav;
