@@ -24,7 +24,6 @@ CREATE TABLE "benefits"(
 "notes" VARCHAR(1000)
 );
 
-
 --Job Info Table
 CREATE TABLE "job_info"(
   "id" SERIAL PRIMARY KEY,
