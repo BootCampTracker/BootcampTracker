@@ -29,16 +29,16 @@ CREATE TABLE "benefits"(
 "notes" VARCHAR(200) NOT NULL
 );
 
---Role Info Table
-CREATE TABLE "role_info"(
+--Job Info Table
+CREATE TABLE "job_info"(
 "id" SERIAL PRIMARY KEY,
 "user_id" INT REFERENCES "users",
 "benefits_id" INT REFERENCES "benefits",
 "salary" INTEGER NOT NULL,
 "state" VARCHAR(25) NOT NULL,
 "date_hired" DATE NOT NULL,
-"role_title" VARCHAR(45) NOT NULL,
-"role_number" INTEGER NOT NULL,
-"role_location" VARCHAR(45) NOT NULL,
-"role_duration" VARCHAR(45) NOT NULL
+"job_title" VARCHAR(45) NOT NULL,
+"job_number" INTEGER NOT NULL,
+"job_location" VARCHAR(45) NOT NULL,
+"job_duration" VARCHAR(45) NOT NULL
 );

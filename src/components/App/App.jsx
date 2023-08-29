@@ -10,9 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -22,6 +20,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import AlumniForm from '../AlumniForm/AlumniForm';
 import ProfilePage from '../ProfilePage/ProfilePage'
 import './App.css';
+import AdminPage from '../AdminPage/AdminPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -115,8 +114,10 @@ function App() {
             <AlumniForm />
           </Route>
 
-          <Route exact path="/profilepage">
-            <ProfilePage />
+          
+          <Route exact path="/adminpage">
+            {/* Add access level conditional */}
+            <AdminPage />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
