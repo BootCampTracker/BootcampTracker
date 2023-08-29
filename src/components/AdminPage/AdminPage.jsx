@@ -23,6 +23,9 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
 
+
+
+// TODO - Can be removed once we can fetch real data 
 function createData(email, user_id, job_title, salary, bonus) {
   return {
     email,
@@ -33,6 +36,7 @@ function createData(email, user_id, job_title, salary, bonus) {
   };
 }
 
+// TODO - Can be removed once we can fetch real data 
 const rows = [
 createData('sam@sam.com', 2, 'Dev', 50000, 5000),
 createData('john@example.com', 3, 'Engineer', 60000, 7000),

@@ -21,7 +21,7 @@ CREATE TABLE "benefits"(
 "bonuses" BOOLEAN DEFAULT FALSE,
 "long_term_disability" BOOLEAN DEFAULT FALSE,
 "short_term_disability" BOOLEAN DEFAULT FALSE,
-"notes" VARCHAR(1000) NOT NULL
+"notes" VARCHAR(1000)
 );
 
 --Job Info Table
