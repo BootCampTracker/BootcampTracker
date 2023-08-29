@@ -22,7 +22,6 @@ function Nav() {
                             <span className="nav-title">Bootcamp Tracker</span>
                         </Link>
                     </Typography>
-                    <Button color="inherit"></Button>
                 </Toolbar>
             </AppBar>
         </div>
