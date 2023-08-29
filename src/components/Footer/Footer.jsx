@@ -34,7 +34,7 @@ function Footer() {
       <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
         <Toolbar>
           <Box sx={{ flexGrow: 1, color: 'primary'}}/>
-          <Link href="/https://github.com/ZakariyeAden/Bootcamp-Tracker">Contribute to this project!</Link>
+          <a href="https://github.com/ZakariyeAden/Bootcamp-Tracker" style={{color: "white", textDecoration: "none"}}>Contribute to this project!</a>
         </Toolbar>
       </AppBar>
     </>
