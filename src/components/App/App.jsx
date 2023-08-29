@@ -6,6 +6,8 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import { Box } from '@mui/material';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
@@ -107,7 +109,10 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
+        <Box
+          sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh',}}> 
+          <Footer />
+        </Box>
       </div>
     </Router>
   );

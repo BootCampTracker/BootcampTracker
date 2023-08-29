@@ -2,18 +2,18 @@ import React from "react";
 // CUSTOM COMPONENTS
 import LoginForm from "../LoginForm/LoginForm";
 
-import { Box, Stack} from "@mui/material";
+import {Box, Stack, Typography} from "@mui/material";
 function LoginPage() {
   return (
     <>
-    <Stack
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-      sx={{ width: 1, height: "100vh" }}
-    >
+    <Box sx={{textAlign: 'center', margin: 5}}>
+    <Typography variant="h1">
+      Bootcamp Tracker
+    </Typography>
+    </Box>
+    
       <LoginForm />
-    </Stack>
+    
     </>
   );
 }
