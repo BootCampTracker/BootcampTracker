@@ -31,8 +31,11 @@ function LoginForm() {
   };
 
   return (
-    <form className="formPanel" onSubmit={handleLogin} >
-      <Typography component="h1" variant="h5" sx={{ mb: 4 }}>
+    <form className="formPanel" onSubmit={handleLogin}>
+      <Typography 
+      variant="h1" 
+      sx={{fontSize: 50, mb: 4, textAlign: 'center'}}
+      >
         Login
       </Typography>
       {/* ERROR Message for Login */}
@@ -66,11 +69,11 @@ function LoginForm() {
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
         Login
       </Button>
-      <Grid container justifyContent="flex-end">
+      <Grid container justifyContent="center">
         <Grid item>
-          <Link to="/registration" variant="body2" className="register-link">
+            <Link to="/registration" color="inherit" style={{ textDecoration: 'none' }}>
             Register
-          </Link>
+            </Link>
         </Grid>
       </Grid>
     </form>
