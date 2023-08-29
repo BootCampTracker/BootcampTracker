@@ -34,7 +34,9 @@ function App() {
   return (
     <Router>
       <div>
+        <Box sx={{marginBottom: 15}}>
         <Nav />
+        </Box>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/user" />
