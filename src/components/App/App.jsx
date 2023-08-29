@@ -20,6 +20,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import AlumniForm from '../AlumniForm/AlumniForm';
 
 import './App.css';
+import AdminPage from '../AdminPage/AdminPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -111,6 +112,12 @@ function App() {
 
           <Route exact path="/alumniform">
             <AlumniForm />
+          </Route>
+
+          
+          <Route exact path="/adminpage">
+            {/* Add access level conditional */}
+            <AdminPage />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
