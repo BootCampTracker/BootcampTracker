@@ -31,7 +31,7 @@ function LoginForm() {
   };
 
   return (
-    <form className="formPanel" onSubmit={handleLogin}>
+    <form className="formPanel" onSubmit={handleLogin} >
       <Typography component="h1" variant="h5" sx={{ mb: 4 }}>
         Login
       </Typography>

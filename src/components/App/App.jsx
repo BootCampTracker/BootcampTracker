@@ -120,6 +120,11 @@ function App() {
             <AdminPage />
           </Route>
 
+          <Route exact path="/profilepage">
+            {/* Add access level conditional */}
+            <ProfilePage />
+          </Route>
+
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
