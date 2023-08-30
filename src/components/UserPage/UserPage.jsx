@@ -39,13 +39,13 @@ function UserPage() {
               </Box>
               
               <Box className='circle' sx={{textAlign: 'center'}}>
-                <Link className='link' to="#/compare" underline="always" sx={{color: 'white', fontSize: 20}}>
+                <Link className='link' href="#/compare" underline="always" sx={{color: 'white', fontSize: 20}}>
                   View graphed data comparisons
                 </Link>
               </Box>
               
               <Box className='circle' sx={{textAlign: 'center'}}>
-                <Link className='link' to="#" textDecoration="underline" sx={{color: 'white', fontSize: 20}} 
+                <Link className='link' href="/#" textDecoration="underline" sx={{color: 'white', fontSize: 20}} 
                   onClick={() => {
                     navigator.clipboard.writeText("TEXT_TO_BE_COPIED")
                     .then(() => alert(`Link to Bootcamp Tracker has been copied! Paste this into your socials to spread the word about Bootcamp Tracker!`))
