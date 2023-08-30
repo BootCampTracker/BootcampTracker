@@ -1,3 +1,4 @@
+/* REUSEABLE */
 .img{
   width: 100%;
 }
@@ -5,4 +6,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.main-heading{
+  font-size: 1.8rem;
+  text-align: center;
+  color: #228be6;
+}
+/* SECTION */
+.form-section{
+  padding: 1rem 3rem;
+}
+.main-section{
+  
 }
