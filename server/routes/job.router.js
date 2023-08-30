@@ -50,10 +50,13 @@ router.post("/", async (req, res) => {
   VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);`;
     const queryBenefitText = `INSERT INTO "benefits" ("health_insurance","dental_insurance","PTO", "401K", "equity", "bonuses", "long_term_disability","short_term_disability", "notes")
   VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9);`;
+    // Await for querys and Parameterization
     await connection.query(queryJobText, paramsJobInfo);
     await connection.query(queryBenefitText, paramsBenefitInfo);
     await connection.query("COMMIT");
+    console.log('Connection', connection);
     res.sendStatus(200);
+    // Catch any Errors
   } catch (err) {
     await connection.query("ROLLBACK");
     console.log(`ERROR in POST for job and benefits:`, err);
