@@ -173,7 +173,7 @@ function ComparisonPage() {
             type="submit"
             value="submit"
             >
-                butts
+                Create Charts
             </Button>
 
         </form>
