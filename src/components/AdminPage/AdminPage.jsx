@@ -26,9 +26,9 @@ import { visuallyHidden } from '@mui/utils';
 
 
 // TODO - Can be removed once we can fetch real data 
-function createData(email, user_id, job_title, salary, bonus) {
+function createData(username, user_id, job_title, salary, bonus) {
   return {
-    email,
+    username,
     user_id,
     job_title,
     salary,
@@ -85,7 +85,7 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'email',
+    id: 'username',
     numeric: false,
     disablePadding: true,
     label: 'Email',
