@@ -23,9 +23,12 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
 
-function createData(email, user_id, job_title, salary, bonus) {
+
+
+// TODO - Can be removed once we can fetch real data 
+function createData(username, user_id, job_title, salary, bonus) {
   return {
-    email,
+    username,
     user_id,
     job_title,
     salary,
@@ -33,6 +36,7 @@ function createData(email, user_id, job_title, salary, bonus) {
   };
 }
 
+// TODO - Can be removed once we can fetch real data 
 const rows = [
 createData('sam@sam.com', 2, 'Dev', 50000, 5000),
 createData('john@example.com', 3, 'Engineer', 60000, 7000),
@@ -45,18 +49,6 @@ createData('william@example.com', 21, 'Sales Representative', 45000, 4000),
 createData('sophia@example.com', 24, 'Data Scientist', 70000, 7500),
 createData('liam@example.com', 27, 'QA Tester', 48000, 3500),
 createData('ava@example.com', 30, 'Marketing Specialist', 52000, 3000),
-  // createData('Donut', 452, 25.0, 51, 4.9),
-  // createData('Eclair', 262, 16.0, 24, 6.0),
-  // createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  // createData('Gingerbread', 356, 16.0, 49, 3.9),
-  // createData('Honeycomb', 408, 3.2, 87, 6.5),
-  // createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  // createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  // createData('KitKat', 518, 26.0, 65, 7.0),
-  // createData('Lollipop', 392, 0.2, 98, 0.0),
-  // createData('Marshmallow', 318, 0, 81, 2.0),
-  // createData('Nougat', 360, 19.0, 9, 37.0),
-  // createData('Oreo', 437, 18.0, 63, 4.0),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -93,7 +85,7 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'email',
+    id: 'username',
     numeric: false,
     disablePadding: true,
     label: 'Email',
@@ -308,7 +300,7 @@ function AdminPage() {
   );
 
   return (
-    <Box sx={{ width: '100%', margin: 5 }}>
+    <Box sx={{ width: 'auto', margin: 4 }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
