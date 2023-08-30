@@ -60,7 +60,6 @@ function AlumniForm() {
   const handleSubmit = e => {
     e.preventDefault();
     console.log("Submitted", jobInfoInput);
-
     // Dispatch
     dispatch({
       type: "ADD_JOB_INFO",
@@ -149,11 +148,11 @@ function AlumniForm() {
               Job Information
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              <label>Job Title</label>
+              <label>Job Level</label>
               <Select
                 labelId="job-label"
                 id="job-label"
-                label="Job Title"
+                label="Job Level"
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, JobTitle: e.target.value })
                 }
@@ -167,10 +166,10 @@ function AlumniForm() {
                   );
                 })}
               </Select>
-              <label>Job Role</label>
+              <label>Job Title</label>
               <Select
                 id="demo-simple-select"
-                label="Job Role"
+                label="Job Title"
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, JobRole: e.target.value })
                 }
@@ -285,7 +284,7 @@ function AlumniForm() {
                 })}
               </Select>
 
-              <label id="demo-simple-select-label">Job Type</label>
+              <label id="demo-simple-select-label">Workplace</label>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
