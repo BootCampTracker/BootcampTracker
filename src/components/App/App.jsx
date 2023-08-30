@@ -14,10 +14,10 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import UserPage from '../UserPage/UserPage';
-import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AlumniForm from '../AlumniForm/AlumniForm';
+import ComparisonPage from '../ComparisonPage/ComparisonPage';
 
 import './App.css';
 import AdminPage from '../AdminPage/AdminPage';
@@ -92,7 +92,7 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the Landing page
-              <LandingPage />
+              <LoginPage />
             }
           </Route>
 
@@ -104,6 +104,12 @@ function App() {
           <Route exact path="/adminpage">
             {/* Add access level conditional */}
             <AdminPage />
+          </Route>
+
+
+          <Route exact path="/compare">
+            {/* Add access level conditional */}
+            <ComparisonPage />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
