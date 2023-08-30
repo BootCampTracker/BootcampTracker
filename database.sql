@@ -10,27 +10,12 @@ CREATE TABLE "user"(
 "bootcamp" VARCHAR(100)
 );
 
--- Benefits Table
-CREATE TABLE "benefits"(
-"id" SERIAL PRIMARY KEY,
-"health_insurance" BOOLEAN DEFAULT FALSE,
-"dental_insurance" BOOLEAN DEFAULT FALSE,
-"PTO" BOOLEAN DEFAULT FALSE,
-"401K" BOOLEAN DEFAULT FALSE,
-"equity" BOOLEAN DEFAULT FALSE,
-"bonuses" BOOLEAN DEFAULT FALSE,
-"long_term_disability" BOOLEAN DEFAULT FALSE,
-"short_term_disability" BOOLEAN DEFAULT FALSE,
-"notes" VARCHAR(1000)
-);
-
 --Job Info Table
 CREATE TABLE "job_info"(
   "id" SERIAL PRIMARY KEY,
   "user_id" INT REFERENCES "user",
-  "benefits_id" INT REFERENCES "benefits",
   "job_title" VARCHAR(100) NOT NULL,
-  "job_role" VARCHAR(100) NOT NULL,
+  "job_level" VARCHAR(100) NOT NULL,
   "job_type" VARCHAR(100) NOT NULL,
   "workplace" VARCHAR(100) NOT NULL,
   "company" VARCHAR(100) NOT NULL,
@@ -42,4 +27,17 @@ CREATE TABLE "job_info"(
   "salary" INTEGER NOT NULL
 );
 
-
+-- Benefits Table
+CREATE TABLE "benefits"(
+"id" SERIAL PRIMARY KEY,
+"job_id" INT REFERENCES "job_info",
+"health_insurance" BOOLEAN DEFAULT FALSE,
+"dental_insurance" BOOLEAN DEFAULT FALSE,
+"PTO" BOOLEAN DEFAULT FALSE,
+"401K" BOOLEAN DEFAULT FALSE,
+"equity" BOOLEAN DEFAULT FALSE,
+"bonuses" BOOLEAN DEFAULT FALSE,
+"long_term_disability" BOOLEAN DEFAULT FALSE,
+"short_term_disability" BOOLEAN DEFAULT FALSE,
+"notes" VARCHAR(1000)
+);
