@@ -21,7 +21,7 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-
+import { BarChart } from '../BarChart/BarChart';
 
 
 
@@ -300,6 +300,10 @@ function AdminPage() {
   );
 
   return (
+
+    <>
+        <BarChart />
+
     <Box sx={{ width: 'auto', margin: 4 }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
@@ -384,6 +388,7 @@ function AdminPage() {
         label="Dense padding"
       />
     </Box>
+    </>
   );
 };
 

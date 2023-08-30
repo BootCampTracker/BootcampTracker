@@ -5,7 +5,7 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
-
+// TODO - Add rejectUnauthenticated to .get params
 // Fetch all job entries
 router.get('/', (req, res,) => {
 const queryText = `SELECT "user"."id", "user"."username", "job_info"."job_title", 
