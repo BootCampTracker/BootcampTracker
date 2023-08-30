@@ -17,15 +17,15 @@ import {
 } from "@mui/material";
 import { Button } from "@mui/base";
 // Modules
-import bootcamps from "../Modules/Bootcamps";
-import JobDuration from "../Modules/JobDuration";
-import JobPosition from "../Modules/JobPosition";
-import JobType from "../Modules/JobType";
-import JobTitle from "../Modules/JobTitle";
-import JobRole from "../Modules/JobRole";
-import states from "../Modules/States";
+import bootcamps from "./Modules/Bootcamps";
+import JobDuration from "./Modules/JobDuration";
+import JobPosition from "./Modules/JobPosition";
+import JobType from "./Modules/JobType";
+import JobTitle from "./Modules/JobTitle";
+import JobRole from "./Modules/JobRole";
+import states from "./Modules/States";
 function AlumniForm() {
-  // HOOKS 
+  // HOOKS
   const [jobInfoInput, setJobInfoInput] = useState({
     Bootcamp: "",
     GradDate: "",
@@ -182,24 +182,24 @@ function AlumniForm() {
         <FormControlLabel value="FALSE" control={<Radio />} label="No" />
       </RadioGroup>
       <label>Positon:</label>
-        <Select
-          id="demo-simple-select"
-          label="Bootcamps"
-          onChange={e =>
-            setJobInfoInput({ ...jobInfoInput, Position: e.target.value })
-          }
-          value={jobInfoInput.Position}
-          error=""
-          helperText=""
-        >
-          {JobPosition.map(job => {
-            return (
-              <MenuItem key={job.id} value={job.positon}>
-                {job.positon}
-              </MenuItem>
-            );
-          })}
-        </Select>
+      <Select
+        id="demo-simple-select"
+        label="Bootcamps"
+        onChange={e =>
+          setJobInfoInput({ ...jobInfoInput, Position: e.target.value })
+        }
+        value={jobInfoInput.Position}
+        error=""
+        helperText=""
+      >
+        {JobPosition.map(job => {
+          return (
+            <MenuItem key={job.id} value={job.positon}>
+              {job.positon}
+            </MenuItem>
+          );
+        })}
+      </Select>
       <label id="demo-simple-select-label">Hours Worked</label>
       <TextField
         type="number"
@@ -268,7 +268,7 @@ function AlumniForm() {
         }
         value={jobInfoInput.Salary}
       />
-
+      {/* Benefits */}
       <Typography>Benefits</Typography>
       <FormLabel id="health-insurance-radio-group">Health Insurance</FormLabel>
       <RadioGroup

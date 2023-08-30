@@ -34,7 +34,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Box marginBottom={15}>
+        <Box sx={{marginBottom: 15}}>
         <Nav />
         </Box>
         <Switch>
