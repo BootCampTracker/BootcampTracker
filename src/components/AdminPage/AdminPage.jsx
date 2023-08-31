@@ -20,19 +20,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import { Stack } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // TODO's
-// Change top TableRow key value to create unique key ~line 328
 // Set column widths properly
-// Comment code
-// Set column padding to dense
-// Set up filter
-// Set up delete
-// Make sure checkboxes work properly
+// Set-up delete
 
+// Set list order by 'salary', default largest to smallest
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -43,6 +40,7 @@ function descendingComparator(a, b, orderBy) {
   return 0;
 }
 
+// Set list order asc or desc, default desc
 function getComparator(order, orderBy) {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
@@ -70,7 +68,7 @@ const headCells = [
   {
     id: 'username',
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: 'Username',
   },
   {
@@ -99,9 +97,9 @@ const headCells = [
   }
 ];
 
-
+// Table head component
 function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
+  const { order, orderBy, rowCount, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -110,23 +108,13 @@ function EnhancedTableHead(props) {
   return (
     <TableHead sx={{ margin: 4 }}>
       <TableRow >
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all entries',
-            }}
-          />
-        </TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
+            style={{ fontSize: "20px" }}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -147,150 +135,79 @@ function EnhancedTableHead(props) {
   );
 }
 
+// Validate data used in Table Head
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
 
-function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
 
-  return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-        }),
-      }}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Job Entries List
-        </Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
-  );
-}
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
-
-// Render to DOM
+// Main component
 function AdminPage() {
 
   const dispatch = useDispatch();
-  const [order, setOrder] = React.useState('asc');
+  const [order, setOrder] = React.useState('desc');
   const [orderBy, setOrderBy] = React.useState('salary');
-  const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(true);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  // Bring in our list of job entries from store/admin reducer
   const jobList = useSelector(store => store.admin);
 
-
-  useEffect(() => {
-    fetchAllJobEntries();
-  }, []);
-
+  // Dispatch to fetch all job entries
   const fetchAllJobEntries = () => {
     dispatch({
       type: 'FETCH_ALL_JOBS',
     })
   };
 
+  // Fetch all job entries on page load
+  useEffect(() => {
+    fetchAllJobEntries();
+  }, []);
+
+  // Delete selected job entry, fetch new JobList
+  const handleDeleteJobRow = (event, jobId) => {
+    dispatch({
+      type: 'DELETE_JOB_ROW',
+      payload: jobId
+    });
+    fetchAllJobEntries();
+  };
+  
+  // Handle changes to how job list is displayed
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
-  // Changed rows.map to jobList.map
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelected = jobList.map((n) => n.name);
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
-  };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelected(newSelected);
-  };
-
+  // Handle change page user action, default Page is 0
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
+  // Handle change of how many rows displayed per page user action.
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
+  // Handle change table density (Table row padding) user action.
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - jobList.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - jobList?.length) : 0;
 
-  //rows changed to jobList
+  // Save the values of display settings state to a cache so that it persists 
+  // between re-renders
   const visibleRows = React.useMemo(
     () =>
       stableSort(jobList, getComparator(order, orderBy)).slice(
@@ -300,95 +217,95 @@ function AdminPage() {
     [order, orderBy, page, rowsPerPage],
   );
 
-  // Render to DOM
+  // Render Table to DOM.
   return (
+    <Box sx={{ width: '60%', margin: "auto" }}>
+      <Paper sx={{ width: '100%', mb: 2 }}>
+        <Typography
+          sx={{ flex: '1 1 100%', fontWeight: "bold", textAlign: "center" }}
+          variant="h5"
+          id="tableTitle"
+          component="div"
+        >
+          Job Entries
+        </Typography>
+        <TableContainer>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            size={dense ? 'small' : 'medium'}
+          >
+            <EnhancedTableHead
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+              rowCount={jobList?.length}
+            />
+            <TableBody>
+              {visibleRows.map((job, index) => {
+                const labelId = `enhanced-table-checkbox-${index}`;
 
-      <Box sx={{ width: 'auto', margin: 4 }}>
-        <Paper sx={{ width: '100%', mb: 2 }}>
-          <EnhancedTableToolbar numSelected={selected.length} />
-          <TableContainer>
-            <Table
-              sx={{ minWidth: 750 }}
-              aria-labelledby="tableTitle"
-              size={dense ? 'small' : 'medium'}
-            >
-              <EnhancedTableHead
-                numSelected={selected.length}
-                order={order}
-                orderBy={orderBy}
-                onSelectAllClick={handleSelectAllClick}
-                onRequestSort={handleRequestSort}
-                rowCount={jobList.length}
-              />
-              <TableBody>
-                {visibleRows.map((job, index) => {
-                  const isItemSelected = isSelected(job.username);
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, job.username)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      // Change to a value that will provide unique key
-                      key={job.job_id}
-                      selected={isItemSelected}
-                      sx={{ cursor: 'pointer' }}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                        width="1"
-                      >
-                        {job?.username}
-                      </TableCell>
-                      <TableCell align="center">{job?.user_id}</TableCell>
-                      <TableCell align="left">{job?.job_title}</TableCell>
-                      <TableCell align="right">{job?.salary}</TableCell>
-                      <TableCell align="right">{job?.total_yearly_bonus}</TableCell>
-                    </TableRow>
-                  );
-                })}
-                {emptyRows > 0 && (
+                return (
                   <TableRow
-                    style={{
-                      height: (dense ? 33 : 53) * emptyRows,
-                    }}
+                    hover
+                    role="table"
+                    tabIndex={-1}
+                    key={job?.job_id}
+                    sx={{ cursor: 'pointer' }}
                   >
-                    <TableCell colSpan={6} />
+                    <TableCell
+                      align="left"
+                      component="th"
+                      id={labelId}
+                      scope="row"
+                      padding="5px"
+                      width="1"
+                    >
+                      {job?.username}
+                    </TableCell>
+                    <TableCell align="center">{job?.user_id}</TableCell>
+                    <TableCell align="left">{job?.job_title}</TableCell>
+                    <TableCell align="right">{job?.salary}</TableCell>
+                    <TableCell align="right">{job?.total_yearly_bonus}</TableCell>
+                    <IconButton onClick={(event) => handleDeleteJobRow(event, job?.job_id)}>
+                      <DeleteIcon />
+                    </IconButton>
                   </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={jobList.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Paper>
-        <FormControlLabel
-          control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Dense padding"
+                );
+              })}
+              {emptyRows > 0 && (
+                <TableRow
+                  style={{
+                    height: (dense ? 33 : 53) * emptyRows,
+                  }}
+                >
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={jobList?.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      </Box>
+      </Paper>
+      <Stack direction="row" spacing={1} alignItems="center">
+        <Typography>Condense Table Rows</Typography>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={dense}
+              onChange={handleChangeDense}
+            />}
+        />
+      </Stack>
+    </Box>
   );
 };
 
