@@ -5,22 +5,26 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-
+import { Box } from '@mui/material';
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js/auto';
+// import { BarChart } from '..BarChart/BarChart';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AlumniForm from '../AlumniForm/AlumniForm';
-
-import './App.css';
+import ComparisonPage from '../ComparisonPage/ComparisonPage';
 import AdminPage from '../AdminPage/AdminPage';
+import './App.css';
+
+
+Chart.register(CategoryScale);
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -34,19 +38,13 @@ function App() {
   return (
     <Router>
       <div>
+        <Box sx={{marginBottom: 15}}>
         <Nav />
+        </Box>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/user" />
 
-          {/* Visiting localhost:3000/about will show the about page. */}
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/about"
-          >
-            <AboutPage />
-          </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -58,14 +56,6 @@ function App() {
             path="/user"
           >
             <UserPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
           </ProtectedRoute>
 
           <Route
@@ -106,7 +96,7 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the Landing page
-              <LandingPage />
+              <LoginPage />
             }
           </Route>
 
@@ -120,12 +110,21 @@ function App() {
             <AdminPage />
           </Route>
 
+
+          <Route exact path="/compare">
+            {/* Add access level conditional */}
+            <ComparisonPage />
+          </Route>
+
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
+        <Box
+          sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh',}}> 
+          <Footer />
+        </Box>
       </div>
     </Router>
   );

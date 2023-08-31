@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 import jobForm from './jobForm.reducer'
+import admin from './admin.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -12,7 +13,8 @@ import jobForm from './jobForm.reducer'
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  jobForm
+  jobForm,
+  admin, // contains job entry data for display on AdminPage
 });
 
 export default rootReducer;
