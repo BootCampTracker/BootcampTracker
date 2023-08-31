@@ -22,6 +22,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { BarChart } from '../BarChart/BarChart';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -228,7 +230,11 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
+// Render to DOM
 function AdminPage() {
+
+  const dispatch = useDispatch();
+
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('salary');
   const [selected, setSelected] = React.useState([]);
@@ -236,6 +242,16 @@ function AdminPage() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  useEffect(() => {
+    fetchAllJobEntries();
+}, []);
+
+const fetchAllJobEntries = () => {
+dispatch({
+  type: 'FETCH_ALL_JOBS',
+})
+};
+  
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
