@@ -1,44 +1,82 @@
 import { FormControl, Input, Typography, InputLabel, Select, MenuItem, Button } from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 // This is the component function for the ComparisonPage
 function ComparisonPage() {
     
+    //-------------React State Hooks
+    // store the useDispatch hook in the variable dispatch
+    const dispatch = useDispatch();
+    
+    // hook to set local state for workplace location
+    const [workplaceLocation, setWorkplaceLocation] = useState('');
+    
+    // hook to set local state for workplace location
+    const [job, setJob] = useState('');
+    
+    // hook to set local state for workplace location
+    const [bootcamp, setBootcamp] = useState('');
+    
+    // hook to set local state for workplace location
+    const [state, setState] = useState('');
 
+    // function to dispatch the event.target.value to the global state
+    const dispatchChange = () => {
+        dispatch({
+            type: "FETCH_COMPARE_JOBS",
+            payload: {
+                workplaceLocation: workplaceLocation,
+                job: job,
+                bootcamp: bootcamp,
+                state: state,
+            }
+        })
+    }
+
+    //------------Handler functions
     // This function handles the submit of the form
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         console.log('form submitted!');
+        dispatchChange();
     } // end handleSubmit
 
     // This function handles the dropdown for workplace location
     const handleWorkplaceLocationChange = (event) => {
         console.log('workplace location input changed!');
-        console.log(`workplace location is: ${event.target.value}` );
+        console.log(`workplace location is: ${event.target.value}`);
+        setWorkplaceLocation(event.target.value)
         // We need a dispatch and change in state for every change in the input fields!
     } // end handleWorkplaceLocationChange
 
     // This function handles the dropdown for the job
     const handleJobChange = (event) => {
         console.log('job input changed!');
-        console.log(`job is: ${event.target.value}` );
+        console.log(`job is: ${event.target.value}`);
+        setJob(event.target.value);
         // We need a dispatch and change in state for every change in the input fields!
     } // end handleJobChange
 
     // This function handles the dropdown for the bootcamp
     const handleBootcampChange = (event) => {
         console.log('bootcamp input changed!');
-        console.log(`bootcamp is: ${event.target.value}` );
+        console.log(`bootcamp is: ${event.target.value}`);
+        setBootcamp(event.target.value);
         // We need a dispatch and change in state for every change in the input fields!
     } // end handleBootcampChange
 
     // This function handles the dropdown for the state
     const handleStateChange = (event) => {
         console.log('state input changed!');
-        console.log(`state is: ${event.target.value}` );
+        console.log(`state is: ${event.target.value}`);
+        setState(event.target.value);
         // We need a dispatch and change in state for every change in the input fields!
     } // end handleStateChange
 
 
+    // ----------rendered jsx
     return(
     <>
         <Typography variant="h1" sx={{fontSize: 50, marginBottom: 8}}>
@@ -60,7 +98,7 @@ function ComparisonPage() {
                 sx={{ minWidth: 120 }}
                 labelId="workplace-location"
                 id="workplace-location"
-                value={''}
+                value={workplaceLocation}
                 label="workplace-location"
                 onChange={handleWorkplaceLocationChange}
             >
@@ -76,7 +114,7 @@ function ComparisonPage() {
                 sx={{ minWidth: 120 }}
                 labelId="job"
                 id="job"
-                value={''}
+                value={job}
                 label="job"
                 onChange={handleJobChange}
             >
@@ -94,9 +132,9 @@ function ComparisonPage() {
                 sx={{ minWidth: 120 }}
                 labelId="bootcamp"
                 id="bootcamp"
-                value={''}
+                value={bootcamp}
                 label="bootcamp"
-                onChange={'handleBootcampChange'}
+                onChange={handleBootcampChange}
             >
                 <MenuItem value={'Prime Digital Academy'}>Prime Digital Academy</MenuItem>
                 <MenuItem value={'University of MN Boot Camps'}>University of MN Boot Camps</MenuItem>
@@ -109,7 +147,7 @@ function ComparisonPage() {
                 sx={{ minWidth: 120 }}
                 labelId="state"
                 id="state"
-                value={''}
+                value={state}
                 label="state"
                 onChange={handleStateChange}
             >
