@@ -13,13 +13,13 @@ function ComparisonPage() {
     // hook to set local state for workplace location
     const [workplaceLocation, setWorkplaceLocation] = useState('');
     
-    // hook to set local state for workplace location
+    // hook to set local state for job
     const [job, setJob] = useState('');
     
-    // hook to set local state for workplace location
+    // hook to set local state for bootcamp
     const [bootcamp, setBootcamp] = useState('');
     
-    // hook to set local state for workplace location
+    // hook to set local state for state
     const [state, setState] = useState('');
 
     // function to dispatch the event.target.value to the global state

@@ -1,6 +1,6 @@
 // ComparisonPage reducer, will set the global state from 
 // users selecting dropdown values
-const adminReducer = (state = {}, action) => {
+const compareReducer = (state = {}, action) => {
     switch (action.type) {
         case 'SET_ALL_JOBS':
             return action.payload;
@@ -10,4 +10,4 @@ const adminReducer = (state = {}, action) => {
 
 };
 
-export default adminReducer;
+export default compareReducer;
