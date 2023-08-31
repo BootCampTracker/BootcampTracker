@@ -5,6 +5,7 @@ import axios from 'axios';
 function* fetchCompareJobs(action) {
     try {
         console.log('in the fetchCompareJobs function!');
+        console.log(`action.payload is: ${JSON.stringify(action.payload)} `);
         // yield axios.get('/api/compare, payload: action.payload')
         // yield put({ type: 'SET_COMPARE_JOBS', payload: response.data})
     } catch (error) {
