@@ -51,9 +51,13 @@ router.post("/", async (req, res) => {
   try {
     await connection.query("BEGIN");
     // Querys
-    const queryJobText = ``;
-    const queryBenefitText = ``;
-    const queryBootcampText = ``;
+    const queryJobText = `INSERT INTO "job_info" ("user_id","job_title", "job_level", "job_type", "workplace", "company", "state","promotion", "job_number", "hours", "date_hired", "salary")
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12);`;
+    const queryBenefitText = `INSERT INTO "benefits" ("user_id", "health_insurance","dental_insurance","PTO", "401K", "equity", "total_yearly_bonus", "long_term_disability","short_term_disability", "notes")
+    VALUES ( $1,$2,$3,$4,$5,$6,$7,$8,$9,$10);`;
+    const queryBootcampText = `INSERT INTO "bootcamp" ("user_id","graduation_date", "bootcamp")
+    VALUES ( $1,$2,$3);
+    `;
     // Await for querys and Parameterization
     await connection.query(queryJobText, paramsJobInfo);
     await connection.query(queryBenefitText, paramsBenefitInfo);

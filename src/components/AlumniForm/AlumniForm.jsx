@@ -32,6 +32,7 @@ function AlumniForm() {
   // HOOKS
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
+  const [openInput, setOpenInput] = useState(false);
   const [jobInfoInput, setJobInfoInput] = useState({
     Bootcamp: "",
     GradDate: "",
@@ -42,8 +43,8 @@ function AlumniForm() {
     Promotions: "",
     Position: "",
     Hours: "",
-    JobDuration: "",
     JobType: "",
+    Workplace: "",
     HireDate: "",
     Salary: "",
     Health: "",
@@ -66,17 +67,17 @@ function AlumniForm() {
       payload: {
         userId: user.id,
         jobTitle: jobInfoInput.JobTitle,
-        jobRole: jobInfoInput.JobRole,
-        Company: jobInfoInput.Company,
+        jobLevel: jobInfoInput.JobRole,
+        company: jobInfoInput.Company,
         state: jobInfoInput.States,
         promotions: jobInfoInput.Promotions,
         jobNumber: jobInfoInput.Position,
         hours: jobInfoInput.Hours,
-        jobDuration: jobInfoInput.JobDuration,
+        workplace: jobInfoInput.Workplace,
         jobType: jobInfoInput.JobType,
         dateHired: jobInfoInput.HireDate,
         salary: jobInfoInput.Salary,
-        graduationDate: jobInfoInput.GradDate,
+        gradDate: jobInfoInput.GradDate,
         bootcamp: jobInfoInput.Bootcamp,
         health: jobInfoInput.Health,
         dental: jobInfoInput.Dental,
@@ -93,7 +94,7 @@ function AlumniForm() {
 
   return (
     <div className="main-section">
-      <h1 className="main-heading">Anonymously submit your information!</h1>
+      <h1 className="main-heading">Anonymously submit your information</h1>
       <Grid container>
         <Grid item xs={6}>
           <form onSubmit={handleSubmit} className="form-section">
@@ -270,10 +271,10 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({
                     ...jobInfoInput,
-                    JobDuration: e.target.value,
+                    JobType: e.target.value,
                   })
                 }
-                value={jobInfoInput.JobDuration}
+                value={jobInfoInput.JobType}
               >
                 {JobDuration.map(job => {
                   return (
@@ -290,9 +291,9 @@ function AlumniForm() {
                 id="demo-simple-select"
                 label="Job Type"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, JobType: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, Workplace: e.target.value })
                 }
-                value={jobInfoInput.JobType}
+                value={jobInfoInput.Workplace}
               >
                 {JobType.map(job => {
                   return (
@@ -467,21 +468,26 @@ function AlumniForm() {
               <RadioGroup
                 row
                 aria-labelledby="bonus-radio-group"
-                onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Bonuses: e.target.value })
-                }
-                value={jobInfoInput.Bonuses}
               >
                 <FormControlLabel
                   value="TRUE"
                   control={<Radio />}
                   label="Yes"
+                  onClick={() => setOpenInput(!openInput)}
                 />
                 <FormControlLabel
                   value="FALSE"
                   control={<Radio />}
                   label="No"
                 />
+                {openInput && <TextField
+                  type="number"
+                  placeholder="Bonuses"
+                  onChange={e =>
+                    setJobInfoInput({ ...jobInfoInput, Bonuses: e.target.value })
+                  }
+                  value={jobInfoInput.Bonuses}
+                />}
               </RadioGroup>
               <FormLabel id="bonus-radio-group">Equity</FormLabel>
               <RadioGroup
