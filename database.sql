@@ -11,7 +11,7 @@ CREATE TABLE "user"(
 -- Job Info Table
 CREATE TABLE "job_info"(
   "id" SERIAL PRIMARY KEY,
-  "user_id" INT REFERENCES "user" NOT NULL,
+  "user_id" INT REFERENCES "user",
   "job_title" VARCHAR(100) NOT NULL,
   "job_level" VARCHAR(100) NOT NULL,
   "job_type" VARCHAR(100) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE "job_info"(
 -- Benefits Table
 CREATE TABLE "benefits"(
 "id" SERIAL PRIMARY KEY,
-"job_id" INT REFERENCES "job_info" (id) NOT NULL,
+"job_id" INT REFERENCES "job_info",
 "health_insurance" BOOLEAN DEFAULT FALSE,
 "dental_insurance" BOOLEAN DEFAULT FALSE,
 "PTO" BOOLEAN DEFAULT FALSE,
@@ -43,7 +43,7 @@ CREATE TABLE "benefits"(
 -- Bootcamp
 CREATE TABLE "bootcamp"(
 "id" SERIAL PRIMARY KEY,
-"user_id" INT REFERENCES "user" NOT NULL,
-"graduation_date" DATE NOT NULL,
-"bootcamp" VARCHAR(100) NOT NULL
+"user_id" INT REFERENCES "user",
+"graduation_date" DATE,
+"bootcamp" VARCHAR(100)
 );
