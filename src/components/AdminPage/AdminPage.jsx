@@ -1,4 +1,4 @@
-import * as React from 'react';
+// import * as React from 'react';
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -22,7 +22,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Stack } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
-import { useEffect } from 'react';
+import { useEffect, useState, useMemo} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // TODO's
@@ -148,20 +148,23 @@ EnhancedTableHead.propTypes = {
 function AdminPage() {
 
   const dispatch = useDispatch();
-  const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('salary');
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(true);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [order, setOrder] = useState('desc');
+  const [orderBy, setOrderBy] = useState('salary');
+  const [page, setPage] = useState(0);
+  const [dense, setDense] = useState(true);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   // Bring in our list of job entries from store/admin reducer
   const jobList = useSelector(store => store.admin);
+
+  console.log({jobList});
 
   // Dispatch to fetch all job entries
   const fetchAllJobEntries = () => {
     dispatch({
       type: 'FETCH_ALL_JOBS',
     })
+
   };
 
   // Fetch all job entries on page load
@@ -177,7 +180,7 @@ function AdminPage() {
     });
     fetchAllJobEntries();
   };
-  
+
   // Handle changes to how job list is displayed
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -208,7 +211,7 @@ function AdminPage() {
 
   // Save the values of display settings state to a cache so that it persists 
   // between re-renders
-  const visibleRows = React.useMemo(
+  const visibleRows = useMemo(
     () =>
       stableSort(jobList, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
@@ -258,7 +261,6 @@ function AdminPage() {
                       component="th"
                       id={labelId}
                       scope="row"
-                      padding="5px"
                       width="1"
                     >
                       {job?.username}
