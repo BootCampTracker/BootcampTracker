@@ -1,6 +1,4 @@
-// import * as React from 'react';
 import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,24 +8,17 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { Stack } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-// TODO's
-// Set column widths properly
-// Set-up delete
 
 // Set list order by 'salary', default largest to smallest
 function descendingComparator(a, b, orderBy) {
@@ -157,14 +148,11 @@ function AdminPage() {
   // Bring in our list of job entries from store/admin reducer
   const jobList = useSelector(store => store.admin);
 
-  console.log({ jobList });
-
   // Dispatch to fetch all job entries
   const fetchAllJobEntries = () => {
     dispatch({
       type: 'FETCH_ALL_JOBS',
     })
-
   };
 
   // Fetch all job entries on page load
@@ -224,7 +212,7 @@ function AdminPage() {
   return (
     <Box sx={{ width: '60%', margin: "auto" }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <Typography
+        <Typography 
           sx={{ flex: '1 1 100%', fontWeight: "bold", textAlign: "center" }}
           variant="h5"
           id="tableTitle"
@@ -246,7 +234,7 @@ function AdminPage() {
             />
             <TableBody>
               {visibleRows.map((job, index) => {
-                const labelId = `enhanced-table-checkbox-${index}`;
+                const labelId = `enhanced-table-${index}`;
 
                 return (
                   <TableRow
@@ -262,6 +250,7 @@ function AdminPage() {
                       id={labelId}
                       scope="row"
                       width="1"
+
                     >
                       {job?.username}
                     </TableCell>
@@ -269,9 +258,11 @@ function AdminPage() {
                     <TableCell align="left">{job?.job_title}</TableCell>
                     <TableCell align="right">{job?.salary}</TableCell>
                     <TableCell align="right">{job?.total_yearly_bonus}</TableCell>
+                    <TableCell>
                     <IconButton onClick={(event) => handleDeleteJobRow(event, job?.job_id)}>
                       <DeleteIcon />
                     </IconButton>
+                    </TableCell>
                   </TableRow>
                 );
               })}
