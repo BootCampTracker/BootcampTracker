@@ -7,9 +7,10 @@ const app = express();
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
-// Route includes
+// Routes include
 const userRouter = require('./routes/user.router');
 const adminRouter = require('./routes/admin.router');
+const compareRouter = require('./routes/compare.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/compare', compareRouter);
 
 // Serve static files
 app.use(express.static('build'));
