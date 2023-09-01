@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
   let bootcampInfo = req.body;
   // Parameterizations
   let paramsJobInfo = [
-    jobInfo.userId,
+    jobInfo.jobUserId,
     jobInfo.jobTitle,
     jobInfo.jobLevel,
     jobInfo.jobType,
@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
     jobInfo.salary,
   ];
   let paramsBenefitInfo = [
-    benefitInfo.userId,
+    benefitInfo.benefitUserId,
     benefitInfo.health,
     benefitInfo.dental,
     benefitInfo.PTO,
@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
   ];
 
   let paramsBootcampInfo = [
-    bootcampInfo.userId,
+    bootcampInfo.bootcampUserId,
     bootcampInfo.gradDate,
     bootcampInfo.bootcamp,
   ];

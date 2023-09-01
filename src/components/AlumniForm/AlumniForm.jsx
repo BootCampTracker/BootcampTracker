@@ -19,11 +19,11 @@ import {
   Grid,
 } from "@mui/material";
 import illustrationsImg from "../Assets/bootcamp_illustrations.png";
+import Swal from "sweetalert2";
 import "./AlumniForm.css";
 // Modules
 import bootcamps from "./Modules/Bootcamps";
 import JobDuration from "./Modules/JobDuration";
-import JobPosition from "./Modules/JobPosition";
 import JobType from "./Modules/JobType";
 import JobTitle from "./Modules/JobTitle";
 import JobRole from "./Modules/JobRole";
@@ -60,12 +60,16 @@ function AlumniForm() {
   // Submit Form and dispatch
   const handleSubmit = e => {
     e.preventDefault();
+    // Logs
     console.log("Submitted", jobInfoInput);
+    console.log("User id:", user.id);
     // Dispatch
     dispatch({
       type: "ADD_JOB_INFO",
       payload: {
-        userId: user.id,
+        jobUserId: user.id,
+        benefitUserId: user.id,
+        bootcampUserId: user.id,
         jobTitle: jobInfoInput.JobTitle,
         jobLevel: jobInfoInput.JobRole,
         company: jobInfoInput.Company,
@@ -90,8 +94,21 @@ function AlumniForm() {
         notes: jobInfoInput.Extra,
       },
     });
+    // Modal Alert for Submit
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Anonosumly saved your data!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    //   Clear inputs
+    setJobInfoInput("");
   };
 
+  useEffect(() => {
+    dispatch({ type: "FETCH_USER" });
+  }, []);
   return (
     <div className="main-section">
       <h1 className="main-heading">Anonymously submit your information</h1>
@@ -116,6 +133,7 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, Bootcamp: e.target.value })
                 }
+                required
                 value={jobInfoInput.Bootcamp}
               >
                 {bootcamps.map(bootcamp => {
@@ -134,6 +152,7 @@ function AlumniForm() {
                   setJobInfoInput({ ...jobInfoInput, GradDate: e.target.value })
                 }
                 value={jobInfoInput.GradDate}
+                required
               />
             </Box>
 
@@ -158,6 +177,7 @@ function AlumniForm() {
                   setJobInfoInput({ ...jobInfoInput, JobTitle: e.target.value })
                 }
                 value={jobInfoInput.JobTitle}
+                required
               >
                 {JobTitle.map(job => {
                   return (
@@ -175,6 +195,7 @@ function AlumniForm() {
                   setJobInfoInput({ ...jobInfoInput, JobRole: e.target.value })
                 }
                 value={jobInfoInput.JobRole}
+                required
               >
                 {JobRole.map(job => {
                   return (
@@ -191,6 +212,7 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, Company: e.target.value })
                 }
+                required
               />
               <label id="demo-simple-select-label">States</label>
               <Select
@@ -200,6 +222,7 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, States: e.target.value })
                 }
+                required
                 value={jobInfoInput.States}
               >
                 {states.map(state => {
@@ -222,38 +245,34 @@ function AlumniForm() {
                     Promotions: e.target.value,
                   })
                 }
+                required
                 value={jobInfoInput.Promotions}
               >
                 <FormControlLabel
                   value="TRUE"
                   control={<Radio />}
                   label="Yes"
+                  required
                 />
                 <FormControlLabel
                   value="FALSE"
                   control={<Radio />}
                   label="No"
+                  required
                 />
               </RadioGroup>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              <label>Positon:</label>
-              <Select
+              <TextField
                 id="demo-simple-select"
-                label="Bootcamps"
+                label="Position"
+                type="number"
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, Position: e.target.value })
                 }
+                required
                 value={jobInfoInput.Position}
-              >
-                {JobPosition.map(job => {
-                  return (
-                    <MenuItem key={job.id} value={job.positon}>
-                      {job.positon}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
+              />
               <label id="demo-simple-select-label">Hours Worked</label>
               <TextField
                 type="number"
@@ -261,6 +280,7 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, Hours: e.target.value })
                 }
+                required
                 value={jobInfoInput.Hours}
               />
               <label id="demo-simple-select-label">Job Duration</label>
@@ -274,6 +294,7 @@ function AlumniForm() {
                     JobType: e.target.value,
                   })
                 }
+                required
                 value={jobInfoInput.JobType}
               >
                 {JobDuration.map(job => {
@@ -291,8 +312,12 @@ function AlumniForm() {
                 id="demo-simple-select"
                 label="Job Type"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Workplace: e.target.value })
+                  setJobInfoInput({
+                    ...jobInfoInput,
+                    Workplace: e.target.value,
+                  })
                 }
+                required
                 value={jobInfoInput.Workplace}
               >
                 {JobType.map(job => {
@@ -310,6 +335,7 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, HireDate: e.target.value })
                 }
+                required
                 value={jobInfoInput.HireDate}
               />
               <label id="demo-simple-select-label">Salary</label>
@@ -319,6 +345,7 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, Salary: e.target.value })
                 }
+                required
                 value={jobInfoInput.Salary}
               />
             </Box>
@@ -342,17 +369,20 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, Health: e.target.value })
                 }
+                required
                 value={jobInfoInput.Health}
               >
                 <FormControlLabel
                   value="TRUE"
                   control={<Radio />}
                   label="Yes"
+                  required
                 />
                 <FormControlLabel
                   value="FALSE"
                   control={<Radio />}
                   label="No"
+                  required
                 />
               </RadioGroup>
               <FormLabel id="dental-insurance-radio-group">
@@ -370,11 +400,13 @@ function AlumniForm() {
                   value="TRUE"
                   control={<Radio />}
                   label="Yes"
+                  required
                 />
                 <FormControlLabel
                   value="FALSE"
                   control={<Radio />}
                   label="No"
+                  required
                 />
               </RadioGroup>
               <FormLabel id="pto-radio-group">PTO</FormLabel>
@@ -390,11 +422,13 @@ function AlumniForm() {
                   value="TRUE"
                   control={<Radio />}
                   label="Yes"
+                  required
                 />
                 <FormControlLabel
                   value="FALSE"
                   control={<Radio />}
                   label="No"
+                  required
                 />
               </RadioGroup>
               <FormLabel id="401k-radio-group">401K</FormLabel>
@@ -413,11 +447,13 @@ function AlumniForm() {
                   value="TRUE"
                   control={<Radio />}
                   label="Yes"
+                  required
                 />
                 <FormControlLabel
                   value="FALSE"
                   control={<Radio />}
                   label="No"
+                  required
                 />
               </RadioGroup>
               <FormLabel id="lt-diability-radio-group">
@@ -435,11 +471,13 @@ function AlumniForm() {
                   value="TRUE"
                   control={<Radio />}
                   label="Yes"
+                  required
                 />
                 <FormControlLabel
                   value="FALSE"
                   control={<Radio />}
                   label="No"
+                  required
                 />
               </RadioGroup>
               <FormLabel id="st-diability-radio-group">
@@ -457,37 +495,44 @@ function AlumniForm() {
                   value="TRUE"
                   control={<Radio />}
                   label="Yes"
+                  required
                 />
                 <FormControlLabel
                   value="FALSE"
                   control={<Radio />}
                   label="No"
+                  required
                 />
               </RadioGroup>
               <FormLabel id="bonus-radio-group">Bonuses</FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="bonus-radio-group"
-              >
+              <RadioGroup row aria-labelledby="bonus-radio-group">
                 <FormControlLabel
                   value="TRUE"
                   control={<Radio />}
                   label="Yes"
                   onClick={() => setOpenInput(!openInput)}
+                  required
                 />
                 <FormControlLabel
                   value="FALSE"
                   control={<Radio />}
                   label="No"
+                  required
                 />
-                {openInput && <TextField
-                  type="number"
-                  placeholder="Bonuses"
-                  onChange={e =>
-                    setJobInfoInput({ ...jobInfoInput, Bonuses: e.target.value })
-                  }
-                  value={jobInfoInput.Bonuses}
-                />}
+                {openInput && (
+                  <TextField
+                    type="number"
+                    placeholder="Bonuses"
+                    onChange={e =>
+                      setJobInfoInput({
+                        ...jobInfoInput,
+                        Bonuses: e.target.value,
+                      })
+                    }
+                    required
+                    value={jobInfoInput.Bonuses}
+                  />
+                )}
               </RadioGroup>
               <FormLabel id="bonus-radio-group">Equity</FormLabel>
               <RadioGroup
@@ -502,11 +547,13 @@ function AlumniForm() {
                   value="TRUE"
                   control={<Radio />}
                   label="Yes"
+                  required
                 />
                 <FormControlLabel
                   value="FALSE"
                   control={<Radio />}
                   label="No"
+                  required
                 />
               </RadioGroup>
 
@@ -516,6 +563,7 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, Extra: e.target.value })
                 }
+                required
                 value={jobInfoInput.Extra}
               />
             </Box>

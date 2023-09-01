@@ -19,7 +19,7 @@ CREATE TABLE "job_info"(
   "company" VARCHAR(100) NOT NULL,
   "state" VARCHAR(100) NOT NULL,
   "promotion" BOOLEAN DEFAULT FALSE,
-  "job_number" VARCHAR(100) NOT NULL,
+  "job_number" INT NOT NULL,
   "hours" INT NOT NULL,
   "date_hired" DATE NOT NULL,
   "salary" INT NOT NULL
