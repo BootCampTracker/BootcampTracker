@@ -22,7 +22,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Stack } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
-import { useEffect, useState, useMemo} from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // TODO's
@@ -157,7 +157,7 @@ function AdminPage() {
   // Bring in our list of job entries from store/admin reducer
   const jobList = useSelector(store => store.admin);
 
-  console.log({jobList});
+  console.log({ jobList });
 
   // Dispatch to fetch all job entries
   const fetchAllJobEntries = () => {
@@ -217,7 +217,7 @@ function AdminPage() {
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage,
       ),
-    [order, orderBy, page, rowsPerPage],
+    [order, orderBy, page, rowsPerPage, jobList],
   );
 
   // Render Table to DOM.
