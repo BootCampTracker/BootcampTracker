@@ -17,6 +17,8 @@ import UserPage from '../UserPage/UserPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AlumniForm from '../AlumniForm/AlumniForm';
+import ProfilePage from '../ProfilePage/ProfilePage'
+import './App.css';
 import ComparisonPage from '../ComparisonPage/ComparisonPage';
 import AdminPage from '../AdminPage/AdminPage';
 import './App.css';
@@ -110,7 +112,10 @@ function App() {
             <AdminPage />
           </Route>
 
-
+          <Route exact path="/profilepage">
+            {/* Add access level conditional */}
+            <ProfilePage />
+            </Route>
           <Route exact path="/compare">
             {/* Add access level conditional */}
             <ComparisonPage />
