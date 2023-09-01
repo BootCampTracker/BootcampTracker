@@ -8,11 +8,15 @@ const {rejectUnauthenticated} = require('../modules/authentication-middleware');
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('In the server GET route for /api/compare');
 
-    // req.body documentation
-    let comparisonData = req.body;
-    console.log(`comparisonData req.body is: ${JSON.stringify(comparisonData)}`);
-    console.log(`${JSON.stringify(comparisonData.bootcamp)}`);
+    // instead of req.body, use req.query
+    // req.query is our object with key value pairs
+    // req.query = comparisonData
+    console.log(`req.query is: ${JSON.stringify(req.query)}`);
 
+    console.log(`req.query.job is ${req.query.job}`);
+    console.log(`req.query.workplaceLocation is ${req.query.workplaceLocation}`);
+    console.log(`req.query.job is ${req.query.bootcamp}`);
+    console.log(`req.query.job is ${req.query.state}`);
 
     const queryText = ``
 
