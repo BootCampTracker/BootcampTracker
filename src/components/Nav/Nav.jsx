@@ -10,7 +10,11 @@ function Nav() {
 
     return (
         <div>
-            <AppBar position="static" sx={{alignItems: 'center'}}>
+            <AppBar 
+                position="fixed" 
+                color="primary"
+                sx={{ top: '0', bottom: 'auto' }}
+            >
                 <Toolbar>
                     {user.id ?
                     <>

@@ -27,10 +27,10 @@ function DrawerComponent() { // we are setting a piece of state to determine if 
                     <Typography onClick={() => history.push('/user')}> Home </Typography>,
                         // THESE NEED TO PUSH TO THE CORRECT COMPONENTS WHEN THEY EXIST
                     <Typography onClick={() => history.push('/profilepage')}> Profile Page </Typography>,
+                    // <Typography onClick={() => history.push('/profile')}> Profile Page </Typography>,
                     <Typography onClick={() => history.push('/alumniform')}> Alumni Form </Typography>,
-                    <Typography onClick={() => history.push('/')}> Compare Bootcamps </Typography>,
+                    <Typography onClick={() => history.push('/compare')}> Compare Bootcamps </Typography>,
                     <Typography onClick={() => history.push('/adminpage')}> Admin Page </Typography>,
-
                     <LogOutButton/>
                 ].map((label, index) => (
                     <ListItem button
