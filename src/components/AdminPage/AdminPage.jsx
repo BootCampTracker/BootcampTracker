@@ -21,43 +21,17 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-
-function createData(email, user_id, job_title, salary, bonus) {
-  return {
-    email,
-    user_id,
-    job_title,
-    salary,
-    bonus
-  };
-}
-
-const rows = [
-createData('sam@sam.com', 2, 'Dev', 50000, 5000),
-createData('john@example.com', 3, 'Engineer', 60000, 7000),
-createData('jane@example.com', 5, 'Designer', 55000, 4500),
-createData('alex@example.com', 8, 'Manager', 75000, 8000),
-createData('emma@example.com', 12, 'Analyst', 50000, 6000),
-createData('michael@example.com', 15, 'Developer', 65000, 5500),
-createData('olivia@example.com', 18, 'Product Manager', 80000, 9000),
-createData('william@example.com', 21, 'Sales Representative', 45000, 4000),
-createData('sophia@example.com', 24, 'Data Scientist', 70000, 7500),
-createData('liam@example.com', 27, 'QA Tester', 48000, 3500),
-createData('ava@example.com', 30, 'Marketing Specialist', 52000, 3000),
-  // createData('Donut', 452, 25.0, 51, 4.9),
-  // createData('Eclair', 262, 16.0, 24, 6.0),
-  // createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  // createData('Gingerbread', 356, 16.0, 49, 3.9),
-  // createData('Honeycomb', 408, 3.2, 87, 6.5),
-  // createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  // createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  // createData('KitKat', 518, 26.0, 65, 7.0),
-  // createData('Lollipop', 392, 0.2, 98, 0.0),
-  // createData('Marshmallow', 318, 0, 81, 2.0),
-  // createData('Nougat', 360, 19.0, 9, 37.0),
-  // createData('Oreo', 437, 18.0, 63, 4.0),
-];
+// TODO's
+// Change top TableRow key value to create unique key ~line 328
+// Set column widths properly
+// Comment code
+// Set column padding to dense
+// Set up filter
+// Set up delete
+// Make sure checkboxes work properly
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -91,12 +65,13 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
+// Set table headCells attributes
 const headCells = [
   {
-    id: 'email',
+    id: 'username',
     numeric: false,
     disablePadding: true,
-    label: 'Email',
+    label: 'Username',
   },
   {
     id: 'user_id',
@@ -211,7 +186,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Job Entries List
         </Typography>
       )}
 
@@ -236,13 +211,29 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
+// Render to DOM
 function AdminPage() {
+
+  const dispatch = useDispatch();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('salary');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
+  const [dense, setDense] = React.useState(true);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const jobList = useSelector(store => store.admin);
+
+
+  useEffect(() => {
+    fetchAllJobEntries();
+  }, []);
+
+  const fetchAllJobEntries = () => {
+    dispatch({
+      type: 'FETCH_ALL_JOBS',
+    })
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -250,9 +241,10 @@ function AdminPage() {
     setOrderBy(property);
   };
 
+  // Changed rows.map to jobList.map
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = jobList.map((n) => n.name);
       setSelected(newSelected);
       return;
     }
@@ -296,102 +288,107 @@ function AdminPage() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - jobList.length) : 0;
 
+  //rows changed to jobList
   const visibleRows = React.useMemo(
     () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
+      stableSort(jobList, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage,
       ),
     [order, orderBy, page, rowsPerPage],
   );
 
+  // Render to DOM
   return (
-    <Box sx={{ width: '100%', margin: 5 }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.email);
-                const labelId = `enhanced-table-checkbox-${index}`;
 
-                return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row.email)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={row.email}
-                    selected={isItemSelected}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          'aria-labelledby': labelId,
-                        }}
-                      />
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
+      <Box sx={{ width: 'auto', margin: 4 }}>
+        <Paper sx={{ width: '100%', mb: 2 }}>
+          <EnhancedTableToolbar numSelected={selected.length} />
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? 'small' : 'medium'}
+            >
+              <EnhancedTableHead
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={jobList.length}
+              />
+              <TableBody>
+                {visibleRows.map((job, index) => {
+                  const isItemSelected = isSelected(job.username);
+                  const labelId = `enhanced-table-checkbox-${index}`;
+
+                  return (
+                    <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, job.username)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      // Change to a value that will provide unique key
+                      key={job.job_id}
+                      selected={isItemSelected}
+                      sx={{ cursor: 'pointer' }}
                     >
-                      {row.email}
-                    </TableCell>
-                    <TableCell align="right">{row.user_id}</TableCell>
-                    <TableCell align="right">{row.job_title}</TableCell>
-                    <TableCell align="right">{row.salary}</TableCell>
-                    <TableCell align="right">{row.bonus}</TableCell>
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          color="primary"
+                          checked={isItemSelected}
+                          inputProps={{
+                            'aria-labelledby': labelId,
+                          }}
+                        />
+                      </TableCell>
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                        width="1"
+                      >
+                        {job?.username}
+                      </TableCell>
+                      <TableCell align="center">{job?.user_id}</TableCell>
+                      <TableCell align="left">{job?.job_title}</TableCell>
+                      <TableCell align="right">{job?.salary}</TableCell>
+                      <TableCell align="right">{job?.total_yearly_bonus}</TableCell>
+                    </TableRow>
+                  );
+                })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
                   </TableRow>
-                );
-              })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={jobList.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+        <FormControlLabel
+          control={<Switch checked={dense} onChange={handleChangeDense} />}
+          label="Dense padding"
         />
-      </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
-    </Box>
+      </Box>
   );
 };
 
