@@ -1,6 +1,4 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,24 +8,17 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { Stack } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
-import { useEffect } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-// TODO's
-// Set column widths properly
-// Set-up delete
 
 // Set list order by 'salary', default largest to smallest
 function descendingComparator(a, b, orderBy) {
@@ -148,11 +139,11 @@ EnhancedTableHead.propTypes = {
 function AdminPage() {
 
   const dispatch = useDispatch();
-  const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('salary');
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(true);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [order, setOrder] = useState('desc');
+  const [orderBy, setOrderBy] = useState('salary');
+  const [page, setPage] = useState(0);
+  const [dense, setDense] = useState(true);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   // Bring in our list of job entries from store/admin reducer
   const jobList = useSelector(store => store.admin);
@@ -177,7 +168,7 @@ function AdminPage() {
     });
     fetchAllJobEntries();
   };
-  
+
   // Handle changes to how job list is displayed
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -208,20 +199,20 @@ function AdminPage() {
 
   // Save the values of display settings state to a cache so that it persists 
   // between re-renders
-  const visibleRows = React.useMemo(
+  const visibleRows = useMemo(
     () =>
       stableSort(jobList, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage,
       ),
-    [order, orderBy, page, rowsPerPage],
+    [order, orderBy, page, rowsPerPage, jobList],
   );
 
   // Render Table to DOM.
   return (
     <Box sx={{ width: '60%', margin: "auto" }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <Typography
+        <Typography 
           sx={{ flex: '1 1 100%', fontWeight: "bold", textAlign: "center" }}
           variant="h5"
           id="tableTitle"
@@ -243,7 +234,7 @@ function AdminPage() {
             />
             <TableBody>
               {visibleRows.map((job, index) => {
-                const labelId = `enhanced-table-checkbox-${index}`;
+                const labelId = `enhanced-table-${index}`;
 
                 return (
                   <TableRow
@@ -258,8 +249,8 @@ function AdminPage() {
                       component="th"
                       id={labelId}
                       scope="row"
-                      padding="5px"
                       width="1"
+
                     >
                       {job?.username}
                     </TableCell>
@@ -267,9 +258,11 @@ function AdminPage() {
                     <TableCell align="left">{job?.job_title}</TableCell>
                     <TableCell align="right">{job?.salary}</TableCell>
                     <TableCell align="right">{job?.total_yearly_bonus}</TableCell>
+                    <TableCell>
                     <IconButton onClick={(event) => handleDeleteJobRow(event, job?.job_id)}>
                       <DeleteIcon />
                     </IconButton>
+                    </TableCell>
                   </TableRow>
                 );
               })}
