@@ -108,16 +108,15 @@ function App() {
 
           
           <Route exact path="/adminpage">
-            {/* Add access level conditional */}
+            {/* Add access level conditional for Admin*/}
             <AdminPage />
           </Route>
 
           <Route exact path="/profilepage">
-            {/* Add access level conditional */}
+
             <ProfilePage />
             </Route>
           <Route exact path="/compare">
-            {/* Add access level conditional */}
             <ComparisonPage />
           </Route>
 
