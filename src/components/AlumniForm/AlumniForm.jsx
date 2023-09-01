@@ -174,9 +174,9 @@ function AlumniForm() {
                 id="job-label"
                 label="Job Level"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, JobTitle: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, JobRole: e.target.value })
                 }
-                value={jobInfoInput.JobTitle}
+                value={jobInfoInput.JobRole}
                 required
               >
                 {JobTitle.map(job => {
@@ -192,9 +192,9 @@ function AlumniForm() {
                 id="demo-simple-select"
                 label="Job Title"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, JobRole: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, JobTitle: e.target.value })
                 }
-                value={jobInfoInput.JobRole}
+                value={jobInfoInput.JobTitle}
                 required
               >
                 {JobRole.map(job => {
