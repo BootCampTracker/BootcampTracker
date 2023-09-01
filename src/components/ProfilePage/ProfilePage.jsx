@@ -1,4 +1,5 @@
 import React from "react";
+import './ProfilePage.css'
 import {
   List,
   ListItem,
@@ -11,36 +12,14 @@ import {
 //import {useSelector, useDispatch} from 'react-redux';
 
 function ProfilePage() {
-  const CardStyle = {
-    width: "100%",
-    maxWidth: 360,
-    marginTop: "50px",
-    marginLeft: "50px",
-    border: "5px solid black",
-  };
-
-  const CardStyle2 = {
-    width: "100%",
-    maxWidth: 360,
-    bgcolor: "white",
-    marginTop: "20px",
-    marginLeft: "50px",
-    textAlign: "center",
-    border: "5px solid black",
-  };
-
-  const CardStyle3 = {
-    border: "5px solid black",
-    marginRight: "80px",
-    marginTop: "50px",
-  };
+ 
 
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           {/* Grid Item 1*/}
-          <List sx={CardStyle} component="table" aria-label="profile-details">
+          <List className="CardStyle" component="table" aria-label="profile-details">
             <ListItem>
               <ListItemText primary="Current Job:" />
             </ListItem>
@@ -70,7 +49,7 @@ function ProfilePage() {
             </ListItem>
           </List>
           <List
-            sx={CardStyle2}
+            className="CardStyle2"
             component="table"
             aria-label="profile-details"
             dense="table"
@@ -111,7 +90,7 @@ function ProfilePage() {
         </Grid>
         <Grid item xs={4}>
           {/* Grid Item 3*/}
-          <List sx={CardStyle3}>
+          <List className="CardStyle3">
             <ListItem>
               <Grid>
                 <Typography Variant="h6">Role Timeline</Typography>
@@ -122,7 +101,7 @@ function ProfilePage() {
         </Grid>
         <Grid item xs={4}>
           {/* Grid Item 4*/}
-          <List sx={CardStyle3}>
+          <List className="CardStyle3">
             <ListItem>
               <Grid>
                 <Typography Variant="h6">Salary Overtime</Typography>
