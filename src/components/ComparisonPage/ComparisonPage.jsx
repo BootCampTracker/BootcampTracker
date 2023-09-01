@@ -2,6 +2,7 @@ import { FormControl, Input, Typography, InputLabel, Select, MenuItem, Button } 
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { BarChart } from "@mui/icons-material";
 
 // This is the component function for the ComparisonPage
 function ComparisonPage() {
@@ -215,7 +216,7 @@ function ComparisonPage() {
             </Button>
 
         </form>
-
+        <BarChart />
     </>
     )
 }
