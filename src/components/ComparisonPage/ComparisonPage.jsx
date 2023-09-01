@@ -27,7 +27,8 @@ function ComparisonPage() {
     const dispatchChange = () => {
         dispatch({
             type: "FETCH_COMPARE_JOBS",
-            payload: {
+            payload: 
+            {
                 workplaceLocation: workplaceLocation,
                 job: job,
                 bootcamp: bootcamp,

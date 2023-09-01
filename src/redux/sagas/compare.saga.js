@@ -3,10 +3,12 @@ import axios from 'axios';
 
 // fetch all jobs on FETCH_COMPARE_JOBS action
 function* fetchCompareJobs(action) {
+    console.log('in the fetchCompareJobs function!');
     try {
-        console.log('in the fetchCompareJobs function!');
         console.log(`action.payload is: ${JSON.stringify(action.payload)} `);
-        // yield axios.get('/api/compare, payload: action.payload')
+        // Instead of sending payload to be req.body, use string interpolation to make a query url
+            // EX target.com/?searchTerm=value&searchTerm=value&etc
+        yield axios.get(`/api/compare?workplaceLocation=${action.payload.workplaceLocation}&job=${action.payload.job}&bootcamp=${action.payload.bootcamp}&state=${action.payload.state}`)
         // yield put({ type: 'SET_COMPARE_JOBS', payload: response.data})
     } catch (error) {
         console.log('Error fetching compare jobs data', error)
