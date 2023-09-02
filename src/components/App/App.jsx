@@ -112,7 +112,7 @@ function App() {
             <AdminPage />
           </Route>
 
-          <Route exact path="/profilepage">
+          <Route exact path="/profile/:id">
 
             <ProfilePage />
             </Route>
