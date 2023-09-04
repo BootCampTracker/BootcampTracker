@@ -1,6 +1,7 @@
 // HOOKS
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router";
 // MUI and CSS
 import {
   List,
@@ -13,8 +14,16 @@ import {
 } from "@mui/material";
 import "./ProfilePage.css";
 // CUSTOM COMPONENTS
-import { BarChart } from "../Graphs/BarChart/BarChart";
+import RoleGraph from "../Graphs/ProfileGraphs/RoleGraph";
+import SalaryGraph from "../Graphs/ProfileGraphs/SalaryGraph";
 function ProfilePage() {
+  // HOOKS
+  const dispatch = useDispatch();
+  const { profileId } = useParams();
+   // Load Profile data to use in the Graph
+   useEffect(() => {
+    dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
+  }, []);
   return (
     <>
       <Grid container spacing={2}>
@@ -99,7 +108,7 @@ function ProfilePage() {
           <List className="CardStyle3">
             <ListItem>
               <Grid>
-                <BarChart />
+                <RoleGraph />
               </Grid>
             </ListItem>
           </List>
@@ -109,8 +118,7 @@ function ProfilePage() {
           <List className="CardStyle3">
             <ListItem>
               <Grid>
-                <Typography Variant="h6">Salary Overtime</Typography>
-                <Divider />
+                <SalaryGraph/>
               </Grid>
             </ListItem>
           </List>
