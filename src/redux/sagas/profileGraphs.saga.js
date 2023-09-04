@@ -9,7 +9,7 @@ function* setProfileGraphs(action) {
     yield put({ type: "SET_PROFILE_GRAPH", payload: response.data });
     // Catch any ERRORS
   } catch (error) {
-    console.log("Error in GET, error");
+    console.log("ERROR in GET profile Graphs:");
   }
 }
 
