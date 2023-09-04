@@ -51,5 +51,4 @@ const states = [
   { id: 50, name: 'Wyoming' }
 ];
 
-
 module.exports = states

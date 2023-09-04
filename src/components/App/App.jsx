@@ -127,7 +127,7 @@ function App() {
           </Route>
         </Switch>
         <Box
-          sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh',}}> 
+          sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}> 
           <Footer />
         </Box>
       </div>
