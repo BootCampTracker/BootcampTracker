@@ -33,6 +33,7 @@ function AlumniForm() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
   const [openInput, setOpenInput] = useState(false);
+  const [error, setError] = useState(false);
   const [jobInfoInput, setJobInfoInput] = useState({
     bootcamp: "",
     gradDate: "",
@@ -63,6 +64,12 @@ function AlumniForm() {
     // Logs
     console.log("Submitted", jobInfoInput);
     console.log("User id:", user.id);
+    // Validation Form on Salary input
+    if(jobInfoInput.salary > 200000 ){
+      setError(true);
+      return;
+    }
+    setError(false);
     // Dispatch
     dispatch({
       type: "ADD_JOB_INFO",
@@ -103,7 +110,7 @@ function AlumniForm() {
       timer: 1500,
     });
     // //   Clear inputs
-    setJobInfoInput("");
+    // setJobInfoInput("");
   };
 
   useEffect(() => {
@@ -348,6 +355,7 @@ function AlumniForm() {
                 }
                 required
                 value={jobInfoInput.salary}
+                error={error}
               />
             </Box>
             {/* Benefits */}
@@ -568,6 +576,11 @@ function AlumniForm() {
                 value={jobInfoInput.extra}
               />
             </Box>
+          {error ? (
+            <p className="error-text">Please enter a Valid Salary and complete the form! Max Salary: 200,000</p>
+          ) : (
+            <></>
+          )}
             <Button variant="contained" type="submit">
               Submit
             </Button>
