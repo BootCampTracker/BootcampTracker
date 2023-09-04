@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 // Chart.js
 import { Bar } from "react-chartjs-2";
+import 'chartjs-adapter-date-fns';
 const SalaryGraph = () => {
   //  ****** PSEUDO ****** //
   // [X] set up the params for Profile
@@ -23,7 +24,12 @@ const SalaryGraph = () => {
       {
         label: "Roles/Time ",
         data: profileData.map(data => data.salary),
-        backgroundColor: ["rgba(75,192,192,1)"],
+        backgroundColor: [ "rgba(75,192,192,1)",
+        "#ecf0f1",
+        "#50AF95",
+        "#f3ba2f",
+        "#2a71d0"
+      ],
         borderColor: "blue",
         borderWidth: 2,
       },
@@ -46,6 +52,17 @@ const SalaryGraph = () => {
             },
             legend: {
               display: false,
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+            x: {
+              type: "time",
+              time: {
+                unit: "day",
+              },
             },
           },
         }}

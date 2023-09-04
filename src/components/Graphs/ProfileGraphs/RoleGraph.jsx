@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 // Chart.js
 import { Line } from "react-chartjs-2";
+import 'chartjs-adapter-date-fns';
 const RoleGraph = () => {
   //  ****** PSEUDO ****** //
   // [X] set up the params for Profile
@@ -16,7 +17,7 @@ const RoleGraph = () => {
   const { profileId } = useParams();
   const dispatch = useDispatch();
   const profileData = useSelector(state => state.profileGraphs);
-  // Chart.js
+  // Chart.js setting and Profile Data
   const [chartData, setChartData] = useState({
     labels: profileData.map(data => data.date_hired),
     datasets: [
@@ -52,6 +53,17 @@ const RoleGraph = () => {
             },
             legend: {
               display: false,
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+            x: {
+              type: "time",
+              time: {
+                unit: "day",
+              },
             },
           },
         }}

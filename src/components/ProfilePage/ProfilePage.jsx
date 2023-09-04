@@ -63,6 +63,10 @@ function ProfilePage() {
               <ListItemText primary="Company Name:" />
             </ListItem>
           </List>
+    
+        </Grid>
+        <Grid item xs={4}>
+          {/* Grid Item 3*/}
           <List
             className="CardStyle2"
             component="table"
@@ -104,21 +108,18 @@ function ProfilePage() {
           </List>
         </Grid>
         <Grid item xs={4}>
-          {/* Grid Item 3*/}
-          <List className="CardStyle3">
-            <ListItem>
-              <Grid>
-                <RoleGraph />
-              </Grid>
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item xs={4}>
           {/* Grid Item 4*/}
           <List className="CardStyle3">
             <ListItem>
               <Grid>
                 <SalaryGraph/>
+              </Grid>
+            </ListItem>
+          </List>
+          <List className="CardStyle3">
+            <ListItem>
+              <Grid>
+                <RoleGraph />
               </Grid>
             </ListItem>
           </List>
