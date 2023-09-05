@@ -1,4 +1,4 @@
-const JobTitle = [
+const jobTitle = [
   {
     id: 1,
     title: 'Entry Level',
@@ -13,4 +13,4 @@ const JobTitle = [
   },
 ];
 
-module.exports = JobTitle
+export default jobTitle;

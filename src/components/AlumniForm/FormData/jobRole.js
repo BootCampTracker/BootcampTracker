@@ -1,4 +1,4 @@
-const JobRole = [
+const jobRole = [
   { id: 1, role: 'Full Stack Engineer'},
   { id: 2, role: 'UX/UI Designer'},
   { id: 3, role: 'Program Manager'},
@@ -11,4 +11,4 @@ const JobRole = [
   { id: 10, role: 'Digital Marketer'},
 ];
 
-module.exports = JobRole;
+export default jobRole;

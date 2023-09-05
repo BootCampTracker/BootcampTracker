@@ -1,8 +1,13 @@
 import { Bar } from "react-chartjs-2";
 import { useState } from "react";
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js/auto';
+import './BarChart.css';
+
+Chart.register(CategoryScale);
 
 
-export const BarChart = () => {
+function BarChart() {
   const Data = [
     {
       id: 1,
@@ -76,3 +81,5 @@ export const BarChart = () => {
     </div>
   );
 };
+
+export default BarChart;
