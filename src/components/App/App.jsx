@@ -6,6 +6,26 @@ import {
   Redirect,
   Route,
   Switch,
+<<<<<<< HEAD
+} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box } from '@mui/material';
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js/auto';
+// import { BarChart } from '..BarChart/BarChart';
+import Nav from '../Nav/Nav';
+import Footer from '../Footer/Footer';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import UserPage from '../UserPage/UserPage';
+import LoginPage from '../LoginPage/LoginPage';
+import RegisterPage from '../RegisterPage/RegisterPage';
+import AlumniForm from '../AlumniForm/AlumniForm';
+import ProfilePage from '../ProfilePage/ProfilePage'
+import ComparisonPage from '../ComparisonPage/ComparisonPage';
+import AdminPage from '../AdminPage/AdminPage';
+import './App.css';
+
+=======
 } from "react-router-dom";
 // Components
 import Nav from "../Nav/Nav";
@@ -24,6 +44,7 @@ import { Box } from "@mui/material";
 // Chart.js
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js/auto";
+>>>>>>> 49057b02c7d2ca2c6657a1afcd5047d8959c455b
 
 Chart.register(CategoryScale);
 

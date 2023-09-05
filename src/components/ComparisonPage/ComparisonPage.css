@@ -1,0 +1,8 @@
+.chart-container {
+    width: 80%;
+    float: right;
+}
+
+.comparison-container {
+    display: flex;
+}
