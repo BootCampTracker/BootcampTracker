@@ -51,5 +51,9 @@ const states = [
   { id: 50, name: 'Wyoming' }
 ];
 
+<<<<<<< HEAD:src/components/AlumniForm/Modules/States.js
+module.exports = states
+=======
 
 export default states
+>>>>>>> 49057b02c7d2ca2c6657a1afcd5047d8959c455b:src/components/AlumniForm/FormData/states.js

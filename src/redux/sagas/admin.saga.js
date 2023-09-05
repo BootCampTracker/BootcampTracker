@@ -6,7 +6,7 @@ function* fetchAllJobEntries() {
     try {
         const response = yield axios.get('/api/admin')
         console.log({response});
-        yield put({ type: 'SET_ALL_JOBS', payload: response.data})
+        yield put({ type: 'SET_ALL_JOBS_LIST', payload: response.data})
     } catch (error) {
         console.log('Error fetching user jobs data', error)
     }
