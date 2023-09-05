@@ -4,6 +4,7 @@ import user from './user.reducer';
 import jobForm from './jobForm.reducer'
 import admin from './admin.reducer';
 import compare from './compare.reducer'
+import profileReducer from './profile.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   jobForm,
   admin, // contains job entry data for display on AdminPage
   compare, // contains job data for charts on the ComparisonPage
+  profileReducer // contains job data for users profile 
 });
 
 export default rootReducer;

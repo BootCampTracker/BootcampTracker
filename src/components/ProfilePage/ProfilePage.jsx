@@ -1,43 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./ProfilePage.css";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Button,
-  Divider,
-  Grid,
-  Typography,
-} from "@mui/material";
+import {List, ListItem, ListItemText,Button, Divider, Grid,Typography} from "@mui/material";
 //import {useSelector, useDispatch} from 'react-redux';
 
+//profilePage function
 function ProfilePage() {
+  //bringing in use history 
+  const history = useHistory();
+
+  // bringing in useDisptch
+  const dispatch = useDispatch();
+
+    // bringing in use selector and pulling from profileReducer/user
+    const userId = useSelector((store) => store.user);
+    const profileInfo  = useSelector((store) => store.profileReducer);
+    console.log("user id is", userId);
+    console.log("profile data is ", profileInfo);
+
   const CardStyle = {
     width: "100%",
     maxWidth: 360,
     marginLeft: "50px",
     border: "5px solid black",
   };
-
   const CardStyle2 = {
-    width: "100%",
-    maxWidth: 360,
+    width: "100%", maxWidth: 360,
     bgcolor: "white",
-    marginTop: "20px",
-    marginLeft: "50px",
+    marginTop: "20px",  marginLeft: "50px",
     textAlign: "center",
     border: "5px solid black",
   };
-
   const CardStyle3 = {
     border: "5px solid black",
     marginRight: "80px",
   };
-
   const CardStyle4 = {
     border: "5px solid black",
-    marginRight: "80px",
-    marginTop: "300px"
+    marginRight: "80px",marginTop: "300px"
   };
 
   return (
@@ -74,14 +75,10 @@ function ProfilePage() {
               <ListItemText primary="Company Name:" />
             </ListItem>
           </List>
-          <List
-            sx={CardStyle2}
-            component="table"
-            aria-label="profile-details"
-            align="center"
-          >
+          <List sx={CardStyle2}
+            component="" aria-label="profile-details" align="center">
             <Typography variant="h5" component="header">
-              <header>Benefits:</header>
+              Benefits:
             </Typography>
             <Divider />
             <ListItem>
@@ -118,7 +115,7 @@ function ProfilePage() {
           <List sx={CardStyle3}>
             <ListItem>
               <Grid>
-                <Typography Variant="h6">Role Timeline</Typography>
+                <Typography variant="h6">Role Timeline</Typography>
                 <Divider />
               </Grid>
             </ListItem>
@@ -126,7 +123,7 @@ function ProfilePage() {
           <List sx={CardStyle4}>
             <ListItem>
               <Grid>
-                <Typography Variant="h6">Salary Overtime</Typography>
+                <Typography variant="h6">Salary Overtime</Typography>
                 <Divider />
               </Grid>
             </ListItem>

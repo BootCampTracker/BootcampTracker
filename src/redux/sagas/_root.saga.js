@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import setJobInfoSagas from './setJobInfo.saga'
 import adminSaga from './admin.saga';
 import compareSaga from './compare.saga';
+import profileSaga from './profilepage.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     setJobInfoSagas(),
     adminSaga(),
     compareSaga(),
+    profileSaga(),
   ]);
 }

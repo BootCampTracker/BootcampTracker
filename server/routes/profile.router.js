@@ -6,11 +6,12 @@ const {
   } = require('../modules/authentication-middleware');
 
   //get all information for specific user on profile page 
-  router.get('/:id', (req, res) => {
+  router.get('/',rejectUnauthenticated, (req, res) => {
+      console.log('req.user is', req.user);
     console.log('inside of /profile GET router side');
     let userId = req.user.id
-    let queryText= 
-    `SELECT
+    console.log('user id is ',userId);
+    let queryText= `SELECT
     job_info.id AS job_info_id,
     job_info."job_title",
     job_info."job_level",
@@ -41,7 +42,7 @@ INNER JOIN
 INNER JOIN
     bootcamp ON job_info.user_id = bootcamp.user_id
 WHERE
-    job_info.user_id = 1;
+    job_info.user_id = $1;
     `
     //bringing in the pool 
     pool.query(queryText, [userId])
