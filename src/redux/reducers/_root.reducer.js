@@ -4,7 +4,7 @@ import user from './user.reducer';
 import jobForm from './jobForm.reducer'
 import admin from './admin.reducer';
 import compare from './compare.reducer'
-
+import profileGraphs from './profileGraphs.reducer'
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -14,9 +14,10 @@ import compare from './compare.reducer'
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  jobForm,
+  jobForm, // user will submit form in AlumniForm
   admin, // contains job entry data for display on AdminPage
   compare, // contains job data for charts on the ComparisonPage
+  profileGraphs, // Profile Graphs to display in Profile
 });
 
 export default rootReducer;

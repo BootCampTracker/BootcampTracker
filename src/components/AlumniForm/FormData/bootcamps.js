@@ -1,4 +1,4 @@
-const Bootcamps = [
+const bootcamps = [
   {
       id: 1,
       name: "Prime Digital Academy",
@@ -69,4 +69,4 @@ const Bootcamps = [
   },
 ];
 
-export default Bootcamps
+export default bootcamps;

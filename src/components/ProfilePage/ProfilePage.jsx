@@ -1,5 +1,8 @@
-import React from "react";
-import './ProfilePage.css'
+// HOOKS
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router";
+// MUI and CSS
 import {
   List,
   ListItem,
@@ -9,17 +12,29 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-//import {useSelector, useDispatch} from 'react-redux';
-
+import "./ProfilePage.css";
+// CUSTOM COMPONENTS
+import RoleGraph from "../Graphs/ProfileGraphs/RoleGraph";
+import SalaryGraph from "../Graphs/ProfileGraphs/SalaryGraph";
 function ProfilePage() {
- 
-
+  // HOOKS
+  const dispatch = useDispatch();
+  const { profileId } = useParams();
+   // Load Profile data to use in the Graph
+   useEffect(() => {
+    dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
+  }, []);
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           {/* Grid Item 1*/}
-          <List className="CardStyle" component="table" aria-label="profile-details">
+          <List
+            className="CardStyle"
+            component="table"
+            aria-label="profile-details"
+            >
+            <h4>Benefits:</h4>
             <ListItem>
               <ListItemText primary="Current Job:" />
             </ListItem>
@@ -48,6 +63,10 @@ function ProfilePage() {
               <ListItemText primary="Company Name:" />
             </ListItem>
           </List>
+    
+        </Grid>
+        <Grid item xs={4}>
+          {/* Grid Item 3*/}
           <List
             className="CardStyle2"
             component="table"
@@ -56,46 +75,35 @@ function ProfilePage() {
             align="center"
           >
             <Typography variant="h5" component="header">
-              <header>Benefits:</header>
+              <h4>Benefits:</h4>
             </Typography>
             <Divider />
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Health Insurance:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Dental Insurance:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="401K:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Long Term Disability:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Short Term Disability:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Equity:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Graduation to First Posistion:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Yearly Bonus:" />
             </ListItem>
-            <ListItem >
-              <ListItemText primary="PTO:" />
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item xs={4}>
-          {/* Grid Item 3*/}
-          <List className="CardStyle3">
             <ListItem>
-              <Grid>
-                <Typography Variant="h6">Role Timeline</Typography>
-                <Divider />
-              </Grid>
+              <ListItemText primary="PTO:" />
             </ListItem>
           </List>
         </Grid>
@@ -104,14 +112,20 @@ function ProfilePage() {
           <List className="CardStyle3">
             <ListItem>
               <Grid>
-                <Typography Variant="h6">Salary Overtime</Typography>
-                <Divider />
+                <SalaryGraph/>
+              </Grid>
+            </ListItem>
+          </List>
+          <List className="CardStyle3">
+            <ListItem>
+              <Grid>
+                <RoleGraph />
               </Grid>
             </ListItem>
           </List>
         </Grid>
       </Grid>
-      <Grid  marginLeft="150px" marginTop="20px">
+      <Grid marginLeft="150px" marginTop="20px">
         <Button variant="contained" size="large">
           + New Job
         </Button>
