@@ -132,6 +132,6 @@ function ProfilePage() {
       </Grid>
     </>
   );
-}
+};
 
 export default ProfilePage;
