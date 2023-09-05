@@ -1,6 +1,6 @@
 import { FormControl, Input, Typography, InputLabel, Select, MenuItem, Button } from "@mui/material";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import './ComparisonPage.css';
 
@@ -8,6 +8,7 @@ import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js/auto';
 import BarChart from '../BarChart/BarChart';
 Chart.register(CategoryScale);
+
 
 
 // This is the component function for the ComparisonPage
@@ -28,6 +29,9 @@ function ComparisonPage() {
     
     // hook to set local state for state
     const [state, setState] = useState('');
+
+    // bring in compare store
+    const searchResults = useSelector(store => store.compare);
 
     // function to dispatch the event.target.value to the global state
     const dispatchChange = () => {

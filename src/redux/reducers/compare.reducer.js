@@ -2,7 +2,7 @@
 // users selecting dropdown values
 const compareReducer = (state = {}, action) => {
     switch (action.type) {
-        case 'SET_ALL_JOBS':
+        case 'SET_COMPARE_JOBS':
             return action.payload;
         default:
             return state;

@@ -1,4 +1,4 @@
-const JobDuration = [
+const jobDuration = [
   { id: 1, duration: "Full-time" },
   { id: 2, duration: "Part-time" },
   { id: 3, duration: "Contract" },
@@ -6,4 +6,4 @@ const JobDuration = [
   { id: 5, duration: "Freelance" },
 ];
 
-module.exports = JobDuration;
+export default  jobDuration;
