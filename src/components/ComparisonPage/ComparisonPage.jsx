@@ -2,11 +2,17 @@ import { FormControl, Input, Typography, InputLabel, Select, MenuItem, Button } 
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { BarChart } from "@mui/icons-material";
+import './ComparisonPage.css';
+
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js/auto';
+import BarChart from '../BarChart/BarChart';
+Chart.register(CategoryScale);
+
 
 // This is the component function for the ComparisonPage
 function ComparisonPage() {
-    
+ 
     //-------------React State Hooks
     // store the useDispatch hook in the variable dispatch
     const dispatch = useDispatch();
@@ -92,7 +98,7 @@ function ComparisonPage() {
         </Typography>
 
         {/* Form that takes in dropwdown inputs, updates global state, and sends the state to server onSubmit to GET values for charts */}
-        <form onSubmit={handleSubmit}>
+        <form className="comparison-form" onSubmit={handleSubmit}>
 
         {/* This is the dropdown for the workplace location */}
             <InputLabel id="workplace-location">Workplace Location</InputLabel>
@@ -217,7 +223,9 @@ function ComparisonPage() {
             </Button>
 
         </form>
+        <div className="chart-container">
         <BarChart />
+        </div>
     </>
     )
 }

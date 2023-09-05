@@ -18,7 +18,6 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AlumniForm from '../AlumniForm/AlumniForm';
 import ProfilePage from '../ProfilePage/ProfilePage'
-import './App.css';
 import ComparisonPage from '../ComparisonPage/ComparisonPage';
 import AdminPage from '../AdminPage/AdminPage';
 import './App.css';
