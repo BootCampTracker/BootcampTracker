@@ -65,7 +65,7 @@ function AlumniForm() {
     console.log("Submitted", jobInfoInput);
     console.log("User id:", user.id);
     // Validation Form on Salary input
-    if(jobInfoInput.salary > 200000 ){
+    if (jobInfoInput.salary > 200000) {
       setError(true);
       return;
     }
@@ -357,6 +357,19 @@ function AlumniForm() {
                 value={jobInfoInput.salary}
                 error={error}
               />
+              <FormLabel id="bonus-radio-group">Bonuses</FormLabel>
+              <TextField
+                type="number"
+                placeholder="Bonuses"
+                onChange={e =>
+                  setJobInfoInput({
+                    ...jobInfoInput,
+                    bonuses: e.target.value,
+                  })
+                }
+                required
+                value={jobInfoInput.bonuses}
+              />
             </Box>
             {/* Benefits */}
             <Box sx={{ marginTop: "1rem" }}>
@@ -513,36 +526,6 @@ function AlumniForm() {
                   required
                 />
               </RadioGroup>
-              <FormLabel id="bonus-radio-group">Bonuses</FormLabel>
-              <RadioGroup row aria-labelledby="bonus-radio-group">
-                <FormControlLabel
-                  value="TRUE"
-                  control={<Radio />}
-                  label="Yes"
-                  onClick={() => setOpenInput(!openInput)}
-                  required
-                />
-                <FormControlLabel
-                  value="FALSE"
-                  control={<Radio />}
-                  label="No"
-                  required
-                />
-                {openInput && (
-                  <TextField
-                    type="number"
-                    placeholder="Bonuses"
-                    onChange={e =>
-                      setJobInfoInput({
-                        ...jobInfoInput,
-                        bonuses: e.target.value,
-                      })
-                    }
-                    required
-                    value={jobInfoInput.bonuses}
-                  />
-                )}
-              </RadioGroup>
               <FormLabel id="bonus-radio-group">Equity</FormLabel>
               <RadioGroup
                 row
@@ -576,11 +559,14 @@ function AlumniForm() {
                 value={jobInfoInput.extra}
               />
             </Box>
-          {error ? (
-            <p className="error-text">Please enter a Valid Salary and complete the form! Max Salary: 200,000</p>
-          ) : (
-            <></>
-          )}
+            {error ? (
+              <p className="error-text">
+                Please enter a Valid Salary and complete the form! Max Salary:
+                200,000
+              </p>
+            ) : (
+              <></>
+            )}
             <Button variant="contained" type="submit">
               Submit
             </Button>
