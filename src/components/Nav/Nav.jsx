@@ -35,7 +35,7 @@ function Nav() {
                         {/* Add the menu icon */} </IconButton>
                     <Typography variant="h6" component="div"
                         sx={{flexGrow: 1,display: 'flex',alignItems: 'center'}}>
-                        <Link to="/user" className="nav-logo" underline="always">
+                        <Link to="/login" className="nav-logo" underline="always">
                             <img src="https://cdn-icons-png.flaticon.com/512/3629/3629539.png" alt="Logo" className="nav-logo-image"/>
                             <span className="nav-title">Bootcamp Tracker</span>
                         </Link>
