@@ -52,4 +52,4 @@ const states = [
 ];
 
 
-export default states
+export default states;
