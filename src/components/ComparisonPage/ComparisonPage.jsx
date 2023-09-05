@@ -1,4 +1,4 @@
-import { FormControl, Input, Typography, InputLabel, Select, MenuItem, Button } from "@mui/material";
+import { FormControl, Input, Typography, InputLabel, Select, MenuItem, Button, Card, CardContent, Box, CardActions } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -14,13 +14,42 @@ function ComparisonPage() {
     const [workplaceLocation, setWorkplaceLocation] = useState('');
     
     // hook to set local state for job
-    const [job, setJob] = useState('');
+    const [job, setJob] = useState('(job)');
     
     // hook to set local state for bootcamp
     const [bootcamp, setBootcamp] = useState('');
     
     // hook to set local state for state
     const [state, setState] = useState('');
+
+    // ------------ hooks for card
+    // hook to set local state with  % of job with health insurance
+    const [averageHealth, setAverageHealth] = useState(0);
+
+    // hook to set local state with % of job with dental insurance
+    const [averageDental, setAverageDental] = useState(0);
+
+    // hook to set local state with % of job with 401K
+    const [average401K, setAverage401K] = useState(0);
+
+    // hook to set local state with % of job with LTD
+    const [averageLTD, setAverageLTD] = useState(0);
+    
+    // hook to set local state with  % of job with STD
+    const [averageSTD, setAverageSTD] = useState(0);
+    
+    // hook to set local state with % of job with equity option
+    const [averageEquity, setAverageEquity] = useState(0);
+    // hook to set local state with average yearly $ bonus of job
+    const [averageBonus, setAverageBonus] = useState(0);
+
+    // hook to set local state with average paid time off days of job
+    const [averageDaysOff, setAverageDaysOff] = useState(0);
+    
+    // hook to set local state with average time to first role from bootcamp graduation
+    const [averageTimeToGrad, setAverageTimeToGrad] = useState(0);
+
+
 
     // function to dispatch the event.target.value to the global state
     const dispatchChange = () => {
@@ -75,7 +104,6 @@ function ComparisonPage() {
         setState(event.target.value);
         // We need a dispatch and change in state for every change in the input fields!
     } // end handleStateChange
-
 
     // ----------rendered jsx
     return(
@@ -216,6 +244,38 @@ function ComparisonPage() {
             </Button>
 
         </form>
+        <br />
+        
+        {/* This is our card to display benefits */}
+        <Card sx={{ minWidth: 275, maxWidth: 500, backgroundColor: "#bbdefb" }} variant="outlined">
+        <CardContent sx={{backgroundColor: "white", margin: 2}}>
+            <Typography variant="h5" component="div">
+                {job}
+            </Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Benefits, Averages, Etc.
+            </Typography>
+            <Typography variant="body2">
+            {averageHealth}% of {job} have health insurance.
+            <br />
+            {averageDental}% of {job} have dental insurance.
+            <br />
+            {average401K}% of {job} have a 401K.
+            <br />
+            {averageLTD}% of {job} have Long Term Disability.
+            <br />
+            {averageSTD}% of {job} have Short Term Disability.
+            <br />
+            {averageEquity}% of {job} receive an Equity option.
+            <br />
+            The average yearly bonus of a {job} is ${averageBonus}
+            <br />
+            The average number of PTO days received: {averageDaysOff}/year
+            <br />
+            Average time from graduation to first role: {averageTimeToGrad} days
+            </Typography>
+        </CardContent>
+        </Card>
 
     </>
     )
