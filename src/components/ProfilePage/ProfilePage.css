@@ -1,23 +1,24 @@
 .CardStyle {
-    width: 100%;
-    max-width: 360px;
-    margin-top: 50px;
-    margin-left: 50px;
-  }
-  
-  .CardStyle2 {
-    width: 100%;
-    max-width: 360px;
-    background-color: white;
-    margin-top: 20px;
-    margin-left: 50px;
-    text-align: center;
+  width: 100%;
+  max-width: 360px;
+  margin-top: 50px;
+  margin-left: 50px;
+}
 
-  }
-  
-  .CardStyle3 {
-  
-    margin-right: 80px;
-    margin-top: 50px;
-  }
-  
+.CardStyle2 {
+  width: 100%;
+  max-width: 360px;
+  background-color: white;
+  margin-top: 20px;
+  margin-left: 50px;
+  text-align: center;
+}
+
+.CardStyle3 {
+  margin-right: 80px;
+  margin-top: 50px;
+}
+.subheading{
+  text-align: start;
+  font-size: 1.5rem;
+}

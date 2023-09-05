@@ -14,12 +14,19 @@ import {
   ListItemAvatar,
   Avatar,
 } from "@mui/material";
-import ImageIcon from "@mui/icons-material/Image";
+// Icons
 import WorkIcon from "@mui/icons-material/Work";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
-import PaidIcon from '@mui/icons-material/Paid';
-import MovingIcon from '@mui/icons-material/Moving';
-import SchoolIcon from '@mui/icons-material/School';
+import PaidIcon from "@mui/icons-material/Paid";
+import MovingIcon from "@mui/icons-material/Moving";
+import SchoolIcon from "@mui/icons-material/School";
+import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
+import CottageRoundedIcon from '@mui/icons-material/CottageRounded';
+import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded';
+import HealthAndSafetyRoundedIcon from '@mui/icons-material/HealthAndSafetyRounded';
+import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
+import LocalAirportRoundedIcon from '@mui/icons-material/LocalAirportRounded';
 import "./ProfilePage.css";
 // CUSTOM COMPONENTS
 import RoleGraph from "../Graphs/ProfileGraphs/RoleGraph";
@@ -37,8 +44,8 @@ function ProfilePage() {
       <Grid container spacing={2}>
         <Grid item xs={4}>
           {/* Grid Item 1*/}
-          <Typography variant="h5" component="header">
-            <h4>Jobs:</h4>
+          <Typography variant="h5" component="header" className="subheading">
+           Job:
           </Typography>
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
@@ -47,7 +54,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <PaidIcon  />
+                  <PaidIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary="Salary:" secondary="Add salary here!" />
@@ -89,7 +96,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <BeachAccessIcon />
+                  <DateRangeRoundedIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -101,7 +108,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <BeachAccessIcon />
+                  <WorkIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -113,7 +120,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <BeachAccessIcon />
+                  <CottageRoundedIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary="State:" secondary="Add State here!" />
@@ -122,7 +129,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <BeachAccessIcon />
+                  <BusinessRoundedIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -136,17 +143,17 @@ function ProfilePage() {
         <Grid item xs={4}>
           {/* Grid Item 3*/}
 
-          <Typography variant="h5" component="header">
-            <h4>Benefits:</h4>
+          <Typography variant="h5" component="header" className="subheading">
+            Benefits:
           </Typography>
           <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           >
             <Divider />
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <ImageIcon />
+                  <HealthAndSafetyRoundedIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -170,7 +177,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <BeachAccessIcon />
+                  <AttachMoneyRoundedIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary="401K:" secondary="Add 401K here!" />
@@ -179,7 +186,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <BeachAccessIcon />
+                  <PersonRoundedIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -191,7 +198,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <BeachAccessIcon />
+                  <PersonRoundedIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -203,7 +210,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <BeachAccessIcon />
+                  <GroupsRoundedIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary="Equity:" secondary="Add Equity here!" />
@@ -212,7 +219,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <BeachAccessIcon />
+                  <AttachMoneyRoundedIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary="Bonuses:" secondary="Add Bonuses here!" />
@@ -221,7 +228,7 @@ function ProfilePage() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
-                  <BeachAccessIcon />
+                  <LocalAirportRoundedIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary="PTO:" secondary="Add PTO  here!" />
@@ -233,21 +240,16 @@ function ProfilePage() {
           {/* Grid Item 4*/}
           <List className="CardStyle3">
             <ListItem>
-              <Grid>
-                <SalaryGraph />
-              </Grid>
+              <SalaryGraph />
             </ListItem>
           </List>
           <List className="CardStyle3">
             <ListItem>
-              <Grid>
-                <RoleGraph />
-              </Grid>
+              <RoleGraph />
             </ListItem>
           </List>
         </Grid>
       </Grid>
-      <Grid marginLeft="150px" marginTop="20px"></Grid>
     </>
   );
 }
