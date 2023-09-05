@@ -5,7 +5,7 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
-  
+
 // Fetch all job entries for AdminPage
 router.get('/', rejectUnauthenticated, (req, res,) => {
 const queryText = `SELECT "user"."username", "user"."id" AS "user_id", "user"."username", "job_info"."job_title", 
