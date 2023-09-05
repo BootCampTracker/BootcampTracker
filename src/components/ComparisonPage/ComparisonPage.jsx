@@ -6,7 +6,7 @@ import './ComparisonPage.css';
 
 import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js/auto';
-import BarChart from '../BarChart/BarChart';
+import BarChart from '../Graphs/ComparisonGraphs/BarChart';
 Chart.register(CategoryScale);
 
 
@@ -30,7 +30,7 @@ function ComparisonPage() {
     // hook to set local state for state
     const [state, setState] = useState('');
 
-    // bring in compare store
+    // bring in compare store which holds the data for our graphs
     const searchResults = useSelector(store => store.compare);
 
     // function to dispatch the event.target.value to the global state
@@ -227,6 +227,7 @@ function ComparisonPage() {
             </Button>
 
         </form>
+        {/* Salary over time graph */}
         <div className="chart-container">
         <BarChart />
         </div>
