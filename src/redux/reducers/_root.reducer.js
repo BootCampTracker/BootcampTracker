@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
+import jobForm from './jobForm.reducer'
 import admin from './admin.reducer';
 import compare from './compare.reducer'
 
@@ -13,6 +14,7 @@ import compare from './compare.reducer'
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
+  jobForm,
   admin, // contains job entry data for display on AdminPage
   compare, // contains job data for charts on the ComparisonPage
 });

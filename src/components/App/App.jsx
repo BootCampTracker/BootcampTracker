@@ -107,10 +107,10 @@ function App() {
           </Route>
 
           
-          <Route exact path="/adminpage">
+          <ProtectedRoute exact path="/adminpage">
             {/* Add access level conditional */}
             <AdminPage />
-          </Route>
+          </ProtectedRoute>
 
           <Route exact path="/profilepage">
             {/* Add access level conditional */}
