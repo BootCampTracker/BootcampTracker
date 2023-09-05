@@ -1,5 +1,5 @@
 import React from "react";
-import './ProfilePage.css'
+import "./ProfilePage.css";
 import {
   List,
   ListItem,
@@ -12,14 +12,40 @@ import {
 //import {useSelector, useDispatch} from 'react-redux';
 
 function ProfilePage() {
- 
+  const CardStyle = {
+    width: "100%",
+    maxWidth: 360,
+    marginLeft: "50px",
+    border: "5px solid black",
+  };
+
+  const CardStyle2 = {
+    width: "100%",
+    maxWidth: 360,
+    bgcolor: "white",
+    marginTop: "20px",
+    marginLeft: "50px",
+    textAlign: "center",
+    border: "5px solid black",
+  };
+
+  const CardStyle3 = {
+    border: "5px solid black",
+    marginRight: "80px",
+  };
+
+  const CardStyle4 = {
+    border: "5px solid black",
+    marginRight: "80px",
+    marginTop: "300px"
+  };
 
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           {/* Grid Item 1*/}
-          <List className="CardStyle" component="table" aria-label="profile-details">
+          <List sx={CardStyle} aria-label="profile-details">
             <ListItem>
               <ListItemText primary="Current Job:" />
             </ListItem>
@@ -49,48 +75,47 @@ function ProfilePage() {
             </ListItem>
           </List>
           <List
-            className="CardStyle2"
+            sx={CardStyle2}
             component="table"
             aria-label="profile-details"
-            dense="table"
             align="center"
           >
             <Typography variant="h5" component="header">
               <header>Benefits:</header>
             </Typography>
             <Divider />
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Health Insurance:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Dental Insurance:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="401K:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Long Term Disability:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Short Term Disability:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Equity:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Graduation to First Posistion:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="Yearly Bonus:" />
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemText primary="PTO:" />
             </ListItem>
           </List>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} marginLeft="200px">
           {/* Grid Item 3*/}
-          <List className="CardStyle3">
+          <List sx={CardStyle3}>
             <ListItem>
               <Grid>
                 <Typography Variant="h6">Role Timeline</Typography>
@@ -98,10 +123,7 @@ function ProfilePage() {
               </Grid>
             </ListItem>
           </List>
-        </Grid>
-        <Grid item xs={4}>
-          {/* Grid Item 4*/}
-          <List className="CardStyle3">
+          <List sx={CardStyle4}>
             <ListItem>
               <Grid>
                 <Typography Variant="h6">Salary Overtime</Typography>
@@ -111,7 +133,7 @@ function ProfilePage() {
           </List>
         </Grid>
       </Grid>
-      <Grid  marginLeft="150px" marginTop="20px">
+      <Grid marginLeft="150px" marginTop="20px">
         <Button variant="contained" size="large">
           + New Job
         </Button>
