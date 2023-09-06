@@ -10,7 +10,7 @@ router.get("/graph/:id",rejectUnauthenticated, (req, res) => {
   // Query and requesting User id
   const queryText = `SELECT "job_info"."id", "date_hired", "salary", "job_number" FROM "job_info"
   WHERE "user_id" = $1;`;
-  const profileId = req.params.id;
+  const profileId = req.user.id;
 
   pool
     .query(queryText, [profileId])

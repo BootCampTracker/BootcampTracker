@@ -17,6 +17,7 @@ const RoleGraph = () => {
   const { profileId } = useParams();
   const dispatch = useDispatch();
   const profileData = useSelector(state => state.profileGraphs);
+  const user = useSelector(state => state.user);
   // Chart.js setting and Profile Data
   const [chartData, setChartData] = useState({
     labels: profileData.map(data => data.date_hired),
@@ -38,7 +39,7 @@ const RoleGraph = () => {
   });
   // Load Profile data to use in the Graph
   useEffect(() => {
-    dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
+    dispatch({ type: "SET_PROFILE_GRAPHS", payload: user.id });
   }, []);
   return (
     <div className="chart-container">
