@@ -38,7 +38,7 @@ const SalaryGraph = () => {
   });
   // Load Profile data to use in the Graph
   useEffect(() => {
-    dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: user.id });
+    dispatch({ type: "SET_PROFILE_GRAPHS", payload: user.id });
   }, []);
   return (
     <div className="chart-container">

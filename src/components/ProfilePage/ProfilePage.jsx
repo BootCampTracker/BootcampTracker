@@ -35,10 +35,11 @@ function ProfilePage() {
   // HOOKS
   const dispatch = useDispatch();
   const { profileId } = useParams();
-  
+  const user = useSelector(store => store.user);
+
   // Load Profile data to use in the Graph
   useEffect(() => {
-    // dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: user.id });
+    dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: user.id });
   }, []);
   return (
     <>
