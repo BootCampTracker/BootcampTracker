@@ -34,7 +34,7 @@ function DrawerComponent() {
         {[
           <Typography onClick={() => history.push("/user")}> Home </Typography>,
           // THESE NEED TO PUSH TO THE CORRECT COMPONENTS WHEN THEY EXIST
-          <Typography onClick={() => history.push(`/profile/${user.id}`)}>
+          <Typography onClick={() => history.push('/profile')}>
             Profile
           </Typography>,
           <Typography onClick={() => history.push("/alumniform")}>

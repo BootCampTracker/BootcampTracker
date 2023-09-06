@@ -25,6 +25,7 @@ import { Box } from "@mui/material";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js/auto";
 
+
 Chart.register(CategoryScale);
 
 function App() {
@@ -91,21 +92,22 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/alumniform">
+          <ProtectedRoute exact path="/alumniform">
             <AlumniForm />
-          </Route>
+          </ProtectedRoute>
 
           <ProtectedRoute exact path="/adminpage">
             {/* Add access level conditional */}
             <AdminPage />
           </ProtectedRoute>
 
-          <Route exact path="/profile/:profileId">
+          <ProtectedRoute exact path="/profile">
             <ProfilePage />
-          </Route>
-          <Route exact path="/compare">
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/compare">
             <ComparisonPage />
-          </Route>
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
