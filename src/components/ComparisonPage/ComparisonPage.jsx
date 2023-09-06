@@ -166,20 +166,6 @@ function ComparisonPage() {
         setAverageDaysOff(result.toFixed(2));
     }
 
-    //function to create our difference between date hired and date graduated in days
-    let date_diff_indays = function(date1, date2) {
-        dt1 = new Date(date1);
-        dt2 = new Date(date2);
-        return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
-        }
-
-    // function to create a formatted date from our gross SQL date/timestamp
-    // const oneDay = 24 * 60 * 60 * 1000; // in milliseconds
-    // const firstDate = new Date(i.date_hired);
-    // const secondDate = new Date(i.graduation_date); // 2008, 1, 22
-    // const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-    // console.log('diffDays is:', diffDays);
-
     // function that averages time from graduation to first job
     const functionAverageTimeToJob = () => {
         console.log('in the functionAverageTimeToGrad!');
