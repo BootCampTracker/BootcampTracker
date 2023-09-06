@@ -1,12 +1,13 @@
-import { all } from 'redux-saga/effects';
-import loginSaga from './login.saga';
-import registrationSaga from './registration.saga';
-import userSaga from './user.saga';
-import setJobInfoSagas from './setJobInfo.saga'
-import adminSaga from './admin.saga';
-import compareSaga from './compare.saga';
-import profileSaga from './profilepage.saga';
+import { all } from "redux-saga/effects";
+import loginSaga from "./login.saga";
+import registrationSaga from "./registration.saga";
+import userSaga from "./user.saga";
+import setJobInfoSagas from "./setJobInfo.saga";
+import adminSaga from "./admin.saga";
+import compareSaga from "./compare.saga";
+import profileInfoSaga from "./profileInfo.saga";
 
+import profileGraphSaga from "./profileGraphs.saga";
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     setJobInfoSagas(),
     adminSaga(),
     compareSaga(),
-    profileSaga(),
+    profileInfoSaga(),
+    profileGraphSaga(),
   ]);
 }

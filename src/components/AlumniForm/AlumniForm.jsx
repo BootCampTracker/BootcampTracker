@@ -21,41 +21,42 @@ import {
 import illustrationsImg from "../Assets/bootcamp_illustrations.png";
 import Swal from "sweetalert2";
 import "./AlumniForm.css";
-// Modules
-import bootcamps from "./Modules/Bootcamps";
-import JobDuration from "./Modules/JobDuration";
-import JobType from "./Modules/JobType";
-import JobTitle from "./Modules/JobTitle";
-import JobRole from "./Modules/JobRole";
-import states from "./Modules/States";
+// Form Data
+import bootcamps from "./FormData/bootcamps";
+import JobDuration from "./FormData/jobDuration";
+import JobType from "./FormData/jobType";
+import JobTitle from "./FormData/jobTitle";
+import JobRole from "./FormData/jobRole";
+import states from "./FormData/states";
 function AlumniForm() {
   // HOOKS
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
   const [openInput, setOpenInput] = useState(false);
+  const [error, setError] = useState(false);
   const [jobInfoInput, setJobInfoInput] = useState({
-    Bootcamp: "",
-    GradDate: "",
-    JobTitle: "",
-    JobRole: "",
-    Company: "",
-    States: "",
-    Promotions: "",
-    Position: "",
-    Hours: "",
-    JobType: "",
-    Workplace: "",
-    HireDate: "",
-    Salary: "",
-    Health: "",
-    Dental: "",
+    bootcamp: "",
+    gradDate: "",
+    jobTitle: "",
+    jobRole: "",
+    company: "",
+    states: "",
+    promotions: "",
+    position: "",
+    hours: "",
+    jobType: "",
+    workplace: "",
+    hireDate: "",
+    salary: "",
+    health: "",
+    dental: "",
     PTO: "",
-    FourZeroOneK: "",
+    fourZeroOneK: "",
     STD: "",
     LTD: "",
-    Bonuses: "",
-    Equity: "",
-    Extra: "",
+    bonuses: "",
+    equity: "",
+    extra: "",
   });
   // Submit Form and dispatch
   const handleSubmit = e => {
@@ -63,6 +64,12 @@ function AlumniForm() {
     // Logs
     console.log("Submitted", jobInfoInput);
     console.log("User id:", user.id);
+    // Validation Form on Salary input
+    if (jobInfoInput.salary > 200000) {
+      setError(true);
+      return;
+    }
+    setError(false);
     // Dispatch
     dispatch({
       type: "ADD_JOB_INFO",
@@ -70,40 +77,40 @@ function AlumniForm() {
         jobUserId: user.id,
         benefitUserId: user.id,
         bootcampUserId: user.id,
-        jobTitle: jobInfoInput.JobTitle,
-        jobLevel: jobInfoInput.JobRole,
-        company: jobInfoInput.Company,
-        state: jobInfoInput.States,
-        promotions: jobInfoInput.Promotions,
-        jobNumber: jobInfoInput.Position,
-        hours: jobInfoInput.Hours,
-        workplace: jobInfoInput.Workplace,
-        jobType: jobInfoInput.JobType,
-        dateHired: jobInfoInput.HireDate,
-        salary: jobInfoInput.Salary,
-        gradDate: jobInfoInput.GradDate,
-        bootcamp: jobInfoInput.Bootcamp,
-        health: jobInfoInput.Health,
-        dental: jobInfoInput.Dental,
+        jobTitle: jobInfoInput.jobTitle,
+        jobLevel: jobInfoInput.jobRole,
+        company: jobInfoInput.company,
+        state: jobInfoInput.states,
+        promotions: jobInfoInput.promotions,
+        jobNumber: jobInfoInput.position,
+        hours: jobInfoInput.hours,
+        workplace: jobInfoInput.workplace,
+        jobType: jobInfoInput.jobType,
+        dateHired: jobInfoInput.hireDate,
+        salary: jobInfoInput.salary,
+        gradDate: jobInfoInput.gradDate,
+        bootcamp: jobInfoInput.bootcamp,
+        health: jobInfoInput.health,
+        dental: jobInfoInput.dental,
         PTO: jobInfoInput.PTO,
-        fourZeroOneK: jobInfoInput.FourZeroOneK,
-        equity: jobInfoInput.Equity,
-        bonuses: jobInfoInput.Bonuses,
+        fourZeroOneK: jobInfoInput.fourZeroOneK,
+        equity: jobInfoInput.equity,
+        bonuses: jobInfoInput.bonuses,
         LTD: jobInfoInput.LTD,
         STD: jobInfoInput.STD,
-        notes: jobInfoInput.Extra,
+        notes: jobInfoInput.extra,
       },
     });
     // Modal Alert for Submit
     Swal.fire({
       position: "center",
       icon: "success",
-      title: "Anonosumly saved your data!",
+      title: "Anonymously submitted!",
       showConfirmButton: false,
       timer: 1500,
     });
-    //   Clear inputs
-    setJobInfoInput("");
+    // //   Clear inputs
+    // setJobInfoInput("");
   };
 
   useEffect(() => {
@@ -131,10 +138,10 @@ function AlumniForm() {
                 id="demo-simple-select"
                 label="Bootcamps"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Bootcamp: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, bootcamp: e.target.value })
                 }
                 required
-                value={jobInfoInput.Bootcamp}
+                value={jobInfoInput.bootcamp}
               >
                 {bootcamps.map(bootcamp => {
                   return (
@@ -149,9 +156,9 @@ function AlumniForm() {
                 type="date"
                 placeholder="Graduation Date"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, GradDate: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, gradDate: e.target.value })
                 }
-                value={jobInfoInput.GradDate}
+                value={jobInfoInput.gradDate}
                 required
               />
             </Box>
@@ -174,9 +181,9 @@ function AlumniForm() {
                 id="job-label"
                 label="Job Level"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, JobTitle: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, jobRole: e.target.value })
                 }
-                value={jobInfoInput.JobTitle}
+                value={jobInfoInput.jobRole}
                 required
               >
                 {JobTitle.map(job => {
@@ -192,9 +199,9 @@ function AlumniForm() {
                 id="demo-simple-select"
                 label="Job Title"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, JobRole: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, jobTitle: e.target.value })
                 }
-                value={jobInfoInput.JobRole}
+                value={jobInfoInput.jobTitle}
                 required
               >
                 {JobRole.map(job => {
@@ -210,8 +217,9 @@ function AlumniForm() {
                 type="text"
                 placeholder="Company Name"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Company: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, company: e.target.value })
                 }
+                value={jobInfoInput.company}
                 required
               />
               <label id="demo-simple-select-label">States</label>
@@ -220,10 +228,10 @@ function AlumniForm() {
                 id="demo-simple-select"
                 label="States"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, States: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, states: e.target.value })
                 }
                 required
-                value={jobInfoInput.States}
+                value={jobInfoInput.states}
               >
                 {states.map(state => {
                   return (
@@ -242,11 +250,11 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({
                     ...jobInfoInput,
-                    Promotions: e.target.value,
+                    promotions: e.target.value,
                   })
                 }
                 required
-                value={jobInfoInput.Promotions}
+                value={jobInfoInput.promotions}
               >
                 <FormControlLabel
                   value="TRUE"
@@ -268,20 +276,20 @@ function AlumniForm() {
                 label="Position"
                 type="number"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Position: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, position: e.target.value })
                 }
                 required
-                value={jobInfoInput.Position}
+                value={jobInfoInput.position}
               />
               <label id="demo-simple-select-label">Hours Worked</label>
               <TextField
                 type="number"
                 placeholder="Hours Worked"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Hours: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, hours: e.target.value })
                 }
                 required
-                value={jobInfoInput.Hours}
+                value={jobInfoInput.hours}
               />
               <label id="demo-simple-select-label">Job Duration</label>
               <Select
@@ -291,11 +299,11 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({
                     ...jobInfoInput,
-                    JobType: e.target.value,
+                    jobType: e.target.value,
                   })
                 }
                 required
-                value={jobInfoInput.JobType}
+                value={jobInfoInput.jobType}
               >
                 {JobDuration.map(job => {
                   return (
@@ -314,11 +322,11 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({
                     ...jobInfoInput,
-                    Workplace: e.target.value,
+                    workplace: e.target.value,
                   })
                 }
                 required
-                value={jobInfoInput.Workplace}
+                value={jobInfoInput.workplace}
               >
                 {JobType.map(job => {
                   return (
@@ -333,20 +341,34 @@ function AlumniForm() {
                 type="date"
                 placeholder="Hire Date"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, HireDate: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, hireDate: e.target.value })
                 }
                 required
-                value={jobInfoInput.HireDate}
+                value={jobInfoInput.hireDate}
               />
               <label id="demo-simple-select-label">Salary</label>
               <TextField
                 type="number"
                 placeholder="Salary - Yearly/hourly"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Salary: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, salary: e.target.value })
                 }
                 required
-                value={jobInfoInput.Salary}
+                value={jobInfoInput.salary}
+                error={error}
+              />
+              <FormLabel id="bonus-radio-group">Bonuses</FormLabel>
+              <TextField
+                type="number"
+                placeholder="Bonuses"
+                onChange={e =>
+                  setJobInfoInput({
+                    ...jobInfoInput,
+                    bonuses: e.target.value,
+                  })
+                }
+                required
+                value={jobInfoInput.bonuses}
               />
             </Box>
             {/* Benefits */}
@@ -367,10 +389,10 @@ function AlumniForm() {
                 row
                 aria-labelledby="health-insurance-radio-group"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Health: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, health: e.target.value })
                 }
                 required
-                value={jobInfoInput.Health}
+                value={jobInfoInput.health}
               >
                 <FormControlLabel
                   value="TRUE"
@@ -392,9 +414,9 @@ function AlumniForm() {
                 row
                 aria-labelledby="dental-insurance-radio-group"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Dental: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, dental: e.target.value })
                 }
-                value={jobInfoInput.Dental}
+                value={jobInfoInput.dental}
               >
                 <FormControlLabel
                   value="TRUE"
@@ -438,10 +460,10 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({
                     ...jobInfoInput,
-                    FourZeroOneK: e.target.value,
+                    fourZeroOneK: e.target.value,
                   })
                 }
-                value={jobInfoInput.FourZeroOneK}
+                value={jobInfoInput.fourZeroOneK}
               >
                 <FormControlLabel
                   value="TRUE"
@@ -504,44 +526,14 @@ function AlumniForm() {
                   required
                 />
               </RadioGroup>
-              <FormLabel id="bonus-radio-group">Bonuses</FormLabel>
-              <RadioGroup row aria-labelledby="bonus-radio-group">
-                <FormControlLabel
-                  value="TRUE"
-                  control={<Radio />}
-                  label="Yes"
-                  onClick={() => setOpenInput(!openInput)}
-                  required
-                />
-                <FormControlLabel
-                  value="FALSE"
-                  control={<Radio />}
-                  label="No"
-                  required
-                />
-                {openInput && (
-                  <TextField
-                    type="number"
-                    placeholder="Bonuses"
-                    onChange={e =>
-                      setJobInfoInput({
-                        ...jobInfoInput,
-                        Bonuses: e.target.value,
-                      })
-                    }
-                    required
-                    value={jobInfoInput.Bonuses}
-                  />
-                )}
-              </RadioGroup>
               <FormLabel id="bonus-radio-group">Equity</FormLabel>
               <RadioGroup
                 row
                 aria-labelledby="bonus-radio-group"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Equity: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, equity: e.target.value })
                 }
-                value={jobInfoInput.Equity}
+                value={jobInfoInput.equity}
               >
                 <FormControlLabel
                   value="TRUE"
@@ -561,12 +553,20 @@ function AlumniForm() {
                 type="text"
                 placeholder="Notes"
                 onChange={e =>
-                  setJobInfoInput({ ...jobInfoInput, Extra: e.target.value })
+                  setJobInfoInput({ ...jobInfoInput, extra: e.target.value })
                 }
                 required
-                value={jobInfoInput.Extra}
+                value={jobInfoInput.extra}
               />
             </Box>
+            {error ? (
+              <p className="error-text">
+                Please enter a Valid Salary and complete the form! Max Salary:
+                200,000
+              </p>
+            ) : (
+              <></>
+            )}
             <Button variant="contained" type="submit">
               Submit
             </Button>

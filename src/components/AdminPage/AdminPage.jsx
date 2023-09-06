@@ -20,7 +20,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-// Set list order by 'salary', default largest to smallest
+// Set list order by 'salary', default largest to smallest (desc)
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -135,7 +135,7 @@ EnhancedTableHead.propTypes = {
 };
 
 
-// Main component
+// AdminPage component
 function AdminPage() {
 
   const dispatch = useDispatch();
@@ -197,8 +197,8 @@ function AdminPage() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - jobList?.length) : 0;
 
-  // Save the values of display settings state to a cache so that it persists 
-  // between re-renders
+  // Save the state of the listed variables to cache so that it persists 
+  // between re-renders. useMemo will only run if state changes. 
   const visibleRows = useMemo(
     () =>
       stableSort(jobList, getComparator(order, orderBy)).slice(

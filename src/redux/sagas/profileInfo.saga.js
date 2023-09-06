@@ -5,7 +5,7 @@ import axios from 'axios'
 //fetching job data for profile 
 function* fetchProfileInfo() {
     try {
-        const response = yield axios.get('api/profile')
+        const response = yield axios.get('/api/profile')
         console.log({response});
         yield put({ type: 'SET_PROFILE_INFO', payload: response.data })
     } catch (err) {
