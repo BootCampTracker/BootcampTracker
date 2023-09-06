@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 // MUI and CSS
 import {
   List,
@@ -34,6 +35,7 @@ import SalaryGraph from "../Graphs/ProfileGraphs/SalaryGraph";
 //import profileReducer from "../../redux/reducers/profile.reducer";
 function ProfilePage() {
   // HOOKS
+  const history = useHistory()
   const dispatch = useDispatch();
   const { profileId } = useParams();
 
@@ -48,6 +50,11 @@ function ProfilePage() {
     dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
     dispatch({ type: "FETCH_PROFILE_INFO", payload: user.id });
   }, []);
+
+  //setting use history to go to alumni form when new job is clicked 
+  const alumniRoute = () => {
+    history.push("/alumniform")
+  }
 
   return (
     <>
@@ -278,7 +285,7 @@ function ProfilePage() {
                   primary="PTO:"
                   secondary={info.PTO ? "Yes" : "No"}
                   className = "bold-secondary-text"
-                />
+                  />
               </ListItem>
               <Divider />
             </List>
@@ -297,6 +304,9 @@ function ProfilePage() {
           </Grid>
         </Grid>
       ))}
+      <Grid marginLeft="160px" marginTop= "25px">
+        <Button onClick= {alumniRoute} color="primary" variant="contained"> New Job</Button>
+      </Grid>
     </>
   );
 }
