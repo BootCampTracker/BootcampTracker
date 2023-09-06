@@ -1,9 +1,10 @@
 import { FormControl, Input, Typography, InputLabel, Select, MenuItem, Button, Card, CardContent, Box, CardActions } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './ComparisonPage.css';
 
+// Chart.js imports
 import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js/auto';
 import BarChart from '../Graphs/ComparisonGraphs/BarChart';
@@ -48,6 +49,7 @@ function ComparisonPage() {
     
     // hook to set local state with % of job with equity option
     const [averageEquity, setAverageEquity] = useState(0);
+
     // hook to set local state with average yearly $ bonus of job
     const [averageBonus, setAverageBonus] = useState(0);
 
@@ -55,13 +57,14 @@ function ComparisonPage() {
     const [averageDaysOff, setAverageDaysOff] = useState(0);
     
     // hook to set local state with average time to first role from bootcamp graduation
-    const [averageTimeToGrad, setAverageTimeToGrad] = useState(0);
+    const [averageTimeToJob, setAverageTimeToJob] = useState(0);
 
     // --------------------- bring in compare store
     // bring in compare store which holds the data for our graphs
-    const searchResults = useSelector(store => store.compare);
+    const searchResults = useSelector(store => store.compare) ? useSelector(store => store.compare) : '';
     
     //---------------------- calculating averages for the benefits card
+    // function that averages how many folks have health insurance
     const functionAverageHealth = () => {
         console.log('in the functionAverageHealth!');
         let boolCount = 0;
@@ -74,7 +77,7 @@ function ComparisonPage() {
         setAverageHealth(result.toFixed(2));
     }
     
-    // calculating averages for the benefits card
+    // function that averages how many folks have dental insurance
     const functionAverageDental = () => {
         console.log('in the functionAverageDental!');
         let boolCount = 0;
@@ -87,7 +90,7 @@ function ComparisonPage() {
         setAverageDental(result.toFixed(2));
     }
 
-    // calculating averages for the benefits card
+    // function that averages how many folks have a work 401K
     const functionAverage401K = () => {
         console.log('in the functionAverage401K!');
         let boolCount = 0;
@@ -100,6 +103,118 @@ function ComparisonPage() {
         setAverage401K(result.toFixed(2));
     }
 
+    // function that averages how many folks have work long-term disability insurance
+    const functionAverageLTD = () => {
+        console.log('in the functionAverageLTD!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.long_term_disability) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length)*100
+        setAverageLTD(result.toFixed(2));
+    }
+
+    // function that averages how many folks have work short-term disability insurance
+    const functionAverageEquity = () => {
+        console.log('in the functionAverageEquity!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.equity) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length)*100
+        setAverageEquity(result.toFixed(2));
+    }
+
+    // function that averages how many folks have an equity option
+    const functionAverageSTD = () => {
+        console.log('in the functionAverageSTD!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.short_term_disability) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length)*100
+        setAverageSTD(result.toFixed(2));
+    }
+
+    // function that averages folks' yearly bonus
+    const functionAverageBonus = () => {
+        console.log('in the functionAverageBonus!');
+        let totalBonuses = 0;
+        for (const response of searchResults) {
+            totalBonuses += response.total_yearly_bonus;
+        }
+        let result = totalBonuses / searchResults.length
+        setAverageBonus(result.toFixed(2));
+    }
+
+    // function that averages the percent of folks with PTO
+    const functionAverageDaysOff = () => {
+        console.log('in the functionAverageDaysOff!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.PTO) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length)*100
+        setAverageDaysOff(result.toFixed(2));
+    }
+
+    //function to create our difference between date hired and date graduated in days
+    let date_diff_indays = function(date1, date2) {
+        dt1 = new Date(date1);
+        dt2 = new Date(date2);
+        return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
+        }
+
+    // function to create a formatted date from our gross SQL date/timestamp
+    // const oneDay = 24 * 60 * 60 * 1000; // in milliseconds
+    // const firstDate = new Date(i.date_hired);
+    // const secondDate = new Date(i.graduation_date); // 2008, 1, 22
+    // const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+    // console.log('diffDays is:', diffDays);
+
+    // function that averages time from graduation to first job
+    const functionAverageTimeToJob = () => {
+        console.log('in the functionAverageTimeToGrad!');
+        //initialize our totalTimeToJob variable
+        let totalTimeToJob = 0;
+
+        // loop to go through our array of job entries
+        for (const response of searchResults) {
+            // only add this difference to our calculations if it's the user's first job after bootcamp
+            if(response.job_number = 1){
+                const oneDay = 24 * 60 * 60 * 1000; // in milliseconds
+                const firstDate = new Date(response.date_hired);
+                const secondDate = new Date(response.graduation_date); // 2008, 1, 22
+                const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+                // console.log('diffDays is:', diffDays);
+                    totalTimeToJob += diffDays;
+                }
+            }
+            let result = totalTimeToJob / searchResults.length;
+            setAverageTimeToJob(result.toFixed(2));
+        }
+    
+
+    useEffect(() => {
+        // do stuff when searchResults (dependency listed in the dependency array) changes
+        functionAverageHealth();
+        functionAverageDental();
+        functionAverage401K();
+        functionAverageLTD();
+        functionAverageSTD();
+        functionAverageEquity();
+        functionAverageBonus();
+        functionAverageDaysOff();
+        functionAverageTimeToJob();
+    }, [searchResults])
 
 
     // function to dispatch the event.target.value to the global state
@@ -121,12 +236,8 @@ function ComparisonPage() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('form submitted!');
-        dispatchChange()
-        .then(
-            functionAverageHealth();
-            functionAverageDental();
-            functionAverage401K();
-        );
+        dispatchChange();
+        // benefits card functions will be handled in the useEffect function
         ;
     } // end handleSubmit
 
@@ -299,8 +410,11 @@ function ComparisonPage() {
             >
                 Create Charts
             </Button>
+        {/* End of submit button */}
 
+        {/* End of form */}
         </form>
+
         <br />
 
         <pre>{JSON.stringify(searchResults)}</pre>
@@ -329,9 +443,9 @@ function ComparisonPage() {
             <br />
             The average yearly bonus {job ? `of ${job}s` : ''} is ${averageBonus}
             <br />
-            The average number of PTO days received: {averageDaysOff}/year
+            {averageDaysOff}% {job ? `of ${job}s` : ''} have PTO.
             <br />
-            Average time from graduation to first role: {averageTimeToGrad} days
+            Average time from graduation to first role: {averageTimeToJob} days
             </Typography>
         </CardContent>
         </Card>

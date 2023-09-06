@@ -25,6 +25,7 @@ router.get('/', (req, res) => {
     "benefits"."equity",
     "benefits"."long_term_disability",
     "benefits"."short_term_disability",
+    "benefits"."total_yearly_bonus",
     "benefits"."notes"
     FROM "job_info" 
     JOIN "bootcamp" ON "bootcamp"."user_id" = "job_info"."user_id"
