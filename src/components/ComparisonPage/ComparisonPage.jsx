@@ -112,11 +112,19 @@ function ComparisonPage() {
 
         console.log('chartData is:', chartData)
 
-        setShowGraph(true);
-
+        // setShowGraph(true);
+        showGraphNow();
         // console.log('average is:', yearThreeSalarySum)
         // console.log('variable is:', threeYearSalaryArr);
     };
+
+    // function showGraphNow() {
+    //     console.log('data is:', data);
+    //     console.log('chartData is:', chartData)
+
+    //     setShowGraph(true);
+
+    // }
 
 
     //-------------React State Hooks
