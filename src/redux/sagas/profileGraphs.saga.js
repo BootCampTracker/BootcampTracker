@@ -4,7 +4,7 @@ import axios from "axios";
 // GET for Profile info to display into Graphs
 function* setProfileGraphs(action) {
   try {
-    const response = yield axios.get(`/api/profile/graph/${action.payload}`);
+    const response = yield axios.get(`/api/profile/graph`);
     // Dispatch the GET in 'SET_PROFILE_GRAPH' and payload
     yield put({ type: "SET_PROFILE_GRAPH", payload: response.data });
     // Catch any ERRORS

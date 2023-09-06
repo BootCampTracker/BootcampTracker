@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 // Chart.js
 import { Line } from "react-chartjs-2";
-import 'chartjs-adapter-date-fns';
+import "chartjs-adapter-date-fns";
 const RoleGraph = () => {
   //  ****** PSEUDO ****** //
   // [X] set up the params for Profile
@@ -37,10 +37,20 @@ const RoleGraph = () => {
       },
     ],
   });
-  // Load Profile data to use in the Graph
+  // Load Profile data and Graph
   useEffect(() => {
-    dispatch({ type: "SET_PROFILE_GRAPHS", payload: user.id });
-  }, []);
+    setChartData({
+      labels: profileData.map(data => data.date_hired),
+      // Refractoring code
+      datasets: [
+        {
+          ...chartData.datasets[0],
+          data: profileData.map(data => data.job_number),
+        },
+      ],
+    });
+    // Update Graphs when profile information are changed
+  }, [profileData]);
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: "center" }}>Line Graph</h2>

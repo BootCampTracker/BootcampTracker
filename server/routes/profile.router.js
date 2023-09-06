@@ -6,7 +6,7 @@ const {
 const router = express.Router();
 
 // GET Profile for graphs
-router.get("/graph/:id",rejectUnauthenticated, (req, res) => {
+router.get("/graph",rejectUnauthenticated, (req, res) => {
   // Query and requesting User id
   const queryText = `SELECT "job_info"."id", "date_hired", "salary", "job_number" FROM "job_info"
   WHERE "user_id" = $1;`;
