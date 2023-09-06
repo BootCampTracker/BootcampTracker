@@ -52,7 +52,7 @@ const SalaryGraph = () => {
   }, [profileData]);
   return (
     <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Chart Graph</h2>
+      <h2 style={{ textAlign: "center" }}>Salary over Time Graph</h2>
       <Bar
         data={chartData}
         options={{

@@ -42,6 +42,7 @@ function ProfilePage() {
   }, []);
   return (
     <>
+    <h1 className="profile-heading">Welcome, {user.username} to your Profile!</h1>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           {/* Grid Item 1*/}
