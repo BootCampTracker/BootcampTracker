@@ -17,7 +17,7 @@ const SalaryGraph = () => {
   const { profileId } = useParams();
   const dispatch = useDispatch();
   const profileData = useSelector(state => state.profileGraphs);
-  const user = useSelector(store => store.user);
+  const user = useSelector(state => state.user);
   // Chart.js
   const [chartData, setChartData] = useState({
     labels: profileData.map(data => data.date_hired),
@@ -36,13 +36,23 @@ const SalaryGraph = () => {
       },
     ],
   });
-  // Load Profile data to use in the Graph
+  // Load Profile data and Graph
   useEffect(() => {
-    dispatch({ type: "SET_PROFILE_GRAPHS", payload: user.id });
-  }, []);
+    setChartData({
+      labels: profileData.map(data => data.date_hired),
+      // Refractoring code
+      datasets: [
+        {
+          ...chartData.datasets[0],
+          data: profileData.map(data => data.salary),
+        } 
+      ],
+    })
+    // Update Graphs when Profile information are changed
+  }, [profileData]);
   return (
     <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Chart Graph</h2>
+      <h2 style={{ textAlign: "center" }}>Salary over Time Graph</h2>
       <Bar
         data={chartData}
         options={{

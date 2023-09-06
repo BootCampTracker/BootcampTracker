@@ -5,15 +5,12 @@ import axios from "axios";
 function* setProfileGraphs(action) {
   console.log('Before Try Action:', action.payload);
   try {
-    console.log('Action:', action.payload);
-    const response = yield axios.get(`/api/profile/graph/${action.payload}`);
-    console.log('Response:', response);
-
+    const response = yield axios.get(`/api/profile/graph`);
     // Dispatch the GET in 'SET_PROFILE_GRAPH' and payload
     yield put({ type: "SET_PROFILE_GRAPH", payload: response.data });
     // Catch any ERRORS
   } catch (error) {
-    console.log(`ERROR in GET sagas profile Graphs:`, error);
+    console.log("ERROR in GET profile Graphs:",error);
   }
 }
 

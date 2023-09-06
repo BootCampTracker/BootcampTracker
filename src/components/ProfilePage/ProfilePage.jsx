@@ -36,13 +36,13 @@ function ProfilePage() {
   const dispatch = useDispatch();
   const { profileId } = useParams();
   const user = useSelector(store => store.user);
-
   // Load Profile data to use in the Graph
   useEffect(() => {
-    dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: user.id });
+    dispatch({ type: "FETCH_PROFILE_GRAPHS" });
   }, []);
   return (
     <>
+    <h1 className="profile-heading">Welcome, {user.username} to your Profile!</h1>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           {/* Grid Item 1*/}
