@@ -11,7 +11,7 @@ import {
 import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import UserPage from "../UserPage/UserPage";
+import Home from "../Home/Home";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import AlumniForm from "../AlumniForm/AlumniForm";
@@ -44,7 +44,7 @@ function App() {
         </Box>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/user" />
+          <Redirect exact from="/" to="/home" />
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -53,16 +53,16 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
-            path="/user"
+            path="/home"
           >
-            <UserPage />
+            <Home />
           </ProtectedRoute>
 
           <Route exact path="/login">
             {user.id ? (
               // If the user is already logged in,
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/home" />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
@@ -84,7 +84,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/home" />
             ) : (
               // Otherwise, show the Landing page
               <LoginPage />
@@ -100,7 +100,7 @@ function App() {
             <AdminPage />
           </ProtectedRoute>
 
-          <Route exact path="/profile/:profileId">
+          <Route exact path="/profile">
             <ProfilePage />
           </Route>
           <Route exact path="/compare">
