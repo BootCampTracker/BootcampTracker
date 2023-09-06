@@ -22,7 +22,7 @@ function ComparisonPage() {
     const [workplaceLocation, setWorkplaceLocation] = useState('');
     
     // hook to set local state for job
-    const [job, setJob] = useState('(job)');
+    const [job, setJob] = useState('');
     
     // hook to set local state for bootcamp
     const [bootcamp, setBootcamp] = useState('');
@@ -30,7 +30,7 @@ function ComparisonPage() {
     // hook to set local state for state
     const [state, setState] = useState('');
 
-    // ------------ hooks for card
+    // -------------------- hooks for card
     // hook to set local state with  % of job with health insurance
     const [averageHealth, setAverageHealth] = useState(0);
 
@@ -57,10 +57,50 @@ function ComparisonPage() {
     // hook to set local state with average time to first role from bootcamp graduation
     const [averageTimeToGrad, setAverageTimeToGrad] = useState(0);
 
-
-    // bring in compare store
+    // --------------------- bring in compare store
     // bring in compare store which holds the data for our graphs
     const searchResults = useSelector(store => store.compare);
+    
+    //---------------------- calculating averages for the benefits card
+    const functionAverageHealth = () => {
+        console.log('in the functionAverageHealth!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.health_insurance) {
+                boolCount += 1
+            }
+        }
+        let result =(boolCount / searchResults.length)*100
+        setAverageHealth(result.toFixed(2));
+    }
+    
+    // calculating averages for the benefits card
+    const functionAverageDental = () => {
+        console.log('in the functionAverageDental!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.dental_insurance) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length)*100
+        setAverageDental(result.toFixed(2));
+    }
+
+    // calculating averages for the benefits card
+    const functionAverage401K = () => {
+        console.log('in the functionAverage401K!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.fourOhOneKay) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length)*100
+        setAverage401K(result.toFixed(2));
+    }
+
+
 
     // function to dispatch the event.target.value to the global state
     const dispatchChange = () => {
@@ -81,7 +121,13 @@ function ComparisonPage() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('form submitted!');
-        dispatchChange();
+        dispatchChange()
+        .then(
+            functionAverageHealth();
+            functionAverageDental();
+            functionAverage401K();
+        );
+        ;
     } // end handleSubmit
 
     // This function handles the dropdown for workplace location
@@ -256,6 +302,8 @@ function ComparisonPage() {
 
         </form>
         <br />
+
+        <pre>{JSON.stringify(searchResults)}</pre>
         
         {/* This is our card to display benefits */}
         <Card sx={{ minWidth: 275, maxWidth: 500, backgroundColor: "#bbdefb" }} variant="outlined">
@@ -267,19 +315,19 @@ function ComparisonPage() {
                 Benefits, Averages, Etc.
             </Typography>
             <Typography variant="body2">
-            {averageHealth}% of {job} have health insurance.
+            {averageHealth}% {job ? `of ${job}s` : ''} have health insurance.
             <br />
-            {averageDental}% of {job} have dental insurance.
+            {averageDental}% {job ? `of ${job}s` : ''} have dental insurance.
             <br />
-            {average401K}% of {job} have a 401K.
+            {average401K}% {job ? `of ${job}s` : ''} have a 401K.
             <br />
-            {averageLTD}% of {job} have Long Term Disability.
+            {averageLTD}% {job ? `of ${job}s` : ''} have Long Term Disability.
             <br />
-            {averageSTD}% of {job} have Short Term Disability.
+            {averageSTD}% {job ? `of ${job}s` : ''} have Short Term Disability.
             <br />
-            {averageEquity}% of {job} receive an Equity option.
+            {averageEquity}% {job ? `of ${job}s` : ''} receive an Equity option.
             <br />
-            The average yearly bonus of a {job} is ${averageBonus}
+            The average yearly bonus {job ? `of ${job}s` : ''} is ${averageBonus}
             <br />
             The average number of PTO days received: {averageDaysOff}/year
             <br />

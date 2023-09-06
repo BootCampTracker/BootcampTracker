@@ -9,9 +9,28 @@ router.get('/', (req, res) => {
     const { job, state, bootcamp, workplaceLocation } = req.query;
     let paramNum = 0;
     const values = [];
-    let queryText = `SELECT "job_info"."salary", "job_info"."date_hired",
-        "bootcamp"."graduation_date" FROM "job_info" JOIN "bootcamp" 
-        ON "bootcamp"."user_id" = "job_info"."user_id" WHERE 1=1`;
+    let queryText = `
+    SELECT "job_info"."salary", 
+    "job_info"."date_hired", 
+    "job_info"."job_number",
+    "job_info"."state",
+    "job_info"."workplace",
+    "job_info"."job_title",
+    "bootcamp"."graduation_date",
+    "bootcamp"."bootcamp",
+    "benefits"."health_insurance",
+    "benefits"."dental_insurance",
+    "benefits"."PTO",
+    "benefits"."401K" AS "fourohonekay",
+    "benefits"."equity",
+    "benefits"."long_term_disability",
+    "benefits"."short_term_disability",
+    "benefits"."notes"
+    FROM "job_info" 
+    JOIN "bootcamp" ON "bootcamp"."user_id" = "job_info"."user_id"
+    JOIN "benefits" ON "benefits"."user_id" = "job_info"."user_id"
+    WHERE 1=1
+    `;
 
     if (job) {
         paramNum += 1;
