@@ -31,7 +31,7 @@ import "./ProfilePage.css";
 // CUSTOM COMPONENTS
 import RoleGraph from "../Graphs/ProfileGraphs/RoleGraph";
 import SalaryGraph from "../Graphs/ProfileGraphs/SalaryGraph";
-import profileReducer from "../../redux/reducers/profile.reducer";
+//import profileReducer from "../../redux/reducers/profile.reducer";
 function ProfilePage() {
   // HOOKS
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ function ProfilePage() {
                     <PaidIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Salary:" secondary={info.salary} className = ""/>
+                <ListItemText primary="Salary:" secondary={info.salary} className = "bold-secondary-text"/>
               </ListItem>
               <Divider />
               <ListItem>

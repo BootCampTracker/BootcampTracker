@@ -6,7 +6,6 @@ import setJobInfoSagas from "./setJobInfo.saga";
 import adminSaga from "./admin.saga";
 import compareSaga from "./compare.saga";
 import profileInfoSaga from "./profileInfo.saga";
-
 import profileGraphSaga from "./profileGraphs.saga";
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.

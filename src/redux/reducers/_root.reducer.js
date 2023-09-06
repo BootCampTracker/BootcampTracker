@@ -5,7 +5,6 @@ import jobForm from "./jobForm.reducer";
 import admin from "./admin.reducer";
 import compare from "./compare.reducer";
 import profileReducer from "./profile.reducer";
-
 import profileGraphs from "./profileGraphs.reducer";
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
