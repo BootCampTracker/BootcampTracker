@@ -17,6 +17,7 @@ const SalaryGraph = () => {
   const { profileId } = useParams();
   const dispatch = useDispatch();
   const profileData = useSelector(state => state.profileGraphs);
+  const user = useSelector(store => store.user);
   // Chart.js
   const [chartData, setChartData] = useState({
     labels: profileData.map(data => data.date_hired),
@@ -37,7 +38,7 @@ const SalaryGraph = () => {
   });
   // Load Profile data to use in the Graph
   useEffect(() => {
-    dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
+    dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: user.id });
   }, []);
   return (
     <div className="chart-container">
