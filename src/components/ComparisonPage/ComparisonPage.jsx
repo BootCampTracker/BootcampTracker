@@ -10,124 +10,9 @@ import ComparisonSalaryGraph from '../Graphs/ComparisonGraphs/ComparisonSalaryGr
 
 // This is the component function for the ComparisonPage
 function ComparisonPage() {
-    const [chartData, setChartData] = useState({});
-    const [data, setData] = useState([]);
+
+    // Bring in results from comparison page search
     const searchResults = useSelector(store => store.compare);
-    const salaries = [];
-    // console.log('searchResults is:', searchResults);
-
-    // function objectCreator(num, year) {
-    // }
-
-    // let averageSalary;
-    // function getAverageSalary(array) {
-    //     let initialValue = 0;
-    //     array.reduce((accumulator, currentValue) => 
-    //     accumulator + currentValue, initialValue) / array.length;
-    //     return averageSalary;
-    // };
-
-    function handleComparisonData() {
-        let oneYearSalaryArr = [];
-        let twoYearSalaryArr = [];
-        let threeYearSalaryArr = [];
-        let fourYearSalaryArr = [];
-        let fiveYearSalaryArr = [];
-
-        // Loop through searchResults array and sort salaries into new arrays 
-        // based on how many years after graduation date it has been.
-        for (let i of searchResults) {
-            const oneDay = 24 * 60 * 60 * 1000; // in milliseconds
-            const firstDate = new Date(i.graduation_date);
-            const secondDate = new Date(i.date_hired);
-            const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-
-            if (diffDays <= 365) {
-                oneYearSalaryArr.push(i.salary);
-            }
-            else if (diffDays <= 730 && diffDays > 365) {
-                twoYearSalaryArr.push(i.salary);
-            }
-            else if (diffDays <= 1095 && diffDays > 730) {
-                threeYearSalaryArr.push(i.salary);
-            }
-            else if (diffDays <= 1460 && diffDays > 1095) {
-                fourYearSalaryArr.push(i.salary);
-            }
-            else if (diffDays <= 1825 && diffDays > 1460) {
-                fiveYearSalaryArr.push(i.salary);
-            }
-        };
-
-        // Get the average for salaries by year
-        let initialValue = 0;
-        const yearThreeSalarySum = threeYearSalaryArr.reduce((accumulator, currentValue) =>
-            accumulator + currentValue, initialValue) / threeYearSalaryArr.length;
-
-        const yearOneSalarySum = oneYearSalaryArr.reduce((accumulator, currentValue) =>
-            accumulator + currentValue, initialValue) / oneYearSalaryArr.length;
-
-        const yearTwoSalarySum = twoYearSalaryArr.reduce((accumulator, currentValue) =>
-            accumulator + currentValue, initialValue) / twoYearSalaryArr.length;
-
-        const yearFourSalarySum = threeYearSalaryArr.reduce((accumulator, currentValue) =>
-            accumulator + currentValue, initialValue) / fourYearSalaryArr.length;
-
-        // Set data array to send to chartDate
-        setData([
-            {
-                year: 1,
-                avgSalaries: yearOneSalarySum
-            },
-            {
-                year: 2,
-                avgSalaries: yearTwoSalarySum
-            },
-            {
-                year: 3,
-                avgSalaries: yearThreeSalarySum
-            }
-        ]);
-
-        console.log('data is:', data);
-
-        // Set chartData state
-        setChartData({
-            labels: data?.map((data) => data?.avgSalaries),
-            datasets: [
-                {
-                    label: "Users Gained ",
-                    data: data?.map((data) => data?.year),
-                    backgroundColor: [
-                        "rgba(75,192,192,1)",
-                        "#ecf0f1",
-                        "#50AF95",
-                        "#f3ba2f",
-                        "#2a71d0"
-                    ],
-                    borderColor: "blue",
-                    borderWidth: 2
-                }
-            ]
-        });
-
-        console.log('chartData is:', chartData)
-
-        // setShowGraph(true);
-        showGraphNow();
-        // console.log('average is:', yearThreeSalarySum)
-        // console.log('variable is:', threeYearSalaryArr);
-    };
-
-    // function showGraphNow() {
-    //     console.log('data is:', data);
-    //     console.log('chartData is:', chartData)
-
-    //     setShowGraph(true);
-
-    // }
-
-
 
     //-------------React State Hooks
     // store the useDispatch hook in the variable dispatch
@@ -336,12 +221,10 @@ function ComparisonPage() {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatchChange();
-        handleComparisonData();
+        // handleComparisonData();
         console.log('form submitted!');
-        dispatchChange();
         // benefits card functions will be handled in the useEffect function
-        ;
-    } // end handleSubmit
+    }; // end handleSubmit
 
     // This function handles the dropdown for workplace location
     const handleWorkplaceLocationChange = (event) => {
@@ -512,23 +395,13 @@ function ComparisonPage() {
                 >
                     Create Charts
                 </Button>
-                {/* This button will submit our form */}
-                <Button variant="contained"
-                    sx={{ marginTop: 5 }}
-                    type="submit"
-                    value="submit"
-                >
-                    Create Charts
-                </Button>
-                {/* End of submit button */}
-
             </form>
             {/* End of form */}
 
             {/* Salary over time graph */}
             <div className="chart-container">
                 {showGraph ? (
-                    <ComparisonSalaryGraph chartData={chartData} />
+                    <ComparisonSalaryGraph />
                 ) : (
                     <div className="chart-container-empty">
                         Submit form to view graph

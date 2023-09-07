@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
     "benefits"."notes"
     FROM "job_info" 
     JOIN "bootcamp" ON "bootcamp"."user_id" = "job_info"."user_id"
-    JOIN "benefits" ON "benefits"."user_id" = "job_info"."user_id"
+    JOIN "benefits" ON "benefits"."job_id" = "job_info"."id"
     WHERE 1=1
     `;
 
