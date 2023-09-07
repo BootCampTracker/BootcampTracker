@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import './ComparisonPage.css';
 // Chart.js imports
 import ComparisonSalaryGraph from '../Graphs/ComparisonGraphs/ComparisonSalaryGraph';
+import ComparisonRoleGraph from "../Graphs/ComparisonGraphs/ComparisonRoleGraph";
 
 
 
@@ -398,10 +399,21 @@ function ComparisonPage() {
             </form>
             {/* End of form */}
 
-            {/* Salary over time graph */}
+            {/* Salaries over time graph */}
             <div className="chart-container">
                 {showGraph ? (
                     <ComparisonSalaryGraph />
+                ) : (
+                    <div className="chart-container-empty">
+                        Submit form to view graph
+                    </div>
+                )}
+            </div>
+            
+            {/* Roles over time graph */}
+            <div className="chart-container">
+                {showGraph ? (
+                    <ComparisonRoleGraph />
                 ) : (
                     <div className="chart-container-empty">
                         Submit form to view graph
