@@ -72,3 +72,4 @@ const SalaryGraph = () => {
 };
 
 export default SalaryGraph;
+
