@@ -32,7 +32,7 @@ function DrawerComponent() {
       {/* this is a list of what is in our drawer */}
       <List>
         {[
-          <Typography onClick={() => history.push("/user")}> Home </Typography>,
+          <Typography onClick={() => history.push("/home")}> Home </Typography>,
           // THESE NEED TO PUSH TO THE CORRECT COMPONENTS WHEN THEY EXIST
           <Typography onClick={() => history.push('/profile')}>
             Profile

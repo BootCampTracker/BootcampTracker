@@ -13,7 +13,6 @@ const jobRouter = require('./routes/job.router')
 const adminRouter = require('./routes/admin.router');
 const profileRouter = require('./routes/profile.router');
 const compareRouter = require('./routes/compare.router');
-
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

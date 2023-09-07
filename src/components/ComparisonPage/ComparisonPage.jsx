@@ -1,8 +1,9 @@
-import { FormControl, Input, Typography, InputLabel, Select, MenuItem, Button } from "@mui/material";
+import { FormControl, Input, Typography, InputLabel, Select, MenuItem, Button, Card, CardContent, Box, CardActions } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './ComparisonPage.css';
+// Chart.js imports
 import ComparisonSalaryGraph from '../Graphs/ComparisonGraphs/ComparisonSalaryGraph';
 
 
@@ -127,6 +128,7 @@ function ComparisonPage() {
     // }
 
 
+
     //-------------React State Hooks
     // store the useDispatch hook in the variable dispatch
     const dispatch = useDispatch();
@@ -143,8 +145,177 @@ function ComparisonPage() {
     // hook to set local state for state
     const [state, setState] = useState('');
 
+    // -------------------- hooks for card
+    // hook to set local state with  % of job with health insurance
+    const [averageHealth, setAverageHealth] = useState(0);
+
+    // hook to set local state with % of job with dental insurance
+    const [averageDental, setAverageDental] = useState(0);
+
+    // hook to set local state with % of job with 401K
+    const [average401K, setAverage401K] = useState(0);
+
+    // hook to set local state with % of job with LTD
+    const [averageLTD, setAverageLTD] = useState(0);
+
+    // hook to set local state with  % of job with STD
+    const [averageSTD, setAverageSTD] = useState(0);
+
+    // hook to set local state with % of job with equity option
+    const [averageEquity, setAverageEquity] = useState(0);
+
+    // hook to set local state with average yearly $ bonus of job
+    const [averageBonus, setAverageBonus] = useState(0);
+
+    // hook to set local state with average paid time off days of job
+    const [averageDaysOff, setAverageDaysOff] = useState(0);
+
+    // hook to set local state with average time to first role from bootcamp graduation
+    const [averageTimeToJob, setAverageTimeToJob] = useState(0);
+
+    // --------------------- bring in compare store
     // do not show graph on page load, only after form submit
-    const [showGraph, setShowGraph] = useState(false);
+    const [showGraph, setShowGraph] = useState(false) ? useSelector(store => store.compare) : '';
+
+    //---------------------- calculating averages for the benefits card
+    // function that averages how many folks have health insurance
+    const functionAverageHealth = () => {
+        console.log('in the functionAverageHealth!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.health_insurance) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length) * 100
+        setAverageHealth(result.toFixed(2));
+    }
+
+    // function that averages how many folks have dental insurance
+    const functionAverageDental = () => {
+        console.log('in the functionAverageDental!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.dental_insurance) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length) * 100
+        setAverageDental(result.toFixed(2));
+    }
+
+    // function that averages how many folks have a work 401K
+    const functionAverage401K = () => {
+        console.log('in the functionAverage401K!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.fourOhOneKay) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length) * 100
+        setAverage401K(result.toFixed(2));
+    }
+
+    // function that averages how many folks have work long-term disability insurance
+    const functionAverageLTD = () => {
+        console.log('in the functionAverageLTD!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.long_term_disability) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length) * 100
+        setAverageLTD(result.toFixed(2));
+    }
+
+    // function that averages how many folks have work short-term disability insurance
+    const functionAverageEquity = () => {
+        console.log('in the functionAverageEquity!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.equity) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length) * 100
+        setAverageEquity(result.toFixed(2));
+    }
+
+    // function that averages how many folks have an equity option
+    const functionAverageSTD = () => {
+        console.log('in the functionAverageSTD!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.short_term_disability) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length) * 100
+        setAverageSTD(result.toFixed(2));
+    }
+
+    // function that averages folks' yearly bonus
+    const functionAverageBonus = () => {
+        console.log('in the functionAverageBonus!');
+        let totalBonuses = 0;
+        for (const response of searchResults) {
+            totalBonuses += response.total_yearly_bonus;
+        }
+        let result = totalBonuses / searchResults.length
+        setAverageBonus(result.toFixed(2));
+    }
+
+    // function that averages the percent of folks with PTO
+    const functionAverageDaysOff = () => {
+        console.log('in the functionAverageDaysOff!');
+        let boolCount = 0;
+        for (const response of searchResults) {
+            if (response.PTO) {
+                boolCount += 1
+            }
+        }
+        let result = (boolCount / searchResults.length) * 100
+        setAverageDaysOff(result.toFixed(2));
+    }
+
+    // function that averages time from graduation to first job
+    const functionAverageTimeToJob = () => {
+        console.log('in the functionAverageTimeToGrad!');
+        //initialize our totalTimeToJob variable
+        let totalTimeToJob = 0;
+
+        // loop to go through our array of job entries
+        for (const response of searchResults) {
+            // only add this difference to our calculations if it's the user's first job after bootcamp
+            if (response.job_number = 1) {
+                const oneDay = 24 * 60 * 60 * 1000; // in milliseconds
+                const firstDate = new Date(response.date_hired);
+                const secondDate = new Date(response.graduation_date); // 2008, 1, 22
+                const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+                // console.log('diffDays is:', diffDays);
+                totalTimeToJob += diffDays;
+            }
+        }
+        let result = totalTimeToJob / searchResults.length;
+        setAverageTimeToJob(result.toFixed(2));
+    }
+
+
+    useEffect(() => {
+        // do stuff when searchResults (dependency listed in the dependency array) changes
+        functionAverageHealth();
+        functionAverageDental();
+        functionAverage401K();
+        functionAverageLTD();
+        functionAverageSTD();
+        functionAverageEquity();
+        functionAverageBonus();
+        functionAverageDaysOff();
+        functionAverageTimeToJob();
+    }, [searchResults])
+
 
     // function to dispatch the event.target.value to the global state
     const dispatchChange = () => {
@@ -167,6 +338,9 @@ function ComparisonPage() {
         dispatchChange();
         handleComparisonData();
         console.log('form submitted!');
+        dispatchChange();
+        // benefits card functions will be handled in the useEffect function
+        ;
     } // end handleSubmit
 
     // This function handles the dropdown for workplace location
@@ -200,7 +374,6 @@ function ComparisonPage() {
         setState(event.target.value);
         // We need a dispatch and change in state for every change in the input fields!
     } // end handleStateChange
-
 
     // ----------rendered jsx
     return (
@@ -339,8 +512,19 @@ function ComparisonPage() {
                 >
                     Create Charts
                 </Button>
+                {/* This button will submit our form */}
+                <Button variant="contained"
+                    sx={{ marginTop: 5 }}
+                    type="submit"
+                    value="submit"
+                >
+                    Create Charts
+                </Button>
+                {/* End of submit button */}
 
             </form>
+            {/* End of form */}
+
             {/* Salary over time graph */}
             <div className="chart-container">
                 {showGraph ? (
@@ -351,6 +535,37 @@ function ComparisonPage() {
                     </div>
                 )}
             </div>
+
+            {/* This is our card to display benefits */}
+            <Card sx={{ minWidth: 275, maxWidth: 500, backgroundColor: "#bbdefb" }} variant="outlined">
+                <CardContent sx={{ backgroundColor: "white", margin: 2 }}>
+                    <Typography variant="h5" component="div">
+                        {job}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        Benefits, Averages, Etc.
+                    </Typography>
+                    <Typography variant="body2">
+                        {averageHealth}% {job ? `of ${job}s` : ''} have health insurance.
+                        <br />
+                        {averageDental}% {job ? `of ${job}s` : ''} have dental insurance.
+                        <br />
+                        {average401K}% {job ? `of ${job}s` : ''} have a 401K.
+                        <br />
+                        {averageLTD}% {job ? `of ${job}s` : ''} have Long Term Disability.
+                        <br />
+                        {averageSTD}% {job ? `of ${job}s` : ''} have Short Term Disability.
+                        <br />
+                        {averageEquity}% {job ? `of ${job}s` : ''} receive an Equity option.
+                        <br />
+                        The average yearly bonus {job ? `of ${job}s` : ''} is ${averageBonus}
+                        <br />
+                        {averageDaysOff}% {job ? `of ${job}s` : ''} have PTO.
+                        <br />
+                        Average time from graduation to first role: {averageTimeToJob} days
+                    </Typography>
+                </CardContent>
+            </Card>
         </>
     )
 };
