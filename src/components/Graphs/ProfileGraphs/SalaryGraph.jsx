@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 // Chart.js
 import { Bar } from "react-chartjs-2";
 import 'chartjs-adapter-date-fns';
+
 const SalaryGraph = () => {
   //  ****** PSEUDO ****** //
   // [X] set up the params for Profile
@@ -83,3 +84,4 @@ const SalaryGraph = () => {
 };
 
 export default SalaryGraph;
+

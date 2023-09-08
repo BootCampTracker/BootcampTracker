@@ -1,6 +1,14 @@
 .chart-container {
     width: 80%;
     float: right;
+    margin: 30px;
+}
+
+.chart-container-empty {
+    border: 1px solid black;
+    text-align: center;
+    width: 545px;
+    height: 273px;
 }
 
 .comparison-container {
