@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 
-// Role graph component
+// Roles over time graph component
 function ComparisonRoleGraph() {
 
-    // bring in compare store which holds the data for our graph
+    // Bring in compare store which holds the data for our graph
     const searchResults = useSelector(store => store.compare);
+
+    // Declare a variable to hold our user count for computing roles over time
+    let userCount = 0;
 
     // Set chartData initial state
     const [chartData, setChartData] = useState({
@@ -28,78 +31,108 @@ function ComparisonRoleGraph() {
             }]
     });
 
-    useEffect(() => {
-        // Declare empty array variables to hold data as we perform logic
-        let oneYearRoleArr = [];
-        let twoYearRoleArr = [];
-        let threeYearRoleArr = [];
-        let fourYearRoleArr = [];
-        let fiveYearRoleArr = [];
+    // Function that creates a set object of user_ids. Set objects only keep one 
+    // copy of each value put in. We can then use the size method to obtain the 
+    // number of unique users
+    function countUniqueUsers(array) {
+        return userCount = new Set(array).size;
+    }
 
-        // Loop through searchResults array and sort roles into new arrays 
-        // based on the number of days between graduation date and hire date so
-        // that we have seperate arrays for salaries by year
+    // Hook that runs when searchResults variable changes
+    useEffect(() => {
+
+        // 
+        let rolesInFirstYear = 0;
+        let rolesInSecondYear = 0;
+        let rolesInThirdYear = 0;
+        let rolesInFourthYear = 0;
+        let rolesInFifthYear = 0;
+
+        // Holds all user_id's returned in searchResults
+        let userIdArray = [];
+
+        // Loop through searchResults array and count roles per year 
+        // based on the number of days between graduation date and hire date
+        // so that we have seperate counts for roles by year
         for (let i of searchResults) {
-            const oneDay = 24 * 60 * 60 * 1000; // in milliseconds
-            const firstDate = new Date(i.graduation_date);
-            const secondDate = new Date(i.date_hired);
+            const oneDay = 24 * 60 * 60 * 1000; // Total milliseconds in a day
+            const firstDate = new Date(i.graduation_date); // Set graduation date variable
+            const secondDate = new Date(i.date_hired); // Set hire date variable
+
+            // Calculate the difference (in days) between graduation date and
+            // hire date and assign to variable
             const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
 
+            // Push all user_id's into userIdArray
+            userIdArray.push(i.user_id);
+
+            // Count the number of roles per year and assign to variables
             if (diffDays <= 365) {
-                oneYearRoleArr.push(i.role);
+                rolesInFirstYear += 1;
             }
             else if (diffDays <= 730 && diffDays > 365) {
-                twoYearRoleArr.push(i.role);
+                rolesInSecondYear += 1;
             }
             else if (diffDays <= 1095 && diffDays > 730) {
-                threeYearRoleArr.push(i.role);
+                rolesInThirdYear += 1;
             }
             else if (diffDays <= 1460 && diffDays > 1095) {
-                fourYearRoleArr.push(i.role);
+                rolesInFourthYear += 1;
             }
             else if (diffDays <= 1825 && diffDays > 1460) {
-                fiveYearRoleArr.push(i.role);
+                rolesInFifthYear += 1;
             }
         };
 
-        // Get the role average by year
-        let initialValue = 0;
-        const yearThreeRoleSum = Math.round(threeYearRoleArr.reduce((accumulator, currentValue) =>
-            accumulator + currentValue, initialValue) / threeYearRoleArr.length);
-        const yearOneRoleSum = Math.round(oneYearRoleArr.reduce((accumulator, currentValue) =>
-            accumulator + currentValue, initialValue) / oneYearRoleArr.length);
-        const yearTwoRoleSum = Math.round(twoYearRoleArr.reduce((accumulator, currentValue) =>
-            accumulator + currentValue, initialValue) / twoYearRoleArr.length);
-        const yearFourRoleSum = Math.round(fourYearRoleArr.reduce((accumulator, currentValue) =>
-            accumulator + currentValue, initialValue) / fourYearRoleArr.length);
-        const yearFiveRoleSum = Math.round(fiveYearRoleArr.reduce((accumulator, currentValue) =>
-            accumulator + currentValue, initialValue) / fiveYearRoleArr.length);
+        console.log('roles by years (3):', rolesInFirstYear, rolesInSecondYear, rolesInThirdYear);
 
-        // Set data array to send to chartData
+
+        // Compute number of unique users in searchResults to use when 
+        // calculating roles over time, returns a number assigned to userCount
+        // variable
+        countUniqueUsers(userIdArray);
+
+
+        console.log('usersArray is:', userIdArray);
+        console.log('userCount is:', userCount);
+
+
+        // Calculate the average number of roles per year
+        const yearOneRoleAvg = rolesInFirstYear / userCount;
+        const yearTwoRoleAvg = (rolesInFirstYear + rolesInSecondYear) / userCount;
+        const yearThreeRoleAvg = (rolesInFirstYear + rolesInSecondYear + rolesInThirdYear) / userCount;
+        const yearFourRoleAvg = (rolesInFirstYear + rolesInSecondYear + rolesInThirdYear + rolesInFourthYear) / userCount;
+        const yearFiveRoleAvg = (rolesInFirstYear + rolesInSecondYear + rolesInThirdYear + rolesInFourthYear + rolesInFifthYear) / userCount;
+
+        console.log('Avg roles by year (3):', yearOneRoleAvg, yearTwoRoleAvg, yearThreeRoleAvg);
+
+
+        // Declare finalData array to send to chartData state variable
         const finalData = [
+            // First object is used to set graph origin point at zero
             {
                 year: 0,
-                avgSalaries: 0
+                avgRoleCount: 0
             },
             {
                 year: 1 + 'yr',
-                avgSalaries: yearOneRoleSum
+                avgRoleCount: yearOneRoleAvg
             },
             {
                 year: 2 + 'yr',
-                avgSalaries: yearTwoRoleSum
+                avgRoleCount: yearTwoRoleAvg
             },
             {
                 year: 3 + 'yr',
-                avgSalaries: yearThreeRoleSum
+                avgRoleCount: yearThreeRoleAvg
             },
             {
                 year: 4 + 'yr',
-                avgSalaries: yearFourRoleSum
+                avgRoleCount: yearFourRoleAvg
             },
             {
                 year: 5 + 'yr',
-                avgSalaries: yearFiveRoleSum
+                avgRoleCount: yearFiveRoleAvg
             },
         ];
 
@@ -108,7 +141,7 @@ function ComparisonRoleGraph() {
             datasets: [
                 {
                     label: "Year",
-                    data: finalData.map((data) => data.avgSalaries),
+                    data: finalData.map((data) => data.avgRoleCount),
                     backgroundColor: [
                         "rgba(75,192,192,1)",
                         "#ecf0f1",
