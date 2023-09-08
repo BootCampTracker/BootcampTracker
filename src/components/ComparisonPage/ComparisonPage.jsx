@@ -217,14 +217,19 @@ function ComparisonPage() {
         })
     }
 
+    let displayCard = false;
+    const toggleCard = () => { displayCard = true}
+    console.log(`displayCard: `, displayCard);
+
     //------------Handler functions
     // This function handles the submit of the form
     const handleSubmit = (event) => {
         event.preventDefault();
+        toggleCard();
+        console.log(`display card: `, displayCard);
         console.log('form submitted!');
         dispatchChange();
         // benefits card functions will be handled in the useEffect function
-        ;
     } // end handleSubmit
 
     // This function handles the dropdown for workplace location
@@ -406,6 +411,7 @@ function ComparisonPage() {
         <pre>{JSON.stringify(searchResults)}</pre>
         
         {/* This is our card to display benefits */}
+        {displayCard ? `<h1>display card</h1>` : `<h1>don't display card</h1>`}
         <Card sx={{ minWidth: 275, maxWidth: 500, backgroundColor: "#bbdefb" }} variant="outlined">
         <CardContent sx={{backgroundColor: "white", margin: 2}}>
             <Typography variant="h5" component="div">
