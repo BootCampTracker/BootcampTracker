@@ -30,11 +30,14 @@
   padding-left: 10px;
   margin: 0;
 }
-
+/* color: #046fc7;
+color: #0061b0; */
 .navLink {
+  font-size: 2rem;
   display: inline-block;
   color: #f2f2f2;
-  background-color: #00acb0;
+  background-color: #046fc7;
+  border-radius: 1rem;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -47,8 +50,8 @@
   outline: 0;
 }
 
-Link:hover {
-  background-color: #008183;
+.navLink:hover {
+  background-color: #0061b0;
 }
 
 .nav-links{

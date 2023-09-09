@@ -33,17 +33,17 @@ function DrawerComponent() {
       <List>
         {[
           <nav className="nav-links">
-            <Typography onClick={() => history.push("/home")}>Home</Typography>
-            <Typography onClick={() => history.push("/profile")}>
+            <Typography onClick={() => history.push("/home")} className="navLink">Home</Typography>
+            <Typography onClick={() => history.push("/profile")} className="navLink">
               Profile
             </Typography>
-            <Typography onClick={() => history.push("/alumniform")}>
+            <Typography onClick={() => history.push("/alumniform")} className="navLink">
               Alumni Form
             </Typography>
-            <Typography onClick={() => history.push("/compare")}>
+            <Typography onClick={() => history.push("/compare")} className="navLink">
               Compare Bootcamps
             </Typography>
-            {user.access_level > 1 && <Typography onClick={() => history.push("/adminpage")}>
+            {user.access_level === 1 && <Typography onClick={() => history.push("/adminpage")} className="navLink">
               Admin Page
             </Typography>}
             <LogOutButton />
