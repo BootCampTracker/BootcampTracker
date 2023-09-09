@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 // Chart.js
 import { Line } from "react-chartjs-2";
-import "chartjs-adapter-date-fns";
+import 'chartjs-adapter-date-fns';
+
 const RoleGraph = () => {
   //  ****** PSEUDO ****** //
   // [X] set up the params for Profile

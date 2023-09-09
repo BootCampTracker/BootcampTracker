@@ -28,6 +28,8 @@ import JobType from "./FormData/jobType";
 import JobTitle from "./FormData/jobTitle";
 import JobRole from "./FormData/jobRole";
 import states from "./FormData/states";
+
+
 function AlumniForm() {
   // HOOKS
   const dispatch = useDispatch();
@@ -58,18 +60,21 @@ function AlumniForm() {
     equity: "",
     extra: "",
   });
+
   // Submit Form and dispatch
-  const handleSubmit = e => {
-    e.preventDefault();
-    // Logs
+  const handleSubmit = (event) => {
+    event.preventDefault();
     console.log("Submitted", jobInfoInput);
     console.log("User id:", user.id);
+
     // Validation Form on Salary input
     if (jobInfoInput.salary > 200000) {
       setError(true);
       return;
     }
+
     setError(false);
+
     // Dispatch
     dispatch({
       type: "ADD_JOB_INFO",
@@ -101,6 +106,7 @@ function AlumniForm() {
         notes: jobInfoInput.extra,
       },
     });
+
     // Modal Alert for Submit
     Swal.fire({
       position: "center",
@@ -109,13 +115,16 @@ function AlumniForm() {
       showConfirmButton: false,
       timer: 1500,
     });
-    // //   Clear inputs
-    // setJobInfoInput("");
+
+    //   Clear inputs
+    setJobInfoInput("");
   };
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_USER" });
-  }, []);
+  // useEffect(() => {
+  //   dispatch({ type: "FETCH_USER" });
+  // }, []);
+
+
   return (
     <div className="main-section">
       <h1 className="main-heading">Anonymously submit your information</h1>
