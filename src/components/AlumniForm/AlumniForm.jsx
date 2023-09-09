@@ -1,6 +1,7 @@
 // HOOKS
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 // MUI and Assets
 import {
   Box,
@@ -29,12 +30,11 @@ import JobTitle from "./FormData/jobTitle";
 import JobRole from "./FormData/jobRole";
 import states from "./FormData/states";
 
-
 function AlumniForm() {
   // HOOKS
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
-  const [openInput, setOpenInput] = useState(false);
+  const history = useHistory();
   const [error, setError] = useState(false);
   const [jobInfoInput, setJobInfoInput] = useState({
     bootcamp: "",
@@ -62,13 +62,13 @@ function AlumniForm() {
   });
 
   // Submit Form and dispatch
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     console.log("Submitted", jobInfoInput);
     console.log("User id:", user.id);
 
     // Validation Form on Salary input
-    if (jobInfoInput.salary > 200000) {
+    if (jobInfoInput.hours > 60 || jobInfoInput.hours < 0) {
       setError(true);
       return;
     }
@@ -116,17 +116,41 @@ function AlumniForm() {
       timer: 1500,
     });
 
+    history.push("/profile");
     //   Clear inputs
     setJobInfoInput("");
   };
-
-  // useEffect(() => {
-  //   dispatch({ type: "FETCH_USER" });
-  // }, []);
-
-
+  // Auto fill the Form when Clicked anywhere on the Page!
+  const handleFillForm = () => {
+    console.log("Fill the Form:");
+    setJobInfoInput({
+      hours: 40,
+      bootcamp: "Prime Digital Academy",
+      jobType: "Full-time",
+      jobTitle: "Full Stack Engineer",
+      bonuses: 120,
+      jobRole: "Entry Level",
+      company: "Target",
+      states: "Minnesota",
+      position: 1,
+      workplace: "Hybrid",
+      salary: 70000,
+      extra:
+        "Target was the best place worked at for my first position, Thanks to the Target team!",
+      gradDate: "2023-09-15",
+      hireDate: "2023-10-20",
+      health: "TRUE",
+      dental: "TRUE",
+      PTO: "TRUE",
+      fourZeroOneK: "TRUE",
+      equity: "TRUE",
+      LTD: "FALSE",
+      STD: "FALSE",
+      promotions: "TRUE",
+    });
+  };
   return (
-    <div className="main-section">
+    <div className="main-section" onClick={handleFillForm}>
       <h1 className="main-heading">Anonymously submit your information</h1>
       <Grid container>
         <Grid item xs={6}>
@@ -570,8 +594,7 @@ function AlumniForm() {
             </Box>
             {error ? (
               <p className="error-text">
-                Please enter a Valid Salary and complete the form! Max Salary:
-                200,000
+                Please fill out the form. Max hours 60!
               </p>
             ) : (
               <></>
