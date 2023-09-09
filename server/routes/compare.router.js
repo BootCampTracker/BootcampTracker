@@ -5,12 +5,13 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 
 // Fetch salaries for all jobs that meet the search criteria
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const { job, state, bootcamp, workplaceLocation } = req.query;
     let paramNum = 0;
     const values = [];
     let queryText = `
-    SELECT "job_info"."salary", 
+    SELECT "job_info"."user_id", 
+    "job_info"."salary", 
     "job_info"."date_hired", 
     "job_info"."job_number",
     "job_info"."state",
@@ -29,7 +30,7 @@ router.get('/', (req, res) => {
     "benefits"."notes"
     FROM "job_info" 
     JOIN "bootcamp" ON "bootcamp"."user_id" = "job_info"."user_id"
-    JOIN "benefits" ON "benefits"."user_id" = "job_info"."user_id"
+    JOIN "benefits" ON "benefits"."job_id" = "job_info"."id"
     WHERE 1=1
     `;
 

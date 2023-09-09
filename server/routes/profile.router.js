@@ -6,11 +6,10 @@ const {
   } = require('../modules/authentication-middleware');
 
   //get all information for specific user on profile page 
-  router.get('/',rejectUnauthenticated, (req, res) => {
-      console.log('req.user is', req.user);
-    console.log('inside of /profile GET router side');
+  router.get('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('req.user is', req.user);
+    // console.log('inside of /profile GET router side');
     let userId = req.user.id
-    console.log('user id is ',userId);
     let queryText= `SELECT
     job_info.id AS job_info_id,
     job_info."job_title",
@@ -48,6 +47,7 @@ WHERE
     pool.query(queryText, [userId])
         .then((result) => {
             //sending table row data
+            console.log('result.rows is:', result.rows)
             res.send(result.rows)
         }).catch((err) => {
             //catch error 

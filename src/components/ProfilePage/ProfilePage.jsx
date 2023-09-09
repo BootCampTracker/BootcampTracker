@@ -1,7 +1,8 @@
 // HOOKS
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 // MUI and CSS
 import {
   List,
@@ -28,31 +29,42 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 import LocalAirportRoundedIcon from "@mui/icons-material/LocalAirportRounded";
 import "./ProfilePage.css";
-// CUSTOM COMPONENTS
+
+// Chart.js components
 import RoleGraph from "../Graphs/ProfileGraphs/RoleGraph";
 import SalaryGraph from "../Graphs/ProfileGraphs/SalaryGraph";
-//import profileReducer from "../../redux/reducers/profile.reducer";
+
+
 function ProfilePage() {
   // HOOKS
+  const history = useHistory();
   const dispatch = useDispatch();
-  const { profileId } = useParams();
+  // const { profileId } = useParams();
 
   // bringing in use selector and pulling from profileReducer/user store
   const user = useSelector((store) => store.user);
   const profileInfo = useSelector((store) => store.profileReducer);
-  console.log("user id is", user);
-  console.log("profile info is ", profileInfo);
+  console.log("user id is", user.id);
+  // console.log("profileInfo is ", profileInfo);
 
   // Load Profile data to use in the Graph and profile info
   useEffect(() => {
-    dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
+    // dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
     dispatch({ type: "FETCH_PROFILE_INFO", payload: user.id });
   }, []);
 
+  //setting use history to go to alumni form when new job is clicked 
+  const alumniRoute = () => {
+    history.push("/alumniform")
+  }
+
+  let info = profileInfo[0]+'?';
+  console.log("profileInfo is ", profileInfo);
+  // console.log('info is:', info.salary);
+
   return (
     <>
-      {profileInfo.map((info) => (
-        <Grid container spacing={2} key={info.id}>
+        <Grid container spacing={2} >
           <Grid className = "CardStyle" item xs={3}>
             {/* Grid Item 1*/}
             <Typography variant="h5" component="header" className="subheading">
@@ -68,7 +80,7 @@ function ProfilePage() {
                     <PaidIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Salary:" secondary={info.salary} className = "bold-secondary-text"/>
+                <ListItemText primary="Salary:" secondary={profileInfo[profileInfo.length - 1]?.salary} className = "bold-secondary-text"/>
               </ListItem>
               <Divider />
               <ListItem>
@@ -79,7 +91,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Current Job:"
-                  secondary={info.job_title}
+                  secondary={profileInfo[profileInfo.length - 1]?.job_title}
                   className = "bold-secondary-text"
                 />
               </ListItem>
@@ -92,7 +104,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Job Number:"
-                  secondary={info.job_number}
+                  secondary={profileInfo[profileInfo.length - 1]?.job_number}
                   className = "bold-secondary-text"
                 />
               </ListItem>
@@ -103,7 +115,7 @@ function ProfilePage() {
                     <SchoolIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Bootcamp:" secondary={info.bootcamp} className = "" />
+                <ListItemText primary="Bootcamp:" secondary={profileInfo[profileInfo.length - 1]?.bootcamp} className = "" />
               </ListItem>
               <Divider />
               <ListItem>
@@ -114,7 +126,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Graduation Date:"
-                  secondary={new Date(info.graduation_date).toLocaleString(
+                  secondary={new Date(profileInfo[profileInfo.length - 1]?.graduation_date).toLocaleString(
                     "en-US",
                     {
                       month: "short",
@@ -134,7 +146,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Date hired:"
-                  secondary={new Date(info.date_hired).toLocaleString("en-US", {
+                  secondary={new Date(profileInfo[profileInfo.length - 1]?.date_hired).toLocaleString("en-US", {
                     month: "short",
                     day: "numeric",
                     year: "numeric",
@@ -149,7 +161,7 @@ function ProfilePage() {
                     <CottageRoundedIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="State:" secondary={info.state} className = "" />
+                <ListItemText primary="State:" secondary={profileInfo[profileInfo.length - 1]?.state} className = "" />
               </ListItem>
               <Divider />
               <ListItem>
@@ -160,7 +172,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Company Name:"
-                  secondary={info.company}
+                  secondary={profileInfo[profileInfo.length - 1]?.company}
                   className = "bold-secondary-text"
                 />
               </ListItem>
@@ -185,7 +197,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Health Insurance:"
-                  secondary={info.health_insurance ? "Yes" : "No"}
+                  secondary={profileInfo[profileInfo.length - 1]?.health_insurance ? "Yes" : "No"}
                   className = "bold-secondary-text"
                 />
               </ListItem>
@@ -198,7 +210,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Dental Insurance:"
-                  secondary={info.dental_insurance ? "Yes" : "No"}
+                  secondary={profileInfo[profileInfo.length - 1]?.dental_insurance ? "Yes" : "No"}
                   className = "bold-secondary-text"
                 />
               </ListItem>
@@ -211,7 +223,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="401K:"
-                  secondary={info.when_im_old ? "Yes" : "No"}
+                  secondary={profileInfo[profileInfo.length - 1]?.when_im_old ? "Yes" : "No"}
                   className = "bold-secondary-text"
                 />
               </ListItem>
@@ -224,7 +236,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Long Term Disability:"
-                  secondary={info.long_term_disability ? "Yes" : "No"}
+                  secondary={profileInfo[profileInfo.length - 1]?.long_term_disability ? "Yes" : "No"}
                   className = "bold-secondary-text"
                 />
               </ListItem>
@@ -237,7 +249,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Short Term Disability:"
-                  secondary={info.short_term_disability ? "Yes" : "No"}
+                  secondary={profileInfo[profileInfo.length - 1]?.short_term_disability ? "Yes" : "No"}
                   className = "bold-secondary-text"
                 />
               </ListItem>
@@ -250,7 +262,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Equity:"
-                  secondary={info.equity ? "Yes" : "No"}
+                  secondary={profileInfo[profileInfo.length - 1]?.equity ? "Yes" : "No"}
                   className = "bold-secondary-text"
                 />
               </ListItem>
@@ -263,7 +275,7 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Bonuses:"
-                  secondary={info.total_yearly_bonus}
+                  secondary={profileInfo[profileInfo.length - 1]?.total_yearly_bonus}
                   className = "bold-secondary-text"
                 />
               </ListItem>
@@ -276,9 +288,9 @@ function ProfilePage() {
                 </ListItemAvatar>
                 <ListItemText
                   primary="PTO:"
-                  secondary={info.PTO ? "Yes" : "No"}
+                  secondary={profileInfo[profileInfo.length - 1]?.PTO ? "Yes" : "No"}
                   className = "bold-secondary-text"
-                />
+                  />
               </ListItem>
               <Divider />
             </List>
@@ -296,9 +308,11 @@ function ProfilePage() {
             </List>
           </Grid>
         </Grid>
-      ))}
+      <Grid marginLeft="160px" marginTop= "25px">
+        <Button onClick= {alumniRoute} color="primary" variant="contained"> New Job</Button>
+      </Grid>
     </>
   );
-}
+};
 
 export default ProfilePage;

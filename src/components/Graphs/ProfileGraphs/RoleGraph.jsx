@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 // Chart.js
 import { Line } from "react-chartjs-2";
 import 'chartjs-adapter-date-fns';
+
 const RoleGraph = () => {
   //  ****** PSEUDO ****** //
   // [X] set up the params for Profile
@@ -38,7 +39,7 @@ const RoleGraph = () => {
   });
   // Load Profile data to use in the Graph
   useEffect(() => {
-    dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
+    // dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
   }, []);
   return (
     <div className="chart-container">
