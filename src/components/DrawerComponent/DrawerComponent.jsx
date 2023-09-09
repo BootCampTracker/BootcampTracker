@@ -23,7 +23,7 @@ function DrawerComponent() {
   const user = useSelector(store => store.user);
   // Hamburger menu
   const [open, setOpen] = useState(false);
-// Load user id in the Route for Profile
+  // Load user id in the Route for Profile
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, []);
@@ -32,21 +32,22 @@ function DrawerComponent() {
       {/* this is a list of what is in our drawer */}
       <List>
         {[
-          <Typography onClick={() => history.push("/home")}> Home </Typography>,
-          // THESE NEED TO PUSH TO THE CORRECT COMPONENTS WHEN THEY EXIST
-          <Typography onClick={() => history.push('/profile')}>
-            Profile
-          </Typography>,
-          <Typography onClick={() => history.push("/alumniform")}>
-            Alumni Form
-          </Typography>,
-          <Typography onClick={() => history.push("/compare")}>
-            Compare Bootcamps
-          </Typography>,
-          <Typography onClick={() => history.push("/adminpage")}>
-            Admin Page
-          </Typography>,
-          <LogOutButton />,
+          <nav className="nav-links">
+            <Typography onClick={() => history.push("/home")}>Home</Typography>
+            <Typography onClick={() => history.push("/profile")}>
+              Profile
+            </Typography>
+            <Typography onClick={() => history.push("/alumniform")}>
+              Alumni Form
+            </Typography>
+            <Typography onClick={() => history.push("/compare")}>
+              Compare Bootcamps
+            </Typography>
+            {user.access_level > 1 && <Typography onClick={() => history.push("/adminpage")}>
+              Admin Page
+            </Typography>}
+            <LogOutButton />
+          </nav>,
         ].map((label, index) => (
           <ListItem button key={index}>
             <ListItemText primary={label} />

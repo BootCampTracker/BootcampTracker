@@ -50,3 +50,9 @@
 Link:hover {
   background-color: #008183;
 }
+
+.nav-links{
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
