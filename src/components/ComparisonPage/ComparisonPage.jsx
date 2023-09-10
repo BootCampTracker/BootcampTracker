@@ -217,11 +217,12 @@ function ComparisonPage() {
         });
     }
 
-// ----------------- toggles to display data ONLY when it makes sense
-    // will control the display of the benefits card
+// ----------------- variables to display data ONLY when it makes sense
     // we only want this component to display AFTER the "create graphs" button has been clicked
     let displayCard;
+    // we only want this component to display AFTER the "+" button has been clicked
     let displayForm;
+    // we only want this component to display AFTER the "create graphs" button has been clicked
     let displayGraphs;
 
     //------------Handler functions
