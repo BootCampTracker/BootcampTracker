@@ -8,7 +8,9 @@
   background-color: #00acb0;
   overflow: hidden;
 }
-
+/* *********** */
+/* Logo     */
+/* *********** */
 .nav-logo-image {
   width: 70px; 
   height: auto;
@@ -19,9 +21,6 @@
   align-items: center;
 }
 
-.nav a {
-  text-decoration: none;
-}
 
 .nav-title {
   font-size: 24px;
@@ -30,8 +29,12 @@
   padding-left: 10px;
   margin: 0;
 }
-/* color: #046fc7;
-color: #0061b0; */
+/* *********** */
+/* Links     */
+/* *********** */
+.nav a {
+  text-decoration: none;
+}
 .navLink {
   font-size: 2rem;
   display: inline-block;
