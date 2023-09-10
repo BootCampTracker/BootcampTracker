@@ -1,27 +1,15 @@
+
 /* ************* */
 /* Card Styling */
 /* ************* */
-.CardStyle {
-  width: 100%;
-  max-width: 360px;
-  margin-top: 50px;
-  margin-left: 50px;
+.profile-background{
+  background-image: url('../Assets/BackgroundImg.jpg');
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-size: cover;
 }
 
-.CardStyle2 {
-  width: 100%;
-  max-width: 360px;
-  background-color: white;
-  margin-top: 20px;
-  margin-left: 50px;
-  text-align: center;
-}
-
-.CardStyle3 {
-  border: none;
-  margin-right: 80px;
-  margin-top: 50px;
-}
 /* ********** */
 /* Headings */
 /* ********** */
@@ -30,7 +18,12 @@
   font-size: 1.5rem;
 }
 .profile-heading{
+  color: #228be6;
+  letter-spacing: 2.3px;
+  font-size: 2.3rem;
   text-align: center;
+  position: relative;
+  top: 45%;
 }
 
 .bold-secondary-text {
