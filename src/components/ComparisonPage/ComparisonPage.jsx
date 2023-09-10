@@ -217,20 +217,17 @@ function ComparisonPage() {
         });
     }
 
-    let displayCard = false;
-    const toggleCard = () => { displayCard = true}
-    console.log(`displayCard: `, displayCard);
-
-    let comparisonGraph = false;
-    const toggleComparison = () => {comparisonGraph = true}
-    console.log(`comparisonGraph`);
+// ----------------- toggles to display data ONLY when it makes sense
+    // will control the display of the benefits card
+    // we only want this component to display AFTER the "create graphs" button has been clicked
+    let displayCard;
+    let displayForm;
+    let displayGraphs;
 
     //------------Handler functions
     // This function handles the submit of the form
     const handleSubmit = (event) => {
         event.preventDefault();
-        toggleCard();
-        console.log(`display card: `, displayCard);
         console.log('form submitted!');
         dispatchChange();
         // handleComparisonData();
@@ -270,7 +267,7 @@ function ComparisonPage() {
         // We need a dispatch and change in state for every change in the input fields!
     } // end handleStateChange
 
-    // ----------rendered jsx
+    // ----------------------------------------------------rendered jsx
     return(
     <>
         <Typography variant="h1" sx={{fontSize: 50, marginBottom: 8}}>
@@ -413,7 +410,8 @@ function ComparisonPage() {
         </form>
 
         <h2>Click to add a comparison</h2>
-        <button onClick={butts = true}></button>
+        <button onClick={() => {displayForm = true; console.log(`displayForm: `, displayForm);}}>+</button>
+        {displayForm ? 'display the form' : `don't display the form`}
             {/* Form that takes in dropwdown inputs, updates global state, and sends the state to server onSubmit to GET values for charts */}
             <form className="comparison-form" onSubmit={handleSubmit}>
 
@@ -533,6 +531,7 @@ function ComparisonPage() {
                 {/* This button will submit our form */}
                 <Button variant="contained"
                     sx={{ marginTop: 5 }}
+                    onClick={()=> {displayCard = true; console.log(`displayCard: `, displayCard);}}
                     type="submit"
                     value="submit"
                 >
@@ -563,11 +562,9 @@ function ComparisonPage() {
                 )}
             </div>
 
-        {/* This is our card to display benefits */}
-        {displayCard ? `<h1>display card</h1>` : `<h1>don't display card</h1>`}
-
-
+        {displayCard ? <h1>display card</h1> : <h1>don't display card</h1>}
             {/* This is our card to display benefits */}
+        {displayCard ?
             <Card sx={{ minWidth: 275, maxWidth: 500, backgroundColor: "#bbdefb" }} variant="outlined">
                 <CardContent sx={{ backgroundColor: "white", margin: 2 }}>
                     <Typography variant="h5" component="div">
@@ -597,6 +594,7 @@ function ComparisonPage() {
                     </Typography>
                 </CardContent>
             </Card>
+                : <h1>displayCard is equal to {displayCard}</h1>}
         </>
     )
 };
