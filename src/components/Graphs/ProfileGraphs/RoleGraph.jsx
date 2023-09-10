@@ -53,7 +53,7 @@ const RoleGraph = () => {
     // Update Graphs when profile information are changed
   }, [profileData]);
   return (
-    <div className="chart-container">
+    <div className="chart-container" >
       <h2 style={{ textAlign: "center" }}>Position over Time Graph</h2>
       <Line
         data={chartData}

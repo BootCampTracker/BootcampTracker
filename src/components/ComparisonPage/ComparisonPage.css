@@ -14,3 +14,10 @@
 .comparison-container {
     display: flex;
 }
+
+.comparison-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

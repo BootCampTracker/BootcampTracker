@@ -19,7 +19,7 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import illustrationsImg from "../Assets/bootcamp_illustrations.png";
+import SoftwareEngineerImg from '../Assets/SoftwareEngineer.png'
 import Swal from "sweetalert2";
 import "./AlumniForm.css";
 // Form Data
@@ -150,7 +150,7 @@ function AlumniForm() {
     });
   };
   return (
-    <div className="main-section" onClick={handleFillForm}>
+    <div className="main-section">
       <h1 className="main-heading">Anonymously submit your information</h1>
       <Grid container>
         <Grid item xs={6}>
@@ -166,7 +166,8 @@ function AlumniForm() {
               Bootcamps
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              <label>Bootcamp graduated from:</label>
+              {/* Click on this Label and it will Auto fill */}
+              <label onClick={handleFillForm}>Bootcamp graduated from:</label>
               <Select
                 id="demo-simple-select"
                 label="Bootcamps"
@@ -588,6 +589,7 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, extra: e.target.value })
                 }
+                className="notes-input"
                 required
                 value={jobInfoInput.extra}
               />
@@ -599,7 +601,7 @@ function AlumniForm() {
             ) : (
               <></>
             )}
-            <Button variant="contained" type="submit">
+            <Button variant="contained" type="submit" sx={{marginTop: '1rem'}}>
               Submit
             </Button>
           </form>
@@ -608,9 +610,9 @@ function AlumniForm() {
         <Grid item xs={6}>
           <div className="img-box">
             <img
-              src={illustrationsImg}
-              alt="Illustrations image"
-              className="img"
+              src={SoftwareEngineerImg}
+              alt="Software Engineer Illustrations image"
+              className="img img-"
             />
           </div>
         </Grid>

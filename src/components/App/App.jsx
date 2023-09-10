@@ -25,7 +25,6 @@ import { Box } from "@mui/material";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js/auto";
 
-
 Chart.register(CategoryScale);
 
 function App() {
@@ -40,7 +39,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Box sx={{ marginBottom: 15 }}>
+        <Box sx={{ marginBottom: 10 }}>
           <Nav />
         </Box>
         <Switch>
@@ -114,10 +113,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        <Box
-          sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}> 
-          <Footer />
-        </Box>
+        <Footer />
       </div>
     </Router>
   );
