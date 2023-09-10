@@ -65,7 +65,7 @@ function RegisterForm() {
       </Button>
       <Grid container justifyContent="center">
         <Grid item>
-          <Link to="/login" variant="body2" style={{ textDecoration: 'none' }}>
+          <Link to="/login" variant="body2" style={{ textDecoration: 'none', color: '#000' }}>
             Already have an account? Sign in
           </Link>
         </Grid>
