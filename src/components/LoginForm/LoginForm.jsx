@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 // MUI and Assets
 import { Grid, TextField, Button, Typography } from "@mui/material";
-import LoginVideo from '../Assets/LoginVideoBg.mov'
 function LoginForm() {
   // HOOKS
   const [username, setUsername] = useState("");
