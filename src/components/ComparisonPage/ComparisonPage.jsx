@@ -221,6 +221,10 @@ function ComparisonPage() {
     const toggleCard = () => { displayCard = true}
     console.log(`displayCard: `, displayCard);
 
+    let comparisonGraph = false;
+    const toggleComparison = () => {comparisonGraph = true}
+    console.log(`comparisonGraph`);
+
     //------------Handler functions
     // This function handles the submit of the form
     const handleSubmit = (event) => {
@@ -407,6 +411,9 @@ function ComparisonPage() {
 
         {/* End of form */}
         </form>
+
+        <h2>Click to add a comparison</h2>
+        <button onClick={butts = true}></button>
             {/* Form that takes in dropwdown inputs, updates global state, and sends the state to server onSubmit to GET values for charts */}
             <form className="comparison-form" onSubmit={handleSubmit}>
 
