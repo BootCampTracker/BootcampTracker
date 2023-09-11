@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-// MUI
+// MUI and Assets
 import { Grid, TextField, Button, Typography } from "@mui/material";
 function LoginForm() {
   // HOOKS
@@ -31,7 +31,8 @@ function LoginForm() {
   };
 
   return (
-    <form className="formPanel" onSubmit={handleLogin}>
+    <div>
+    <form className="formPanel" onSubmit={handleLogin}>    
       <Typography 
       variant="h1" 
       sx={{fontSize: 50, mb: 4, textAlign: 'center'}}
@@ -71,12 +72,13 @@ function LoginForm() {
       </Button>
       <Grid container justifyContent="center">
         <Grid item>
-            <Link to="/registration" color="inherit" style={{ textDecoration: 'none' }}>
+            <Link to="/registration" color="inherit" style={{ textDecoration: 'none', color: '#000' }}>
             Register
             </Link>
         </Grid>
       </Grid>
     </form>
+    </div>
   );
 }
 

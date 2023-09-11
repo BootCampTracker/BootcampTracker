@@ -59,7 +59,6 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
     // Await for querys and Parameterization
      const result = await connection.query(queryJobText, paramsJobInfo);
     const jobId = result.rows[0].id;
-    console.log('result:', jobId);
     await connection.query(queryBenefitText, [
       benefitInfo.benefitUserId,
       jobId,

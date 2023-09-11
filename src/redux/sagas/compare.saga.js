@@ -15,9 +15,20 @@ function* fetchCompareJobs(action) {
     }
 };
 
+// fetch all jobs on FETCH_COMPARE_JOBS_TWO action
+function* fetchCompareJobsTwo(action) {
+    try {
+        const response = yield axios.get(`/api/compare?workplaceLocation=${action.payload.workplaceLocation}&job=${action.payload.job}&bootcamp=${action.payload.bootcamp}&state=${action.payload.state}`)
+        yield put({ type: 'SET_COMPARE_JOBS_TWO', payload: response.data})
+    } catch (error) {
+        console.log('Error fetching compare jobs data', error)
+    }
+};
+
 // watcher saga
 function* compareSaga () {
     yield takeLatest('FETCH_COMPARE_JOBS', fetchCompareJobs);
+    yield takeLatest('FETCH_COMPARE_JOBS_TWO', fetchCompareJobsTwo);
 };
 
 export default compareSaga;

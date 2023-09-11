@@ -1,6 +1,9 @@
 .footer {
-  margin-top: 80px;
-  padding: 20px;
-  text-align: center;
-  align-self: flex-end;
+  padding: 2rem;
+  text-align:end;
+  background-color: #228be6;
+}
+.footer-link{
+  color: #fff;
+  text-decoration: none;
 }

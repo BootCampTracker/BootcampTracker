@@ -1,7 +1,6 @@
 import { Line } from "react-chartjs-2";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import './ComparisonSalaryGraph.css';
 
 
 // Salary graph component
@@ -129,7 +128,7 @@ function ComparisonSalaryGraph() {
           borderColor: "gray",
           borderWidth: 2
         }]
-    })
+    });
 
     // If the value of searchResults changes, run useEffect hook to recalculate
     // our new data
@@ -137,8 +136,8 @@ function ComparisonSalaryGraph() {
 
   // Render to DOM
   return (
-    <div className="chart-container">
-      <h2 style={{ textAlign: "center", margin: 0 }}>Average Salaries over Time</h2>
+    <div>
+      <h2 style={{ textAlign: "center", margin: 0 }}>Average Salary over Time</h2>
       <Line
         data={chartData}
         options={{
