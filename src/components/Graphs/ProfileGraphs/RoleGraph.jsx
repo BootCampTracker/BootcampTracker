@@ -18,6 +18,7 @@ const RoleGraph = () => {
   const { profileId } = useParams();
   const dispatch = useDispatch();
   const profileData = useSelector(state => state.profileGraphs);
+  const user = useSelector(state => state.user);
   // Chart.js setting and Profile Data
   const [chartData, setChartData] = useState({
     labels: profileData.map(data => data.date_hired),
@@ -37,16 +38,27 @@ const RoleGraph = () => {
       },
     ],
   });
-  // Load Profile data to use in the Graph
+  // Load Profile data and Graph
   useEffect(() => {
-    // dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
-  }, []);
+    setChartData({
+      labels: profileData.map(data => data.date_hired),
+      // Refractoring code
+      datasets: [
+        {
+          ...chartData.datasets[0],
+          data: profileData.map(data => data.job_number),
+        },
+      ],
+    });
+    // Update Graphs when profile information are changed
+  }, [profileData]);
   return (
-    <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Line Graph</h2>
+    <div className="chart-container" >
+      <h2 style={{ textAlign: "center" }}>Position over Time Graph</h2>
       <Line
         data={chartData}
         options={{
+          responsive: true,
           plugins: {
             title: {
               display: true,
@@ -58,9 +70,11 @@ const RoleGraph = () => {
           },
           scales: {
             y: {
+              display: true,
               beginAtZero: true,
             },
             x: {
+              display: true,
               type: "time",
               time: {
                 unit: "day",

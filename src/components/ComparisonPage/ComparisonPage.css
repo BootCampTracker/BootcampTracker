@@ -8,11 +8,17 @@
     border: 1px solid black;
     border-radius: 3px;
     text-align: center;
+    width: 545px;
+    height: 273px;
 }
 
-.comparison-form {
-    /* border: 1px solid black;
-    border-radius: 3px; */
-    margin: 1em 2em 0em 0em;
-    width: 14em;
+.comparison-container {
+    display: flex;
+}
+
+.comparison-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

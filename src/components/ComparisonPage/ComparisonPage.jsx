@@ -1,8 +1,25 @@
 import { Grid, Container, Typography, InputLabel, Select, MenuItem, Button, Card, CardContent, Box } from "@mui/material";
 import React, { useMemo } from "react";
+// MUI and CSS
+import {
+  FormControl,
+  Input,
+  Typography,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+  Card,
+  CardContent,
+  Box,
+  Grid,
+  CardActions,
+} from "@mui/material";
+import "./ComparisonPage.css";
+// HOOKS
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import './ComparisonPage.css';
 // Chart.js imports
 import ComparisonSalaryGraph from '../Graphs/ComparisonGraphs/ComparisonSalaryGraph';
 import ComparisonRoleGraph from '../Graphs/ComparisonGraphs/ComparisonRoleGraph';
@@ -17,9 +34,9 @@ function ComparisonPage() {
     const searchResults = useSelector(store => store.compare);
     const searchResults2 = useSelector(store => store.compare2);
 
-    //-------------React State Hooks
-    // store the useDispatch hook in the variable dispatch
-    const dispatch = useDispatch();
+  //-------------React State Hooks
+  // store the useDispatch hook in the variable dispatch
+  const dispatch = useDispatch();
 
     // hook to set local state for workplace location
     const [workplaceLocation, setWorkplaceLocation] = useState('');
@@ -183,11 +200,11 @@ function ComparisonPage() {
         setAverageDaysOff(result.toFixed(2));
     };
 
-    // function that averages time from graduation to first job
-    const functionAverageTimeToJob = () => {
-        console.log('in the functionAverageTimeToGrad!');
-        //initialize our totalTimeToJob variable
-        let totalTimeToJob = 0;
+  // function that averages time from graduation to first job
+  const functionAverageTimeToJob = () => {
+    console.log("in the functionAverageTimeToGrad!");
+    //initialize our totalTimeToJob variable
+    let totalTimeToJob = 0;
 
         // loop to go through our array of job entries
         for (const response of searchResults) {
