@@ -1,9 +1,7 @@
 .chart-container {
-    border: 1px solid black;
-    border-radius: 3px;
     align-self: flex-start;
+    /* padding: 0 10rem; */
 }
-
 .chart-container-empty {
     align-self: flex-start;
     border: 1px solid black;
@@ -16,16 +14,18 @@
 .comparison-container {
     display: flex;
 }
-
-.comparison-page-body {
-    margin: 2rem;
+.secondary-comparison-box{
+    margin-bottom: 2rem;
 }
-
 .comparison-form{
+    padding: 0 30rem;
     display: flex;
-    justify-content: center;
-    /* align-items: center; */
     flex-direction: column;
-    margin-right: 2rem;
-    width: 13rem;
+    justify-content: center;
+}
+/* *********** */
+/* Helpers     */
+/* *********** */
+.mt{
+    margin-top: 5rem;
 }
