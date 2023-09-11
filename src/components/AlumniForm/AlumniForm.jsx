@@ -1,6 +1,7 @@
 // HOOKS
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 // MUI and Assets
 import {
   Box,
@@ -18,7 +19,7 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import illustrationsImg from "../Assets/bootcamp_illustrations.png";
+import SoftwareEngineerImg from '../Assets/SoftwareEngineer.png'
 import Swal from "sweetalert2";
 import "./AlumniForm.css";
 // Form Data
@@ -29,12 +30,11 @@ import JobTitle from "./FormData/jobTitle";
 import JobRole from "./FormData/jobRole";
 import states from "./FormData/states";
 
-
 function AlumniForm() {
   // HOOKS
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
-  const [openInput, setOpenInput] = useState(false);
+  const history = useHistory();
   const [error, setError] = useState(false);
   const [jobInfoInput, setJobInfoInput] = useState({
     bootcamp: "",
@@ -62,13 +62,13 @@ function AlumniForm() {
   });
 
   // Submit Form and dispatch
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     console.log("Submitted", jobInfoInput);
     console.log("User id:", user.id);
 
     // Validation Form on Salary input
-    if (jobInfoInput.salary > 200000) {
+    if (jobInfoInput.hours > 60 || jobInfoInput.hours < 0) {
       setError(true);
       return;
     }
@@ -116,15 +116,39 @@ function AlumniForm() {
       timer: 1500,
     });
 
+    history.push("/profile");
     //   Clear inputs
     setJobInfoInput("");
   };
-
-  // useEffect(() => {
-  //   dispatch({ type: "FETCH_USER" });
-  // }, []);
-
-
+  // Auto fill the Form when Clicked anywhere on the Page!
+  const handleFillForm = () => {
+    console.log("Fill the Form:");
+    setJobInfoInput({
+      hours: 40,
+      bootcamp: "Prime Digital Academy",
+      jobType: "Full-time",
+      jobTitle: "Full Stack Engineer",
+      bonuses: 120,
+      jobRole: "Entry Level",
+      company: "Target",
+      states: "Minnesota",
+      position: 1,
+      workplace: "Hybrid",
+      salary: 70000,
+      extra:
+        "Target was the best place worked at for my first position, Thanks to the Target team!",
+      gradDate: "2023-09-15",
+      hireDate: "2023-10-20",
+      health: "TRUE",
+      dental: "TRUE",
+      PTO: "TRUE",
+      fourZeroOneK: "TRUE",
+      equity: "TRUE",
+      LTD: "FALSE",
+      STD: "FALSE",
+      promotions: "TRUE",
+    });
+  };
   return (
     <div className="main-section">
       <h1 className="main-heading">Anonymously submit your information</h1>
@@ -142,7 +166,8 @@ function AlumniForm() {
               Bootcamps
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              <label>Bootcamp graduated from:</label>
+              {/* Click on this Label and it will Auto fill */}
+              <label onClick={handleFillForm}>Bootcamp graduated from:</label>
               <Select
                 id="demo-simple-select"
                 label="Bootcamps"
@@ -564,19 +589,19 @@ function AlumniForm() {
                 onChange={e =>
                   setJobInfoInput({ ...jobInfoInput, extra: e.target.value })
                 }
+                className="notes-input"
                 required
                 value={jobInfoInput.extra}
               />
             </Box>
             {error ? (
               <p className="error-text">
-                Please enter a Valid Salary and complete the form! Max Salary:
-                200,000
+                Please fill out the form. Max hours 60!
               </p>
             ) : (
               <></>
             )}
-            <Button variant="contained" type="submit">
+            <Button variant="contained" type="submit" sx={{marginTop: '1rem'}}>
               Submit
             </Button>
           </form>
@@ -585,9 +610,9 @@ function AlumniForm() {
         <Grid item xs={6}>
           <div className="img-box">
             <img
-              src={illustrationsImg}
-              alt="Illustrations image"
-              className="img"
+              src={SoftwareEngineerImg}
+              alt="Software Engineer Illustrations image"
+              className="img img-"
             />
           </div>
         </Grid>

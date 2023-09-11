@@ -1,12 +1,29 @@
-.CardStyle {
-  width: 100%;
-  max-width: 360px;
-  margin-top: 50px;
-  margin-left: 50px;
+
+/* ************* */
+/* Card Styling */
+/* ************* */
+.profile-background{
+  background-image: url('../Assets/BackgroundImg.jpg');
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-size: cover;
 }
+
+/* ********** */
+/* Headings */
+/* ********** */
 .subheading{
   text-align: start;
   font-size: 1.5rem;
+}
+.profile-heading{
+  color: #228be6;
+  letter-spacing: 2.3px;
+  font-size: 2.3rem;
+  text-align: center;
+  position: relative;
+  top: 45%;
 }
 
 .bold-secondary-text {

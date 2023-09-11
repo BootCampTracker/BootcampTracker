@@ -156,10 +156,9 @@ function ComparisonRoleGraph() {
 
     }, [searchResults]);
 
-    console.log('searchResults are:', searchResults)
-    // 'Showing results for '
+    
     return (
-        <div className="chart-container">
+        <div>
             <h2 style={{ textAlign: "center", margin: 0 }}>Average Roles over Time</h2>
             <Line
                 data={chartData}
@@ -179,10 +178,6 @@ function ComparisonRoleGraph() {
                         },
                         x: {
                             beginAtZero: true,
-                            // type: "time",
-                            // time: {
-                            //     unit: "year",
-                            // }
                         },
                     },
                 }}
