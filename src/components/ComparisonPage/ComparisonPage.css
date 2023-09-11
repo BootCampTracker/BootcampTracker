@@ -9,12 +9,16 @@
     width: 450px;
     height: 271px;
 }
-
+.comparison-section{
+}
 .comparison-container {
     display: flex;
 }
 .secondary-comparison-box{
     margin-bottom: 2rem;
+}
+.compare-btn{
+    padding: 0.5rem 9.2rem;
 }
 .comparison-form{
     padding: 0 30rem;

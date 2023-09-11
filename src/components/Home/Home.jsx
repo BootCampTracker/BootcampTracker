@@ -22,9 +22,9 @@ function Home() {
         >
           <Grid item xs={8} md={8} lg={8}>
             <Typography
-              variant="h1"
+              variant="h1" 
               fontSize={50}
-              sx={{ marginTop: 6, fontWeight: 500, color: "#000" }}
+              sx={{ marginTop: 6, fontWeight: 500, color: "#228be6" }}
             >
               Salary and hiring timeline transparency for bootcamps, visualized.
             </Typography>

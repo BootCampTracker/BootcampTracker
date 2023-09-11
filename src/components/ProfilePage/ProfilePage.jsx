@@ -13,6 +13,7 @@ import {
   Typography,
   ListItemAvatar,
   Avatar,
+  Box,
 } from "@mui/material";
 // Icons
 import WorkIcon from "@mui/icons-material/Work";
@@ -38,8 +39,8 @@ function ProfilePage() {
   const dispatch = useDispatch();
 
   // bringing in use selector and pulling from profileReducer/user store
-  const user = useSelector((store) => store.user);
-  const profileInfo = useSelector((store) => store.profileReducer);
+  const user = useSelector(store => store.user);
+  const profileInfo = useSelector(store => store.profileReducer);
 
   // console.log("profileInfo is ", profileInfo);
 
@@ -335,18 +336,20 @@ function ProfilePage() {
           </List>
         </Grid>
         <Grid className="CardStyle" item xs={6} md={6} lg={6}>
-          <List>
-            <ListItem>
-              <SalaryGraph />
-            </ListItem>
-          </List>
+          <Box
+            className="chart-container"
+            sx={{ ml: 5, mt: 10, maxWidth: "100%" }}
+          >
+            <SalaryGraph />
+          </Box>
         </Grid>
-        <Grid className="CardStyle" item xs={6} md={6} lg={6} >
-          <List>
-            <ListItem>
-              <RoleGraph />
-            </ListItem>
-          </List>
+        <Grid className="CardStyle" item xs={6} md={6} lg={6}>
+          <Box
+            className="chart-container"
+            sx={{ ml: 5, mt: 10, maxWidth: "100%" }}
+          >
+            <RoleGraph />
+          </Box>
         </Grid>
       </Grid>
       <Grid
