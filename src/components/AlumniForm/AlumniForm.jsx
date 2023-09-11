@@ -120,10 +120,6 @@ function AlumniForm() {
     setJobInfoInput("");
   };
 
-  // useEffect(() => {
-  //   dispatch({ type: "FETCH_USER" });
-  // }, []);
-
 
   return (
     <div className="main-section">

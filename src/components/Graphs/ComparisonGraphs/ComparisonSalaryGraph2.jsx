@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 
 
 // Salary graph component
-function ComparisonSalaryGraph() {
+function ComparisonSalaryGraph2() {
 
   // bring in compare store which holds the data for our graphs
-  const searchResults = useSelector(store => store.compare);
+  const searchResults = useSelector(store => store.compare2);
 
 
   // Set chartData initial state
@@ -165,4 +165,4 @@ function ComparisonSalaryGraph() {
 };
 
 // Export graph component
-export default ComparisonSalaryGraph;
+export default ComparisonSalaryGraph2;

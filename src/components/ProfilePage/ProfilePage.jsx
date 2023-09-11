@@ -47,9 +47,8 @@ function ProfilePage() {
   console.log("user id is", user.id);
   // console.log("profileInfo is ", profileInfo);
 
-  // Load Profile data to use in the Graph and profile info
+  // Dispatch action to grab user info from database based on user ID
   useEffect(() => {
-    // dispatch({ type: "FETCH_PROFILE_GRAPHS", payload: profileId });
     dispatch({ type: "FETCH_PROFILE_INFO", payload: user.id });
   }, []);
 

@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 
 
 // Roles over time graph component
-function ComparisonRoleGraph() {
+function ComparisonRoleGraph2() {
 
     // Bring in compare store which holds the data for our graph
-    const searchResults = useSelector(store => store.compare);
+    const searchResults = useSelector(store => store.compare2);
 
     // Declare a variable to hold our user count for computing roles over time
     let userCount = 0;
@@ -190,4 +190,4 @@ function ComparisonRoleGraph() {
     );
 };
 
-export default ComparisonRoleGraph;
+export default ComparisonRoleGraph2;
