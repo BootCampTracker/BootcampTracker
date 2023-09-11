@@ -50,6 +50,8 @@ function ComparisonPage() {
     const [state, setState] = useState('');
     const [state2, setState2] = useState('');
 
+    // hook to set local state for conditional rendering
+    const [ displayCardAndCharts, setDisplayCardAndCharts] = useState(false)
 
     // -------------------- hooks for card
     // hook to set local state with  % of job with health insurance
@@ -394,14 +396,6 @@ function ComparisonPage() {
         });
     };
 
-// ----------------- variables to display data ONLY when it makes sense
-    // we only want this component to display AFTER the "create graphs" button has been clicked
-    let displayCard;
-    // we only want this component to display AFTER the "+" button has been clicked
-    let displayForm;
-    // we only want this component to display AFTER the "create graphs" button has been clicked
-    let displayGraphs;
-
     //------------Handler functions
     // This function handles the submit of the form
     const handleSubmit = (event) => {
@@ -409,6 +403,7 @@ function ComparisonPage() {
         console.log('form submitted!');
         dispatchChange();
         console.log('form submitted!');
+        setDisplayCardAndCharts(true)
         // benefits card functions will be handled in the useEffect function
     } // end handleSubmit
 
@@ -615,6 +610,8 @@ function ComparisonPage() {
                 </form>
                 {/* End of form */}
 
+                {displayCardAndCharts ? 
+                <>
                 {/* Salary over time graph */}
                 <Box className="chart-container" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%' }}>
                 <ComparisonSalaryGraph />
@@ -638,8 +635,11 @@ function ComparisonPage() {
                         </div>
                     )} */}
                 </Box>
+                </>
+                : 'displayCardAndCharts is false'}
 
                 {/* This is our card to display benefits */}
+                {displayCardAndCharts ?  
                 <Card className="card-container" sx={{ backgroundColor: "#bbdefb", height: 'fit-content', ml: 3, mt: 5 }} variant="outlined">
                     <CardContent sx={{ backgroundColor: "white", margin: 2, p: 1 }}>
                         <Typography component='span' sx={{ fontSize: '20px', m: 1 }} color="text.secondary">
@@ -672,6 +672,7 @@ function ComparisonPage() {
                         </Grid>
                     </CardContent>
                 </Card>
+                : 'displayCardAndCharts false'}
             </Box>
 
             {/* This button will show our 2nd comparison form */}
