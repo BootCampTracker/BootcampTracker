@@ -341,7 +341,7 @@ function ProfilePage() {
             </ListItem>
           </List>
         </Grid>
-        <Grid className="CardStyle" item xs={6} md={6} lg={6}>
+        <Grid className="CardStyle" item xs={6} md={6} lg={6} >
           <List>
             <ListItem>
               <RoleGraph />

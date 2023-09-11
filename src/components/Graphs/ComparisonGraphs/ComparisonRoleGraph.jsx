@@ -178,10 +178,6 @@ function ComparisonRoleGraph() {
                         },
                         x: {
                             beginAtZero: true,
-                            // type: "time",
-                            // time: {
-                            //     unit: "year",
-                            // }
                         },
                     },
                 }}

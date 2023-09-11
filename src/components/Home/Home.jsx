@@ -6,8 +6,11 @@ import SoftwareEngineerImg from "../Assets/Home.png";
 import HomeVideo from "../Assets/HomeHeroVideo.mp4";
 import "./Home.css";
 
+
 function Home() {
   const user = useSelector(store => store.user);
+
+
   return (
     <div className="home-section">
       <Box margin={5}>

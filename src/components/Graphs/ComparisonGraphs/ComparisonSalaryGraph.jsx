@@ -128,7 +128,7 @@ function ComparisonSalaryGraph() {
           borderColor: "gray",
           borderWidth: 2
         }]
-    })
+    });
 
     // If the value of searchResults changes, run useEffect hook to recalculate
     // our new data

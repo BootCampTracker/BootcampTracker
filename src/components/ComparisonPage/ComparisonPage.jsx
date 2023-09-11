@@ -1,19 +1,15 @@
-import { Grid, Container, Typography, InputLabel, Select, MenuItem, Button, Card, CardContent, Box } from "@mui/material";
-import React, { useMemo } from "react";
 // MUI and CSS
 import {
-  FormControl,
-  Input,
-  Typography,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  Card,
-  CardContent,
-  Box,
-  Grid,
-  CardActions,
+    Container,
+    Typography,
+    InputLabel,
+    Select,
+    MenuItem,
+    Button,
+    Card,
+    CardContent,
+    Box,
+    Grid,
 } from "@mui/material";
 import "./ComparisonPage.css";
 // HOOKS
@@ -34,9 +30,9 @@ function ComparisonPage() {
     const searchResults = useSelector(store => store.compare);
     const searchResults2 = useSelector(store => store.compare2);
 
-  //-------------React State Hooks
-  // store the useDispatch hook in the variable dispatch
-  const dispatch = useDispatch();
+    //-------------React State Hooks
+    // store the useDispatch hook in the variable dispatch
+    const dispatch = useDispatch();
 
     // hook to set local state for workplace location
     const [workplaceLocation, setWorkplaceLocation] = useState('');
@@ -200,11 +196,11 @@ function ComparisonPage() {
         setAverageDaysOff(result.toFixed(2));
     };
 
-  // function that averages time from graduation to first job
-  const functionAverageTimeToJob = () => {
-    console.log("in the functionAverageTimeToGrad!");
-    //initialize our totalTimeToJob variable
-    let totalTimeToJob = 0;
+    // function that averages time from graduation to first job
+    const functionAverageTimeToJob = () => {
+        console.log("in the functionAverageTimeToGrad!");
+        //initialize our totalTimeToJob variable
+        let totalTimeToJob = 0;
 
         // loop to go through our array of job entries
         for (const response of searchResults) {
@@ -474,18 +470,18 @@ function ComparisonPage() {
 
     // ----------rendered jsx
     return (
-        <Container className="comparison-page-body" sx={{ margin: '1%', minWidth: '100%' }}>
+        <div className="comparison-page-body">
             <Typography variant="h1" sx={{ fontSize: 50, marginBottom: 3 }}>
                 Bootcamp Comparisons
             </Typography>
             <Typography variant="h2" sx={{ fontSize: 20 }}>
                 <span style={{ fontWeight: "bold" }}>Use the dropdowns</span> to filter results in the graph.
             </Typography>
-            <Typography variant="h2" sx={{ fontSize: 20, marginBottom: 5 }}>
+            <Typography variant="h2" sx={{ fontSize: 20 }}>
                 <span style={{ fontWeight: "bold" }}>Click the plus button</span> to add comparisons.
             </Typography>
 
-            <Box className="primary-comparison-box" sx={{ display: "flex", flexWrap: 'wrap', width: '100%' }}>
+            <Box className="primary-comparison-box" sx={{ display: "flex", marginTop: 5 }}>
                 {/* Form that takes in dropdown inputs, updates global state, and sends the state to server onSubmit to GET values for charts */}
                 <form className="comparison-form" onSubmit={handleSubmit}>
                     {/* This is the dropdown for the workplace location */}
@@ -611,29 +607,31 @@ function ComparisonPage() {
                 {/* End of form */}
 
                 {/* Salary over time graph */}
-                <Box className="chart-container" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%', alignItems: 'center' }}>
-                    {showGraph ? (
+                <Box className="chart-container" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%' }}>
+                <ComparisonSalaryGraph />
+                    {/* {showGraph ? (
                         <ComparisonSalaryGraph />
                     ) : (
-                        <div className="chart-container-empty">
+                        <div className="chart-container">
                             Submit form to view graph
                         </div>
-                    )}
+                    )} */}
                 </Box>
 
                 {/* Roles over time graph */}
                 <Box className="chart-container" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%' }}>
-                    {showGraph ? (
+                <ComparisonRoleGraph />
+                    {/* {showGraph ? (
                         <ComparisonRoleGraph />
                     ) : (
                         <div className="chart-container-empty">
                             Submit form to view graph
                         </div>
-                    )}
+                    )} */}
                 </Box>
 
                 {/* This is our card to display benefits */}
-                <Card className="card-container" sx={{ backgroundColor: "#bbdefb", height: 'fit-content', m: 3, mt: 5 }} variant="outlined">
+                <Card className="card-container" sx={{ backgroundColor: "#bbdefb", height: 'fit-content', ml: 3, mt: 5 }} variant="outlined">
                     <CardContent sx={{ backgroundColor: "white", margin: 2, p: 1 }}>
                         <Typography component='span' sx={{ fontSize: '20px', m: 1 }} color="text.secondary">
                             Benefits, Averages, etc.
@@ -643,7 +641,6 @@ function ComparisonPage() {
                             {job}
                         </Typography>
                         <Grid sx={{ display: 'flex', flexDirection: 'column', m: 1 }}>
-                            {/* <Grid sx={{ width: '100%' }}> */}
                             <Typography variant="body2">
                                 {averageHealth}% {job ? `of ${job}s` : ''} have health insurance.
                                 <br />
@@ -670,16 +667,19 @@ function ComparisonPage() {
 
             {/* This button will show our 2nd comparison form */}
             {!showCompare ? (
-                <Button variant="contained"
+                <Button
+                    className="add-compare-btn"
+                    variant="contained"
                     onClick={addCompare}
-                    sx={{ marginTop: 3, width: '17em' }}
+                    // sx={{ marginTop: 3, mb: 5, width: '17em' }}
+                    sx={{ mt: 3, mb: 13 }}
                     type="submit"
                     value="submit"
                 >
                     Compare a second job
                 </Button>
             ) : (
-                <Box className="secondary-comparison-box" sx={{ display: "flex", flexWrap: 'wrap', width: '100%' }}>
+                <Box className="secondary-comparison-box" sx={{ display: "flex", marginTop: 5 }}>
                     {/* Form that takes in dropdown inputs, updates global state, and sends the state to server onSubmit to GET values for charts */}
                     <form className="comparison-form" onSubmit={handleCompareSubmit}>
                         {/* This is the dropdown for the workplace location */}
@@ -795,7 +795,7 @@ function ComparisonPage() {
 
                         {/* This button will submit our form */}
                         <Button variant="contained"
-                            sx={{ marginTop: 3, width: '100%' }}
+                            sx={{ mt: 3, mb: 10, width: '100%' }}
                             type="submit"
                             value="submit"
                         >
@@ -806,28 +806,30 @@ function ComparisonPage() {
 
                     {/* Salary over time graph */}
                     <Box className="chart-container" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%', alignItems: 'center' }}>
-                        {showGraph ? (
+                    <ComparisonSalaryGraph2 />
+                        {/* {showGraph ? (
                             <ComparisonSalaryGraph2 />
                         ) : (
                             <div className="chart-container-empty">
                                 Submit form to view graph
                             </div>
-                        )}
+                        )} */}
                     </Box>
 
                     {/* Roles over time graph */}
                     <Box className="chart-container" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%' }}>
-                        {showGraph ? (
+                    <ComparisonRoleGraph2 />
+                        {/* {showGraph ? (
                             <ComparisonRoleGraph2 />
                         ) : (
                             <div className="chart-container-empty">
                                 Submit form to view graph
                             </div>
-                        )}
+                        )} */}
                     </Box>
 
                     {/* This is our card to display benefits */}
-                    <Card className="card-container" sx={{ backgroundColor: "#bbdefb", height: 'fit-content', m: 3, mt: 5 }} variant="outlined">
+                    <Card className="card-container" sx={{ backgroundColor: "#bbdefb", height: 'fit-content', ml: 3, mt: 5 }} variant="outlined">
                         <CardContent sx={{ backgroundColor: "white", margin: 2, p: 1 }}>
                             <Typography component='span' sx={{ fontSize: '20px', m: 1 }} color="text.secondary">
                                 Benefits, Averages, etc.
@@ -837,7 +839,6 @@ function ComparisonPage() {
                                 {job2}
                             </Typography>
                             <Grid sx={{ display: 'flex', flexDirection: 'column', m: 1 }}>
-                                {/* <Grid sx={{ width: '100%' }}> */}
                                 <Typography variant="body2">
                                     {averageHealth2}% {job2 ? `of ${job2}s` : ''} have health insurance.
                                     <br />
@@ -862,7 +863,7 @@ function ComparisonPage() {
                     </Card>
                 </Box>
             )}
-        </Container>
+        </div>
     )
 };
 

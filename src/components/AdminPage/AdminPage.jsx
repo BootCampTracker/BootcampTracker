@@ -18,6 +18,7 @@ import { Stack } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import './AdminPage.css';
 
 
 // Set list order by 'salary', default largest to smallest (desc)
@@ -210,95 +211,102 @@ function AdminPage() {
 
   // Render Table to DOM.
   return (
-    <Box sx={{ width: '60%', margin: "auto" }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <Typography 
-          sx={{ flex: '1 1 100%', fontWeight: "bold", textAlign: "center" }}
-          variant="h5"
-          id="tableTitle"
-          component="div"
-        >
-          Job Entries
-        </Typography>
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+    <div className="admin-container">
+      <Box margin={5}>
+        {/* <Paper sx={{ width: '100%', m: 5 }}> */}
+        <Paper sx={{ m: 5 }} >
+
+          <Typography
+            sx={{ flex: '1 1 100%', fontWeight: "bold", textAlign: "center" }}
+            variant="h5"
+            id="tableTitle"
+            component="div"
           >
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={jobList?.length}
-            />
-            <TableBody>
-              {visibleRows.map((job, index) => {
-                const labelId = `enhanced-table-${index}`;
+            Job Entries
+          </Typography>
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? 'small' : 'medium'}
+            >
+              <EnhancedTableHead
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+                rowCount={jobList?.length}
+              />
+              <TableBody>
+                {visibleRows.map((job, index) => {
+                  const labelId = `enhanced-table-${index}`;
 
-                return (
-                  <TableRow
-                    hover
-                    role="table"
-                    tabIndex={-1}
-                    key={job?.job_id}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <TableCell
-                      align="left"
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      width="1"
-
+                  return (
+                    <TableRow
+                      hover
+                      role="table"
+                      tabIndex={-1}
+                      key={job?.job_id}
+                      sx={{ cursor: 'pointer' }}
                     >
-                      {job?.username}
-                    </TableCell>
-                    <TableCell align="center">{job?.user_id}</TableCell>
-                    <TableCell align="left">{job?.job_title}</TableCell>
-                    <TableCell align="right">{job?.salary}</TableCell>
-                    <TableCell align="right">{job?.total_yearly_bonus}</TableCell>
-                    <TableCell>
-                    <IconButton onClick={(event) => handleDeleteJobRow(event, job?.job_id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                    </TableCell>
+                      <TableCell
+                        align="left"
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        width="1"
+
+                      >
+                        {job?.username}
+                      </TableCell>
+                      <TableCell align="center">{job?.user_id}</TableCell>
+                      <TableCell align="left">{job?.job_title}</TableCell>
+                      <TableCell align="right">{job?.salary}</TableCell>
+                      <TableCell align="right">{job?.total_yearly_bonus}</TableCell>
+                      <TableCell>
+                        <IconButton 
+                        onClick={(event) => handleDeleteJobRow(event, job?.job_id)}
+                        sx={{}}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
                   </TableRow>
-                );
-              })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={jobList?.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-      <Stack direction="row" spacing={1} alignItems="center">
-        <Typography>Condense Table Rows</Typography>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={dense}
-              onChange={handleChangeDense}
-            />}
-        />
-      </Stack>
-    </Box>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={jobList?.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+        {/* <Stack direction="row" spacing={1} alignItems="center">
+          <Typography>Condense Table Rows</Typography>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={dense}
+                onChange={handleChangeDense}
+              />}
+          />
+        </Stack> */}
+      </Box>
+    </div>
   );
 };
 
