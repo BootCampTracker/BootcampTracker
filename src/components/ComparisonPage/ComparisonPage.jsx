@@ -400,7 +400,6 @@ function ComparisonPage() {
     // This function handles the submit of the form
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('form submitted!');
         dispatchChange();
         console.log('form submitted!');
         setDisplayCardAndCharts(true)
@@ -610,18 +609,11 @@ function ComparisonPage() {
                 </form>
                 {/* End of form */}
 
-                {displayCardAndCharts ? 
+                {displayCardAndCharts ? (
                 <>
                 {/* Salary over time graph */}
-                <Box className="chart-container" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%' }}>
+                <Box className="chart-container-empty" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%' }}>
                 <ComparisonSalaryGraph />
-                    {/* {showGraph ? (
-                        <ComparisonSalaryGraph />
-                    ) : (
-                        <div className="chart-container">
-                            Submit form to view graph
-                        </div>
-                    )} */}
                 </Box>
 
                 {/* Roles over time graph */}
@@ -636,10 +628,32 @@ function ComparisonPage() {
                     )} */}
                 </Box>
                 </>
-                : 'displayCardAndCharts is false'}
+                ) : (
+                    <>
+                    {/* Salary over time graph */}
+                    <Box className="chart-container-empty" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%' }}>
+                            {/* <div className="chart-container"> */}
+                                Submit form to view graph
+                            {/* </div> */}
+                    </Box>
+    
+                    {/* Roles over time graph */}
+                    <Box className="chart-container" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%' }}>
+                    <ComparisonRoleGraph />
+                        {/* {showGraph ? (
+                            <ComparisonRoleGraph />
+                        ) : (
+                            <div className="chart-container-empty">
+                                Submit form to view graph
+                            </div>
+                        )} */}
+                    </Box>
+                    </>
+    
+                )}
 
                 {/* This is our card to display benefits */}
-                {displayCardAndCharts ?  
+                {displayCardAndCharts ?  (
                 <Card className="card-container" sx={{ backgroundColor: "#bbdefb", height: 'fit-content', ml: 3, mt: 5 }} variant="outlined">
                     <CardContent sx={{ backgroundColor: "white", margin: 2, p: 1 }}>
                         <Typography component='span' sx={{ fontSize: '20px', m: 1 }} color="text.secondary">
@@ -672,7 +686,7 @@ function ComparisonPage() {
                         </Grid>
                     </CardContent>
                 </Card>
-                : 'displayCardAndCharts false'}
+                ) : ('displayCardAndCharts false')}
             </Box>
 
             {/* This button will show our 2nd comparison form */}

@@ -5,6 +5,7 @@
 }
 
 .chart-container-empty {
+    align-self: flex-start;
     border: 1px solid black;
     border-radius: 3px;
     text-align: center;
