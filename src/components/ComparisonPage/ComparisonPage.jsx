@@ -52,6 +52,7 @@ function ComparisonPage() {
 
     // hook to set local state for conditional rendering
     const [ displayCardAndCharts, setDisplayCardAndCharts] = useState(false)
+    const [ displayCardAndCharts2, setDisplayCardAndCharts2] = useState(false)
 
     // -------------------- hooks for card
     // hook to set local state with  % of job with health insurance
@@ -411,6 +412,7 @@ function ComparisonPage() {
     const handleCompareSubmit = (event) => {
         event.preventDefault();
         dispatchChange2();
+        setDisplayCardAndCharts2(true)
     }; // end handleSubmit
 
     // Show Comparison Form when user clicks 'Compare jobs' button and remove button from DOM
@@ -635,11 +637,9 @@ function ComparisonPage() {
                         </div>
                     )} */}
                 </Box>
-                </>
-                : 'displayCardAndCharts is false'}
+                
 
                 {/* This is our card to display benefits */}
-                {displayCardAndCharts ?  
                 <Card className="card-container" sx={{ backgroundColor: "#bbdefb", height: 'fit-content', ml: 3, mt: 5 }} variant="outlined">
                     <CardContent sx={{ backgroundColor: "white", margin: 2, p: 1 }}>
                         <Typography component='span' sx={{ fontSize: '20px', m: 1 }} color="text.secondary">
@@ -672,7 +672,8 @@ function ComparisonPage() {
                         </Grid>
                     </CardContent>
                 </Card>
-                : 'displayCardAndCharts false'}
+                </>
+                : ''}
             </Box>
 
             {/* This button will show our 2nd comparison form */}
@@ -814,6 +815,8 @@ function ComparisonPage() {
                     </form>
                     {/* End of form */}
 
+                    {displayCardAndCharts2 ? 
+                    <>
                     {/* Salary over time graph */}
                     <Box className="chart-container" sx={{ m: 3, mt: 10, p: 2, minWidth: '25%', alignItems: 'center' }}>
                     <ComparisonSalaryGraph2 />
@@ -871,6 +874,8 @@ function ComparisonPage() {
                             </Grid>
                         </CardContent>
                     </Card>
+                    </>
+                    : ''}
                 </Box>
             )}
         </div>
