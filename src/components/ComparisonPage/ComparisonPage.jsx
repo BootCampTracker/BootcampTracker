@@ -481,7 +481,7 @@ function ComparisonPage() {
     <div className="comparison-section">
       <Typography
         variant="h1"
-        sx={{ fontSize: 50, marginBottom: 1, textAlign: "center" }}
+        sx={{ fontSize: 50, marginBottom: 1, textAlign: "center", color: '#228be6', fontWeight: '600' }}
       >
         Bootcamp Comparisons
       </Typography>
@@ -566,7 +566,7 @@ function ComparisonPage() {
         {/* This button will submit our form */}
         <Button
           variant="contained"
-          sx={{ marginTop: 3, width: "100%" }}
+          sx={{ marginTop: 3, width: "100%", padding: '0.5rem 9.2rem' }}
           type="submit"
           value="submit"
         >
@@ -576,19 +576,23 @@ function ComparisonPage() {
       {/* End of form */}
       <div className="primary-comparison-box">
         <Grid container>
-          <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+            sx={{ paddingLeft: "10rem", paddingRight: "10rem" }}
+          >
             {displayCardAndCharts ? (
               <>
                 {/* Salary over time graph */}
                 <Box
                   className="chart-container"
-                  sx={{ ml: 5, mt: 10, p: 2, maxWidth: "100%", display: "flex" }}
+                  sx={{ ml: 5, mt: 10, p: 2, maxWidth: "100%", mr: "3rem" }}
                 >
                   <ComparisonSalaryGraph />
                 </Box>
               </>
             ) : (
-                // Display Graphs if submited else show ''
+              // Display Graphs if submited else show ''
               ""
             )}
           </Grid>
@@ -655,7 +659,7 @@ function ComparisonPage() {
                 </CardContent>
               </Card>
             ) : (
-                // Display Graphs if submited else show ''
+              // Display Graphs if submited else show ''
               ""
             )}
           </Grid>
@@ -664,21 +668,37 @@ function ComparisonPage() {
 
       {/* This button will show our 2nd comparison form */}
       {!showCompare ? (
-        <Button
-          className="add-compare-btn"
-          variant="contained"
-          onClick={addCompare}
-          // sx={{ marginTop: 3, mb: 5, width: '17em' }}
-          sx={{ mt: 3, mb: 13 }}
-          type="submit"
-          value="submit"
-        >
-          Compare a second job
-        </Button>
+        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+          <Button
+            className="compare-btn"
+            variant="contained"
+            onClick={addCompare}
+            sx={{ mt: 3, mb: 13, padding: '0.5rem 9.2rem' }}
+            type="submit"
+            value="submit"
+          >
+           + Compare a second job
+          </Button>
+        </Box>
       ) : (
-        <div
-          className="secondary-comparison-box"
-        >
+        <div className="secondary-comparison-box">
+          <Typography
+            variant="h1"
+            sx={{ fontSize: 50, marginTop: 5, textAlign: "center" }}
+          >
+            Bootcamp Comparisons
+          </Typography>
+          <Typography variant="h2" sx={{ fontSize: 20, textAlign: "center" }}>
+            <span style={{ fontWeight: "bold" }}>Use the dropdowns</span> to
+            filter results in the graph.
+          </Typography>
+          <Typography
+            variant="h2"
+            sx={{ fontSize: 20, textAlign: "center", mb: 2 }}
+          >
+            <span style={{ fontWeight: "bold" }}>Click the plus button</span> to
+            add comparisons.
+          </Typography>
           {/* Form that takes in dropdown inputs, updates global state, and sends the state to server onSubmit to GET values for charts */}
           <form className="comparison-form mt" onSubmit={handleCompareSubmit}>
             {/* This is the dropdown for the workplace location */}
@@ -750,7 +770,7 @@ function ComparisonPage() {
             {/* This button will submit our form */}
             <Button
               variant="contained"
-              sx={{ mt: 3, mb: 10, width: "100%" }}
+              sx={{ mt: 3, width: "100%", padding: '0.5rem 9.2rem' }}
               type="submit"
               value="submit"
             >
@@ -761,16 +781,14 @@ function ComparisonPage() {
 
           {/* Salary over time graph */}
           <Grid container>
-            <Grid item xs={12}>
+            <Grid
+              item
+              xs={12}
+              sx={{ paddingLeft: "10rem", paddingRight: "10rem" }}
+            >
               <Box
                 className="chart-container"
-                sx={{
-                  m: 3,
-                  mt: 10,
-                  p: 2,
-                  minWidth: "25%",
-                  alignItems: "center",
-                }}
+                sx={{ ml: 5, mt: 10, p: 2, maxWidth: "100%", mr: "3rem" }}
               >
                 <ComparisonSalaryGraph2 />
               </Box>
