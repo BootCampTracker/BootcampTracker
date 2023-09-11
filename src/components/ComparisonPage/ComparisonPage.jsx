@@ -578,15 +578,14 @@ function ComparisonPage() {
         <Grid container>
           <Grid
             item
-            xs={12}
-            sx={{ paddingLeft: "10rem", paddingRight: "10rem" }}
+            xs={6}
           >
             {displayCardAndCharts ? (
               <>
                 {/* Salary over time graph */}
                 <Box
                   className="chart-container"
-                  sx={{ ml: 5, mt: 10, p: 2, maxWidth: "100%", mr: "3rem" }}
+                  sx={{ mt: 10 }}
                 >
                   <ComparisonSalaryGraph />
                 </Box>
@@ -598,8 +597,7 @@ function ComparisonPage() {
           </Grid>
           <Grid
             item
-            xs={12}
-            sx={{ paddingLeft: "10rem", paddingRight: "10rem" }}
+            xs={6}
           >
             {/* This is our card to display benefits */}
             {displayCardAndCharts ? (
@@ -608,7 +606,7 @@ function ComparisonPage() {
                 sx={{
                   backgroundColor: "#bbdefb",
                   height: "fit-content",
-                  mr: 5,
+                  mr: 10,
                   mt: 10,
                 }}
                 variant="outlined"
@@ -783,12 +781,11 @@ function ComparisonPage() {
           <Grid container>
             <Grid
               item
-              xs={12}
-              sx={{ paddingLeft: "10rem", paddingRight: "10rem" }}
+              xs={6}
             >
               <Box
                 className="chart-container"
-                sx={{ ml: 5, mt: 10, p: 2, maxWidth: "100%", mr: "3rem" }}
+                sx={{  mt: 10  }}
               >
                 <ComparisonSalaryGraph2 />
               </Box>
@@ -797,16 +794,15 @@ function ComparisonPage() {
             {/* This is our card to display benefits */}
             <Grid
               item
-              xs={12}
-              sx={{ paddingLeft: "10rem", paddingRight: "10rem" }}
+              xs={6}
             >
               <Card
-                className="card-container"
+                className="card-container helper-"
                 sx={{
                   backgroundColor: "#bbdefb",
                   height: "fit-content",
-                  ml: 3,
-                  mt: 5,
+                  mr: 10,
+                  mt: 10,
                 }}
                 variant="outlined"
               >
