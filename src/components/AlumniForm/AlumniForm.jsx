@@ -64,11 +64,9 @@ function AlumniForm() {
   // Submit Form and dispatch
   const handleSubmit = event => {
     event.preventDefault();
-    console.log("Submitted", jobInfoInput);
-    console.log("User id:", user.id);
 
     // Validation Form on Salary input
-    if (jobInfoInput.hours > 60 || jobInfoInput.hours < 0) {
+    if (jobInfoInput.hours > 110 || jobInfoInput.hours < 0) {
       setError(true);
       return;
     }
@@ -120,9 +118,9 @@ function AlumniForm() {
     //   Clear inputs
     setJobInfoInput("");
   };
+  
   // Auto fill the Form when Clicked anywhere on the Page!
   const handleFillForm = () => {
-    console.log("Fill the Form:");
     setJobInfoInput({
       hours: 40,
       bootcamp: "Prime Digital Academy",
@@ -149,6 +147,8 @@ function AlumniForm() {
       promotions: "TRUE",
     });
   };
+
+  // Render to DOM
   return (
     <div className="main-section">
       <h1 className="main-heading">Anonymously submit your information</h1>
@@ -601,7 +601,7 @@ function AlumniForm() {
             ) : (
               <></>
             )}
-            <Button variant="contained" type="submit" sx={{marginTop: '1rem'}}>
+            <Button variant="contained" type="submit" sx={{ marginTop: '1rem' }}>
               Submit
             </Button>
           </form>
