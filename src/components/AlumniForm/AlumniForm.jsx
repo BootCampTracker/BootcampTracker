@@ -128,7 +128,9 @@ function AlumniForm() {
   };
 
   // Auto fill the form when clicked anywhere on the page!
-  /*
+  // We left this in here for testing
+  // TODO: remove this handle fill form function AND where it's called
+
   const handleFillForm = () => {
     console.log("Fill the Form:");
     setJobInfoInput({
@@ -157,7 +159,6 @@ function AlumniForm() {
       promotions: "TRUE",
     });
   };
-   */
 
   return (
     <div className="main-section">
