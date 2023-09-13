@@ -1,8 +1,8 @@
-// HOOKS and React Router
+// import HOOKS and React Router
 import { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-// MUI
+// import MUI
 import {
   Drawer,
   List,
@@ -13,17 +13,17 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-// Custom Components
+// import Custom Components
 import LogOutButton from "../LogOutButton/LogOutButton";
 
 function DrawerComponent() {
-  // HOOKS
+  // store hook in the variable
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
-  // Hamburger menu
+  // opening/closing state
   const [open, setOpen] = useState(false);
-  // Load user id in the Route for Profile
+  // Load user id in the Route for Profile on page load
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, []);

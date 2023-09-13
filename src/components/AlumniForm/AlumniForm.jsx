@@ -1,20 +1,17 @@
-// HOOKS
-import { useState, useEffect } from "react";
+// import HOOKS
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-// MUI and Assets
+// import MUI and Assets
 import {
   Box,
   Typography,
   Select,
-  Checkbox,
   Radio,
   RadioGroup,
-  FormControl,
   FormControlLabel,
   FormLabel,
   TextField,
-  InputLabel,
   MenuItem,
   Button,
   Grid,
@@ -30,12 +27,18 @@ import JobTitle from "./FormData/jobTitle";
 import JobRole from "./FormData/jobRole";
 import states from "./FormData/states";
 
+// This is the AlumniForm component
 function AlumniForm() {
   // HOOKS
+  // bring in useDispatch hook and store in the variable dispatch
   const dispatch = useDispatch();
+  // bring in user global state from the store
   const user = useSelector(store => store.user);
+  // bring in useHistory and store in the variable history
   const history = useHistory();
+  // local state hook to track errors (just being used for hours worked right now)
   const [error, setError] = useState(false);
+  // local state to save ALL data that the user is filling out on the page
   const [jobInfoInput, setJobInfoInput] = useState({
     bootcamp: "",
     gradDate: "",
@@ -63,19 +66,21 @@ function AlumniForm() {
 
   // Submit Form and dispatch
   const handleSubmit = event => {
+    // prevent the form from refreshing the page on submission
     event.preventDefault();
+    // log that the from has been submitted, along with what was submitted
     console.log("Submitted", jobInfoInput);
+    // log the user id
     console.log("User id:", user.id);
 
-    // Validation Form on Salary input
+    // validation to check that hours worked does not exceed 60, if it does, throw an error
     if (jobInfoInput.hours > 60 || jobInfoInput.hours < 0) {
       setError(true);
       return;
     }
-
     setError(false);
 
-    // Dispatch
+    // Dispatch an action to the saga for ALL information filled out by the user
     dispatch({
       type: "ADD_JOB_INFO",
       payload: {
@@ -107,7 +112,7 @@ function AlumniForm() {
       },
     });
 
-    // Modal Alert for Submit
+    // Modal alert from sweetalert that the form has successfully been submitted
     Swal.fire({
       position: "center",
       icon: "success",
@@ -116,11 +121,14 @@ function AlumniForm() {
       timer: 1500,
     });
 
+    // push the user to the url /profile
     history.push("/profile");
-    //   Clear inputs
+    //   Clear inputs on the AlumniForm
     setJobInfoInput("");
   };
-  // Auto fill the Form when Clicked anywhere on the Page!
+
+  // Auto fill the form when clicked anywhere on the page!
+  /*
   const handleFillForm = () => {
     console.log("Fill the Form:");
     setJobInfoInput({
@@ -149,6 +157,8 @@ function AlumniForm() {
       promotions: "TRUE",
     });
   };
+   */
+
   return (
     <div className="main-section">
       <h1 className="main-heading">Anonymously submit your information</h1>
