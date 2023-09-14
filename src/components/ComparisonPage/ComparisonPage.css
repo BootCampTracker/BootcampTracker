@@ -14,6 +14,7 @@
     display: flex;
 }
 .chart-container-empty {
+    align-self: flex-start;
     border: 1px solid black;
     border-radius: 3px;
     text-align: center;
@@ -21,6 +22,9 @@
     height: 271px;
 }
 
+.comparison-container {
+    display: flex;
+}
 .secondary-comparison-box{
     margin-bottom: 2rem;
 }

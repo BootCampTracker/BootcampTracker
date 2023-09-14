@@ -1,11 +1,11 @@
 --Bootcamp Tracker elevator pitch:
-Introducing the Bootcamp Salary Tracker, an open-source application designed to empower bootcamp graduates on their post-graduation journey. With this powerful tool, you can effortlessly track and compare your post-graduation experiences.
+Introducing the Bootcamp Tracker, an open-source application designed to empower bootcamp graduates on their post-graduation journey. With this powerful tool, you can effortlessly track and compare your post-graduation experiences.
 
 Our app enables you to log crucial data points such as your salary, job benefits, and graduation dates, giving you valuable insights into your career progression. By encouraging data-driven decision-making, we help you make informed choices about your future.
 
-But that's not all. Bootcamp Salary Tracker also fosters connections within the bootcamp community, creating a supportive network of like-minded individuals who are navigating the same challenges as you.
+But that's not all. Bootcamp Tracker also fosters connections within the bootcamp community, creating a supportive network of like-minded individuals who are navigating the same challenges as you.
 
-Join us today and take control of your post-bootcamp career. The Bootcamp Salary Tracker is here to guide you 
+Join us today and take control of your post-bootcamp career. The Bootcamp Tracker is here to guide you 
 toward success!"
 
 --Technologies used: 

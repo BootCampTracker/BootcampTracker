@@ -401,16 +401,15 @@ function ComparisonPage() {
     });
   };
 
-  //------------Handler functions
-  // This function handles the submit of the form
-  const handleSubmit = event => {
-    event.preventDefault();
-    console.log("form submitted!");
-    dispatchChange();
-    console.log("form submitted!");
-    setDisplayCardAndCharts(true);
-    // benefits card functions will be handled in the useEffect function
-  }; // end handleSubmit
+    //------------Handler functions
+    // This function handles the submit of the form
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatchChange();
+        console.log('form submitted!');
+        setDisplayCardAndCharts(true)
+        // benefits card functions will be handled in the useEffect function
+    } // end handleSubmit
 
   // This function handles the submit of the compare form
   const handleCompareSubmit = event => {

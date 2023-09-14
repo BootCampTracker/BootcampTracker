@@ -34,7 +34,7 @@ function Home() {
               sx={{ marginTop: 6, color: "#000" }}
             >
               <span style={{ fontWeight: "bold" }}>
-                Bootcamp Salary Tracker is a valuable tool{" "}
+                Bootcamp Tracker is a valuable tool{" "}
               </span>
               for anyone considering, enrolled in, or graduating from a
               bootcamp. This tool helps users choose the right educational
