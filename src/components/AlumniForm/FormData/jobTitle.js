@@ -1,3 +1,4 @@
+// These are the dropdowns
 const jobTitle = [
   {
     id: 1,

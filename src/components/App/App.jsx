@@ -1,4 +1,4 @@
-// HOOKS and React Router
+// import HOOKS and React Router
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,7 +7,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-// Components
+// import Components
 import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -18,20 +18,23 @@ import AlumniForm from "../AlumniForm/AlumniForm";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import ComparisonPage from "../ComparisonPage/ComparisonPage";
 import AdminPage from "../AdminPage/AdminPage";
-// MUI and CSS
+// import MUI and CSS
 import "./App.css";
 import { Box } from "@mui/material";
-// Chart.js
+// import Chart.js
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js/auto";
 
 Chart.register(CategoryScale);
 
+// React component function: App
+// all front-end routing will be taking place in this component
 function App() {
+  // save useDispatch hook in the variable dispatch
   const dispatch = useDispatch();
-
+  // bring in the global state of user
   const user = useSelector(store => store.user);
-
+  // useEffect hook will send a dispatch on page load every time that there is a dispatch on the page
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);

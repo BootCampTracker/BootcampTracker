@@ -1,3 +1,4 @@
+// These are the dropdowns
 const jobRole = [
   { id: 1, role: 'Full Stack Engineer'},
   { id: 2, role: 'UX/UI Designer'},

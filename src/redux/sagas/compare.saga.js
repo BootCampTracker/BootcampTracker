@@ -9,7 +9,9 @@ function* fetchCompareJobs(action) {
         // Instead of sending payload to be req.body, use string interpolation to make a query url
             // EX target.com/?searchTerm=value&searchTerm=value&etc
         const response = yield axios.get(`/api/compare?workplaceLocation=${action.payload.workplaceLocation}&job=${action.payload.job}&bootcamp=${action.payload.bootcamp}&state=${action.payload.state}`)
+        console.log('response.data is: ', response.data);
         yield put({ type: 'SET_COMPARE_JOBS', payload: response.data})
+        console.log('response.data is: ', response.data);
     } catch (error) {
         console.log('Error fetching compare jobs data', error)
     }

@@ -295,16 +295,6 @@ function AdminPage() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-        {/* <Stack direction="row" spacing={1} alignItems="center">
-          <Typography>Condense Table Rows</Typography>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={dense}
-                onChange={handleChangeDense}
-              />}
-          />
-        </Stack> */}
       </Box>
     </div>
   );

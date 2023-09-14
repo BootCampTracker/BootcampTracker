@@ -1,3 +1,5 @@
+// hard coded example data
+// TODO create a function a function that creates an object in this shape
 const comparisonData = [
     {
       id: 1,
