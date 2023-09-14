@@ -68,13 +68,9 @@ function AlumniForm() {
   const handleSubmit = event => {
     // prevent the form from refreshing the page on submission
     event.preventDefault();
-    // log that the from has been submitted, along with what was submitted
-    console.log("Submitted", jobInfoInput);
-    // log the user id
-    console.log("User id:", user.id);
 
-    // validation to check that hours worked does not exceed 60, if it does, throw an error
-    if (jobInfoInput.hours > 60 || jobInfoInput.hours < 0) {
+    // Validation Form on Salary input
+    if (jobInfoInput.hours > 110 || jobInfoInput.hours < 0) {
       setError(true);
       return;
     }
@@ -132,7 +128,6 @@ function AlumniForm() {
   // TODO: remove this handle fill form function AND where it's called
 
   const handleFillForm = () => {
-    console.log("Fill the Form:");
     setJobInfoInput({
       hours: 40,
       bootcamp: "Prime Digital Academy",
@@ -160,6 +155,7 @@ function AlumniForm() {
     });
   };
 
+  // Render to DOM
   return (
     <div className="main-section">
       <h1 className="main-heading">Anonymously submit your information</h1>
@@ -612,7 +608,7 @@ function AlumniForm() {
             ) : (
               <></>
             )}
-            <Button variant="contained" type="submit" sx={{marginTop: '1rem'}}>
+            <Button variant="contained" type="submit" sx={{ marginTop: '1rem' }}>
               Submit
             </Button>
           </form>
