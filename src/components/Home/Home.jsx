@@ -86,7 +86,7 @@ function Home() {
               sx={{ color: "#000", fontSize: 20 }}
               onClick={() => {
                 navigator.clipboard
-                  .writeText("TEXT_TO_BE_COPIED")
+                  .writeText("https://github.com/BootCampTracker/BootcampTracker")
                   .then(() =>
                     alert(
                       `Link to Bootcamp Tracker has been copied! Paste this into your socials to spread the word about Bootcamp Tracker!`

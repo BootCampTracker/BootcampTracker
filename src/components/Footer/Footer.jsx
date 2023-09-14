@@ -11,8 +11,7 @@ import "./Footer.css";
 
 function Footer() {
   return <div className="footer">
-            {/* TODO: replace this with the REAL GitHub Link!!! */}
-            <a href="https://github.com/ZakariyeAden/Bootcamp-Tracker" target="_href" className="footer-link">Contribute to this project!</a>
+             <a href="https://github.com/BootCampTracker/BootcampTracker" target="_href" className="footer-link">Contribute to this project!</a>
   </div>;
 }
 
