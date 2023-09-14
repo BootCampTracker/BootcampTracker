@@ -1,3 +1,4 @@
+// These are the dropdowns
 const jobPosition = [
   {id: 1, positon: 'First Position'},
   {id: 2, positon: 'Second Position'},

@@ -1,4 +1,4 @@
-// MUI and CSS
+// unoirt MUI and CSS
 import {
   Container,
   Typography,
@@ -12,16 +12,16 @@ import {
   Grid,
 } from "@mui/material";
 import "./ComparisonPage.css";
-// HOOKS
+// import HOOKS
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-// Chart.js imports
+// import Chart.js imports
 import ComparisonSalaryGraph from "../Graphs/ComparisonGraphs/ComparisonSalaryGraph";
 import ComparisonRoleGraph from "../Graphs/ComparisonGraphs/ComparisonRoleGraph";
 import ComparisonSalaryGraph2 from "../Graphs/ComparisonGraphs/ComparisonSalaryGraph2";
 import ComparisonRoleGraph2 from "../Graphs/ComparisonGraphs/ComparisonRoleGraph2";
-// Formdata
+// import Formdata
 import states from "../../components/AlumniForm/FormData/states";
 import bootcamps from "../AlumniForm/FormData/bootcamps";
 import workplace from "../AlumniForm/FormData/jobType";

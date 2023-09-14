@@ -1,3 +1,4 @@
+// These are the dropdowns
 const jobType = [
   { id: 1, type: "On-Site" },
   { id: 2, type: "Hybrid" },

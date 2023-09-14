@@ -1,3 +1,4 @@
+// These are the dropdowns
 const jobDuration = [
   { id: 1, duration: "Full-time" },
   { id: 2, duration: "Part-time" },

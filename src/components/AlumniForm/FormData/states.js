@@ -1,3 +1,4 @@
+// These are the dropdowns
 const states = [
   { id: 1, name: 'Alabama' },
   { id: 2, name: 'Alaska' },

@@ -10,6 +10,7 @@ const {
     console.log('req.user is', req.user);
     // console.log('inside of /profile GET router side');
     let userId = req.user.id
+    // SQL for query
     let queryText= `SELECT
     job_info.id AS job_info_id,
     job_info."job_title",
@@ -43,36 +44,43 @@ INNER JOIN
 WHERE
     job_info.user_id = $1;
     `
-    //bringing in the pool 
+    //bringing in the pool (connection from server to db)
     pool.query(queryText, [userId])
         .then((result) => {
             //sending table row data
             console.log('result.rows is:', result.rows)
+            // send the response to the client
             res.send(result.rows)
-        }).catch((err) => {
             //catch error 
+        }).catch((err) => {
+            // log error in the server
             console.log('error getting profile data router side', err);
+            // send error response of 500 (server error) to the client
             res.sendStatus(500)
         })
   })
 
 // GET Profile for graphs
 router.get("/graph",rejectUnauthenticated, (req, res) => {
-  // Query and requesting User id
+  // Query and requesting user id
   const queryText = `SELECT "job_info"."id", "date_hired", "salary", "job_number" FROM "job_info"
   WHERE "user_id" = $1;`;
   const profileId = req.user.id;
-
+  // connection to pool (server/db connection)
   pool
+    // send SQL query to the db
     .query(queryText, [profileId])
     .then(result => {
-      // Send the Profile info for Graphs to Client
+      // log success in the server
       console.log("Recieved Profile info for graph from Database:");
+      // Send the Profile info for Graphs to Client
       res.send(result.rows);
-      // Catch any ERRORS
     })
+    // Catch any ERRORS
     .catch(err => {
-      console.log(`ERROR in GET for Profile info Graphs: ${queryText}`);
+      // log errors in the server
+      console.log(`ERROR in GET for Profile info Graphs: ${queryText}`, err);
+      // send error code of 500 (server error) to the client
       res.sendStatus(500);
     });
 });
