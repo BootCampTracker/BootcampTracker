@@ -127,33 +127,33 @@ function AlumniForm() {
   // We left this in here for testing
   // TODO: remove this handle fill form function AND where it's called
 
-  const handleFillForm = () => {
-    setJobInfoInput({
-      hours: 40,
-      bootcamp: "Prime Digital Academy",
-      jobType: "Full-time",
-      jobTitle: "Full Stack Engineer",
-      bonuses: 120,
-      jobRole: "Entry Level",
-      company: "Target",
-      states: "Minnesota",
-      position: 1,
-      workplace: "Hybrid",
-      salary: 70000,
-      extra:
-        "Target was the best place worked at for my first position, Thanks to the Target team!",
-      gradDate: "2023-09-15",
-      hireDate: "2023-10-20",
-      health: "TRUE",
-      dental: "TRUE",
-      PTO: "TRUE",
-      fourZeroOneK: "TRUE",
-      equity: "TRUE",
-      LTD: "FALSE",
-      STD: "FALSE",
-      promotions: "TRUE",
-    });
-  };
+  // const handleFillForm = () => {
+  //   setJobInfoInput({
+  //     hours: 40,
+  //     bootcamp: "Prime Digital Academy",
+  //     jobType: "Full-time",
+  //     jobTitle: "Full Stack Engineer",
+  //     bonuses: 120,
+  //     jobRole: "Entry Level",
+  //     company: "Target",
+  //     states: "Minnesota",
+  //     position: 1,
+  //     workplace: "Hybrid",
+  //     salary: 70000,
+  //     extra:
+  //       "Target was the best place worked at for my first position, Thanks to the Target team!",
+  //     gradDate: "2023-09-15",
+  //     hireDate: "2023-10-20",
+  //     health: "TRUE",
+  //     dental: "TRUE",
+  //     PTO: "TRUE",
+  //     fourZeroOneK: "TRUE",
+  //     equity: "TRUE",
+  //     LTD: "FALSE",
+  //     STD: "FALSE",
+  //     promotions: "TRUE",
+  //   });
+  // };
 
   // Render to DOM
   return (
@@ -174,7 +174,9 @@ function AlumniForm() {
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               {/* Click on this Label and it will Auto fill */}
-              <label onClick={handleFillForm}>Bootcamp graduated from:</label>
+              <label 
+{/*                 onClick={handleFillForm} */}
+                >Bootcamp graduated from:</label>
               <Select
                 id="demo-simple-select"
                 label="Bootcamps"
