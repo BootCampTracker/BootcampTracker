@@ -1,15 +1,12 @@
+// import react
 import React from "react";
-import { useSelector } from "react-redux";
-// MUI and Assets
+// import MUI and Assets
 import { Box, Typography, Link, Grid, Item } from "@mui/material";
-import SoftwareEngineerImg from "../Assets/Home.png";
 import HomeVideo from "../Assets/HomeHeroVideo.mp4";
 import "./Home.css";
 
 
 function Home() {
-  const user = useSelector(store => store.user);
-
 
   return (
     <div className="home-section">

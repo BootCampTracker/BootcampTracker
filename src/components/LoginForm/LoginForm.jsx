@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-// HOOKS
+// import HOOKS
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-// MUI and Assets
+// import MUI and Assets
 import { Grid, TextField, Button, Typography } from "@mui/material";
 function LoginForm() {
   // HOOKS
